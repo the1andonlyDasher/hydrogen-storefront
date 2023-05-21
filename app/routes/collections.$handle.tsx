@@ -1,6 +1,8 @@
 import {useLoaderData} from '@remix-run/react';
 import {LoaderArgs, json} from '@shopify/remix-oxygen';
 import ProductGrid from '../components/ProductGrid';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const seo = ({data}:any) => ({
   title: data?.collection?.title,
@@ -43,28 +45,36 @@ export function meta({data}:any){
 };
 
 export default function Collection() {
-  const {collection}:any = useLoaderData<typeof loader>();
+  const {collection}:any = useLoaderData<typeof loader>() || {};
+  const [stableData, setData]  = useState(collection);
+  useEffect(() => {
+    collection && setData(collection)
+  }, [collection])
   return (
     <>
+           <motion.div
+      className="w-full h-full md:col-span-3 sm:overflow-auto relative z-0"
+    > 
       <header className="grid w-full gap-8 py-8 justify-items-start">
         <h1 className="text-4xl whitespace-pre-wrap font-bold inline-block">
-          {collection.title}
+          {stableData.title}
         </h1>
 
-        {collection.description && (
+        {stableData.description && (
           <div className="flex items-baseline justify-between w-full">
             <div>
               <p className="max-w-md whitespace-pre-wrap inherit text-copy inline-block">
-                {collection.description}
+                {stableData.description}
               </p>
             </div>
           </div>
         )}
       </header>
       <ProductGrid
-        collection={collection}
-        url={`/collections/${collection.handle}`}
+        collection={stableData}
+        url={`/collections/${stableData.handle}`}
       />
+      </motion.div>
     </>
   );
 }

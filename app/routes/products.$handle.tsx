@@ -2,6 +2,8 @@ import { useLoaderData, useMatches, useFetcher } from '@remix-run/react';
 import {LoaderArgs, json} from '@shopify/remix-oxygen';
 import {MediaFile, Money, ShopPayButton} from '@shopify/hydrogen-react';
 import ProductOptions from '@components/ProductOptions'
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 
 
@@ -64,6 +66,8 @@ function PrintJson({data}:any) {
     };
   
     return (
+
+
       <div
         className={`grid gap-4 overflow-x-scroll grid-flow-col md:grid-flow-row  md:p-0 md:overflow-x-auto md:grid-cols-2 w-[90vw] md:w-full lg:col-span-2`}
       >
@@ -135,31 +139,49 @@ function PrintJson({data}:any) {
   
   
 export default function ProductHandle() {
-    const {handle}:any = useLoaderData<typeof loader>();
-    const {product, selectedVariant, storeDomain}:any = useLoaderData<typeof loader>();
+    const {handle}:any = useLoaderData<typeof loader>() || {};
+    const {product, selectedVariant, storeDomain}:any = useLoaderData<typeof loader>() || {};
+    const [stableProductData, setProductData] = useState(product)
+    const [stableSelectedVariantData, setSelectedVariantData] = useState(selectedVariant)
+    const [stableStoreDomainData, setStoreDomainData] = useState(storeDomain)
+    const [stableHandleData, setHandleData] = useState(handle)
     const orderable = selectedVariant?.availableForSale || false;
+    useEffect(()=>{
+      product && setProductData(product);
+      selectedVariant && setSelectedVariantData(selectedVariant);
+      storeDomain && setStoreDomainData(storeDomain)
+      handle && setHandleData(handle)
+    },[product, selectedVariant, storeDomain, handle])
 
     return (
+    //   <motion.div
+    //   key={selectedVariant?.id}
+    //   initial={{ opacity: 0, x:100 }}
+    //   animate={{ opacity: 1, x:0 }}
+    //   exit={{ opacity: 0, x:-100 }}
+    //   transition={{ duration: 1.5, type:"spring" }}
+    //   className="w-full h-full md:col-span-3 sm:overflow-auto relative z-0"
+    // >
         <section className="w-full gap-4 md:gap-8 grid px-6 md:px-8 lg:px-12">
         <div className="grid items-start gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
           <div className="grid md:grid-flow-row  md:p-0 md:overflow-x-hidden md:grid-cols-2 md:w-full lg:col-span-2">
             <div className="md:col-span-2 snap-center card-image aspect-square md:w-full w-[80vw] shadow rounded">
-            <ProductGallery media={product.media.nodes} />
+            <ProductGallery media={stableProductData.media.nodes} />
             </div>
           </div>
           <div className="md:sticky md:mx-auto max-w-xl md:max-w-[24rem] grid gap-8 p-0 md:p-6 md:px-0 top-[6rem] lg:top-[8rem] xl:top-[10rem]">
             <div className="grid gap-2">
               <h1 className="text-4xl font-bold leading-10 whitespace-normal">
-                {product.title}
+                {stableProductData.title}
               </h1>
               <span className="max-w-prose whitespace-pre-wrap inherit text-copy opacity-50 font-medium">
-                {product.vendor}
+                {stableProductData.vendor}
               </span>
             </div>
-            <ProductOptions options={product.options} selectedVariant={selectedVariant} />
+            <ProductOptions options={stableProductData.options} selectedVariant={stableSelectedVariantData} />
             <Money
   withoutTrailingZeros
-  data={selectedVariant.price}
+  data={stableSelectedVariantData.price}
   className="text-xl font-semibold mb-2"
 />
 {orderable && (
@@ -167,27 +189,28 @@ export default function ProductHandle() {
 
    <div className="space-y-2">
   <ShopPayButton
-    storeDomain={storeDomain}
-    variantIds={[selectedVariant?.id]}
+    storeDomain={stableStoreDomainData}
+    variantIds={[stableSelectedVariantData?.id]}
     width={'400px'}
   />
-  <ProductForm variantId={selectedVariant?.id} />
+  <ProductForm variantId={stableSelectedVariantData?.id} />
 </div>
 
   </div>
 )}
 <div
   className="prose border-t border-gray-200 pt-6 text-black text-md"
-  dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+  dangerouslySetInnerHTML={{ __html: stableProductData.descriptionHtml }}
 />
 
             <div
               className="prose border-t border-gray-200 pt-6 text-black text-md"
-              dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+              dangerouslySetInnerHTML={{ __html: stableProductData.descriptionHtml }}
             ></div>
           </div>
         </div>
       </section>
+      // </motion.div>
     );
   }
 
