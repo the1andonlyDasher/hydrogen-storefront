@@ -52,9 +52,7 @@ export default function Collection() {
   }, [collection])
   return (
     <>
-           <motion.div
-      className="w-full h-full md:col-span-3 sm:overflow-auto relative z-0"
-    > 
+    <section className="w-full gap-4 md:gap-8 grid">
       <header className="grid w-full gap-8 py-8 justify-items-start">
         <h1 className="text-4xl whitespace-pre-wrap font-bold inline-block">
           {stableData.title}
@@ -74,7 +72,7 @@ export default function Collection() {
         collection={stableData}
         url={`/collections/${stableData.handle}`}
       />
-      </motion.div>
+      </section>
     </>
   );
 }

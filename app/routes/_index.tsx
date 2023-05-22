@@ -25,7 +25,7 @@ export default function Index() {
   }, [collections])
   // console.log(collections);
   return (
-    <section className="w-full gap-4">
+    <section className="w-full gap-4" >
     <h2 className="whitespace-pre-wrap max-w-prose font-bold text-lead my-3">
       Collections
     </h2>

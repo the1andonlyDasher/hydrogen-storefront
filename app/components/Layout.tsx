@@ -3,6 +3,7 @@ import { Drawer, useDrawer } from "./Drawer";
 import { Await, useMatches, useFetchers, useLocation, Outlet, useOutlet, useLoaderData } from '@remix-run/react';
 import { CartLineItems, CartActions, CartSummary } from './Cart';
 import { AnimatePresence, motion } from "framer-motion";
+import logo from "../images/logo.jpg"
 
 
 interface LayoutProps {
@@ -86,7 +87,7 @@ export function Layout({title }: LayoutProps) {
             block: "start",
             inline: "nearest",
           });
-          console.log("scrollToHash");
+          // console.log("scrollToHash");
         }
       }
       // else {
@@ -98,17 +99,22 @@ export function Layout({title }: LayoutProps) {
 
 
   return (
-    <div className="flex flex-col min-h-screen antialiased bg-neutral-50">
+    <div className="flex flex-col min-h-screen antialiased bg-zinc-950">
       <header
         role="banner"
         className={`flex items-center h-16 p-6 md:p-8 lg:p-12 sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 antialiased transition shadow-sm`}
       >
         <div className="flex gap-12">
-          <a className="font-bold" href="/">
+          <a className="font-bold uppercase text-2xl font-normal" style={{fontFamily:"Yanone Kaffeesatz"}} href="/">
             {title}
           </a>
-          
+
         </div>
+        <img
+            src={logo}
+            width={50}
+            height={50}
+            />
         <CartHeader cart={cart} openDrawer={openDrawer} />
       </header>
       <AnimatePresence
@@ -116,7 +122,7 @@ export function Layout({title }: LayoutProps) {
         initial={true}>
       <motion.main
         role="main"
-
+    className="main"
         key={useLocation().pathname}
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}

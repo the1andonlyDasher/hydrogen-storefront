@@ -10,7 +10,7 @@ import {
   useLocation,
 } from '@remix-run/react';
 import type { Shop } from '@shopify/hydrogen/storefront-api-types';
-import styles from './styles/app.css';
+import styles from './styles/style.css';
 import favicon from '../public/favicon.svg';
 import { type LinksFunction, type LoaderArgs } from '@shopify/remix-oxygen';
 import { Layout } from './components/Layout';
@@ -78,7 +78,7 @@ export default function App({ Path }: any) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="">
                  <Layout title={name} />
         <ScrollRestoration />
         <Scripts />
