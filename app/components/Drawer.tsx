@@ -35,11 +35,11 @@ function Drawer({open, onClose, children}:any) {
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <Dialog.Panel className="max-w-lg transform text-left align-middle shadow-xl transition-all antialiased bg-neutral-50 flex flex-col">
+                <Dialog.Panel className=" right-0 max-w-lg transform text-left align-middle shadow-xl transition-all antialiased bg-neutral-50 flex flex-col">
                   <header className="sticky top-0 flex items-center justify-between px-4 h-24 sm:px-8 md:px-12 flex-0">
                     <h2
                       id="cart-contents"
-                      className="whitespace-pre-wrap max-w-prose font-bold text-lg"
+                      className="whitespace-pre-wrap max-w-prose font-bold text-4xl text-black"
                     >
                       Cart
                     </h2>

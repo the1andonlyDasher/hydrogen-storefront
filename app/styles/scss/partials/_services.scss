@@ -46,7 +46,7 @@
   --mwidth: 450px;
   --columns: 3;
   max-width: calc(var(--mwidth) * var(--columns) + (var(--columns) - 1) * var(--column-gap));
-  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
   grid-column-gap: var(--column-gap);
   grid-row-gap: var(--row-gap);
   justify-content: center;

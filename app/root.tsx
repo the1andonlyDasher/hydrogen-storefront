@@ -18,7 +18,12 @@ import tailwind from './styles/tailwind-build.css';
 import { Seo } from '@shopify/hydrogen';
 import { defer } from '@shopify/remix-oxygen';
 import { CART_QUERY } from 'app/queries/cart';
-import { AnimatePresence, motion } from 'framer-motion';
+import GL from '@components/GL';
+import { useAtom } from 'jotai';
+import { model } from '@components/atoms';
+
+
+
 
 
 
@@ -64,10 +69,11 @@ export async function loader({ context, request }: LoaderArgs) {
   });
 }
 
-export default function App({ Path }: any) {
+export default function App() {
   const data: any = useLoaderData<typeof loader>() || {};
+  const [m, setM] = useAtom(model)
   const { name } = data.layout.shop;
-  
+
 
   return (
     <html lang="en">
@@ -79,9 +85,11 @@ export default function App({ Path }: any) {
         <Links />
       </head>
       <body className="">
-                 <Layout title={name} />
+          <Layout title={name}/>
+          <Scripts />
+          <GL />
         <ScrollRestoration />
-        <Scripts />
+
       </body>
     </html>
   );

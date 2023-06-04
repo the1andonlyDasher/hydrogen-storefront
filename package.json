@@ -16,17 +16,22 @@
   "prettier": "@shopify/prettier-config",
   "dependencies": {
     "@headlessui/react": "^1.7.14",
+    "@react-three/drei": "^9.69.0",
+    "@react-three/fiber": "^8.13.0",
     "@remix-run/react": "1.15.0",
     "@shopify/cli": "3.45.0",
     "@shopify/cli-hydrogen": "^4.1.1",
-    "@shopify/hydrogen": "^2023.4.0",
+    "@shopify/hydrogen": "^2023.4.3",
     "@shopify/remix-oxygen": "^1.0.5",
+    "framer-motion-3d": "^10.12.16",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "isbot": "^3.6.6",
+    "jotai": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.11.2"
+    "react-router-dom": "^6.11.2",
+    "three": "^0.152.2"
   },
   "devDependencies": {
     "@remix-run/dev": "1.15.0",
@@ -37,6 +42,7 @@
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
     "autoprefixer": "^10.4.14",
+    "camera-controls": "^2.4.0",
     "concurrently": "^8.0.1",
     "eslint": "^8.20.0",
     "eslint-plugin-hydrogen": "0.12.2",

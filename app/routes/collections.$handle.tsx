@@ -1,8 +1,11 @@
-import {useLoaderData} from '@remix-run/react';
+import {useLoaderData, useLocation} from '@remix-run/react';
 import {LoaderArgs, json} from '@shopify/remix-oxygen';
 import ProductGrid from '../components/ProductGrid';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useAtom, useSetAtom } from 'jotai';
+import {  model } from '@components/atoms';
+
 
 const seo = ({data}:any) => ({
   title: data?.collection?.title,
@@ -45,28 +48,44 @@ export function meta({data}:any){
 };
 
 export default function Collection() {
-  const {collection}:any = useLoaderData<typeof loader>() || {};
+  const {collection}:any = useLoaderData() || {};
   const [stableData, setData]  = useState(collection);
+  const location = useLocation();
+  const [m, setM] = useAtom(model);
   useEffect(() => {
-    collection && setData(collection)
-  }, [collection])
+    collection && setData(collection);
+    stableData && stableData.products.nodes.map((node:any)=>
+    node.media.nodes.map((med:any)=>{
+      if (med.mediaContentType === 'MODEL_3D') {
+         if(!m.find((item:any)=>item.name === node.handle)){
+
+            m.push({name: node.handle, url:`${med.sources[0].url}`, collection: stableData.handle}), console.log("pushed")
+   
+            
+           }
+      }
+      })
+      )
+  }, [collection, location, m])
+
+  
   return (
     <>
     <section className="w-full gap-4 md:gap-8 grid">
+      <div className='w-full grid min-h-[10rem]'></div>
       <header className="grid w-full gap-8 py-8 justify-items-start">
-        <h1 className="text-4xl whitespace-pre-wrap font-bold inline-block">
-          {stableData.title}
-        </h1>
-
-        {stableData.description && (
-          <div className="flex items-baseline justify-between w-full">
-            <div>
-              <p className="max-w-md whitespace-pre-wrap inherit text-copy inline-block">
-                {stableData.description}
-              </p>
+      <div className="w-full max-w-full flex flex-wrap  rounded-[2px]">
+          <h1 className="text-4xl whitespace-pre-wrap font-bold inline-block">
+            {stableData.title}
+          </h1>
+          {stableData.description && (
+            <div className="flex items-baseline justify-between w-full">
+                <p className=" whitespace-pre-wrap inherit text-copy flex-auto ">
+                  {stableData.description}
+                </p>
             </div>
-          </div>
-        )}
+          )}
+      </div>
       </header>
       <ProductGrid
         collection={stableData}
@@ -85,6 +104,7 @@ const COLLECTION_QUERY = `#graphql
       description
       handle
       products(first: 4, after: $cursor) {
+
         pageInfo {
           hasNextPage
           endCursor
@@ -94,6 +114,28 @@ const COLLECTION_QUERY = `#graphql
           title
           publishedAt
           handle
+          media(first: 10) {
+            nodes {
+              ... on MediaImage {
+                mediaContentType
+                image {
+                  id
+                  url
+                  altText
+                  width
+                  height
+                }
+              }
+              ... on Model3d {
+                id
+                mediaContentType
+                sources {
+                  mimeType
+                  url
+                }
+              }
+            }
+          }
           variants(first: 1) {
             nodes {
               id

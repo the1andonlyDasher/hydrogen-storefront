@@ -103,9 +103,9 @@ canvas {
 }
 
 .canvas__wrapper {
-  height: 100%;
+  @extend %absolute-full;
   position: fixed;
-  width: 100%;
+  z-index: -1;
 }
 
 .sub{
@@ -422,3 +422,8 @@ div[data-scroll-content] .frame:first-child {
 
 
 
+//
+
+shop-pay-button {
+  flex: 1 1 auto;
+}

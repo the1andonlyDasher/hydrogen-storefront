@@ -517,9 +517,6 @@ video {
 .top-\[6rem\] {
   top: 6rem;
 }
-.z-0 {
-  z-index: 0;
-}
 .z-40 {
   z-index: 40;
 }
@@ -608,6 +605,12 @@ video {
 .h-screen {
   height: 100vh;
 }
+.min-h-\[100px\] {
+  min-height: 100px;
+}
+.min-h-\[10rem\] {
+  min-height: 10rem;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -650,9 +653,6 @@ video {
 .max-w-lg {
   max-width: 32rem;
 }
-.max-w-md {
-  max-width: 28rem;
-}
 .max-w-prose {
   max-width: 65ch;
 }
@@ -661,6 +661,9 @@ video {
 }
 .flex-1 {
   flex: 1 1 0%;
+}
+.flex-auto {
+  flex: 1 1 auto;
 }
 .flex-shrink-0 {
   flex-shrink: 0;
@@ -765,6 +768,9 @@ video {
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
 }
+.self-start {
+  align-self: flex-start;
+}
 .overflow-hidden {
   overflow: hidden;
 }
@@ -788,6 +794,9 @@ video {
 }
 .rounded {
   border-radius: 0.25rem;
+}
+.rounded-\[2px\] {
+  border-radius: 2px;
 }
 .rounded-full {
   border-radius: 9999px;
@@ -842,10 +851,6 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-.bg-zinc-950 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(9 9 11 / var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
@@ -915,16 +920,16 @@ video {
 .align-middle {
   vertical-align: middle;
 }
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
 .text-\[0\.625rem\] {
   font-size: 0.625rem;
-}
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
 }
 .text-sm {
   font-size: 0.875rem;
@@ -938,25 +943,17 @@ video {
   font-size: 0.75rem;
   line-height: 1rem;
 }
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
 .font-bold {
   font-weight: 700;
 }
 .font-medium {
   font-weight: 500;
 }
-.font-semibold {
-  font-weight: 600;
-}
 .font-normal {
   font-weight: 400;
+}
+.font-semibold {
+  font-weight: 600;
 }
 .uppercase {
   text-transform: uppercase;
@@ -1010,11 +1007,6 @@ video {
 .opacity-50 {
   opacity: 0.5;
 }
-.shadow {
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
 .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
@@ -1033,6 +1025,10 @@ video {
 }
 .outline-blue-300 {
   outline-color: #93c5fd;
+}
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .backdrop-blur-lg {
   --tw-backdrop-blur: blur(16px);
@@ -1094,10 +1090,6 @@ video {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .sm\:overflow-auto {
-    overflow: auto;
-  }
-
   .sm\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
@@ -1122,10 +1114,6 @@ video {
     grid-column: span 2 / span 2;
   }
 
-  .md\:col-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
   .md\:mx-auto {
     margin-left: auto;
     margin-right: auto;
@@ -1135,8 +1123,8 @@ video {
     width: 100%;
   }
 
-  .md\:max-w-\[24rem\] {
-    max-width: 24rem;
+  .md\:max-w-full {
+    max-width: 100%;
   }
 
   .md\:translate-y-4 {
@@ -1156,6 +1144,10 @@ video {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .md\:grid-cols-\[repeat\(2\2c _minmax\(auto\2c _1fr\)\)\] {
+    grid-template-columns: repeat(2, minmax(auto, 1fr));
+  }
+
   .md\:items-start {
     align-items: flex-start;
   }
@@ -1170,10 +1162,6 @@ video {
 
   .md\:overflow-x-auto {
     overflow-x: auto;
-  }
-
-  .md\:overflow-x-hidden {
-    overflow-x: hidden;
   }
 
   .md\:p-0 {
@@ -1203,11 +1191,6 @@ video {
     padding-right: 1.5rem;
   }
 
-  .md\:px-8 {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
   .md\:py-8 {
     padding-top: 2rem;
     padding-bottom: 2rem;
@@ -1232,6 +1215,10 @@ video {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .lg\:grid-cols-\[repeat\(3\2c _minmax\(auto\2c _1fr\)\)\] {
+    grid-template-columns: repeat(3, minmax(auto, 1fr));
+  }
+
   .lg\:gap-12 {
     gap: 3rem;
   }
@@ -1246,11 +1233,6 @@ video {
 
   .lg\:p-12 {
     padding: 3rem;
-  }
-
-  .lg\:px-12 {
-    padding-left: 3rem;
-    padding-right: 3rem;
   }
 }
 
