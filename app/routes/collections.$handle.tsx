@@ -28,6 +28,8 @@ export async function loader({params, context, request}:LoaderArgs) {
     },
   });
 
+
+
   // Handle 404s
   if (!collection) {
     throw new Response(null, {status: 404});
@@ -50,23 +52,10 @@ export function meta({data}:any){
 export default function Collection() {
   const {collection}:any = useLoaderData() || {};
   const [stableData, setData]  = useState(collection);
-  const location = useLocation();
-  const [m, setM] = useAtom(model);
+
   useEffect(() => {
     collection && setData(collection);
-    stableData && stableData.products.nodes.map((node:any)=>
-    node.media.nodes.map((med:any)=>{
-      if (med.mediaContentType === 'MODEL_3D') {
-         if(!m.find((item:any)=>item.name === node.handle)){
-
-            m.push({name: node.handle, url:`${med.sources[0].url}`, collection: stableData.handle}), console.log("pushed")
-   
-            
-           }
-      }
-      })
-      )
-  }, [collection, location, m])
+  }, [collection])
 
   
   return (

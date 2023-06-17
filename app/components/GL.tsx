@@ -1,4 +1,4 @@
-import { Backdrop, Bounds, CameraControls, Center, Environment, Resize, Stage, useAspect, useGLTF } from "@react-three/drei";
+import { Backdrop, Bounds, CameraControls, Center, Environment, GradientTexture, Resize, Stage, Text, useAspect, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useAtom } from "jotai";
 import { useEffect, useRef, Suspense, useState, useMemo } from "react";
@@ -6,8 +6,9 @@ import { model } from "./atoms";
 import { motion as motion3d } from "framer-motion-3d"
 import * as THREE from "three";
 import { useAnimationControls } from "framer-motion";
-import { useLocation } from "@remix-run/react";
-
+import { useLoaderData, useLocation } from "@remix-run/react";
+import { LoaderArgs, json } from "@shopify/remix-oxygen";
+import { EffectComposer, DepthOfField, Bloom, Noise, Vignette } from "@react-three/postprocessing";
 
 interface productProps {
     index: number;
@@ -19,18 +20,18 @@ interface productProps {
 
 }
 
-
 export default function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 }) {
+
     const [m, setM] = useAtom(model)
     const location = useLocation();
-    const [models, setModels] = useState<any>(m)
+    const [models, setModels] = useState<any>([])
     const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
-        loaded === false && setLoaded(true);
-        models === null && setModels(m), console.log(models); 
-        console.log(loaded);
-    }, [loaded, m])
+        m && setModels(m)
+        console.log(models)
+        models && setLoaded(true)
+    }, [models, m])
 
 
     function P({ item, index }: productProps) {
@@ -47,23 +48,22 @@ export default function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 
             loader.manager.onLoad = function () { console.log("done loading") };
         })
         const controls = useAnimationControls()
-        console.log(location.pathname)
+
         useEffect(() => {
-            console.log(location.pathname)
-
-            if (location.pathname.includes(`/${item.name}`)) {
-
-                controls.start({ scale: (item.name === "adidas-classic" ? 0.5 : 0.75), x: (viewport.size.width < 768 ? 0 : 0 - w / 8), z: 0, y: (viewport.size.width < 768 ? 0 : -1), transition: { duration: 1, type: "spring" } })
-            } else {
-                if (location.pathname.includes(`/collections/${item.collection}`)) {
-                    controls.start({ scale: 0.65, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: 0, transition: { duration: 0.5, type: "spring" } }).then(() => console.log("Done"))
-
+            controls.start({ scale: 0 })
+            if (loaded === true) {
+                if (location.pathname.includes(`/${item.name}`)) {
+                    controls.start({ scale: (item.name === "adidas-classic" ? 0.5 : 0.75), x: (viewport.size.width < 768 ? 0 : 0 - w / 8), z: 0, y: (viewport.size.width < 768 ? 0 : -1), transition: { duration: 1, type: "spring" } })
                 } else {
-                    controls.start({ scale: 0, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: 0, transition: { duration: 0.5, type: "spring" } }).then(() => console.log("Done"))
+                    if (location.pathname.includes(`/collections/${item.collection}`)) {
+                        controls.start({ scale: 0.65, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: 0 }).then(() => console.log("Done"))
+                    } else {
+                        controls.start({ scale: 0, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: 0 }).then(() => console.log("Done"))
+                    }
                 }
             }
-            console.log("running GL")
-        }, [location])
+            console.log("running GL", m)
+        }, [location, m])
 
 
         useFrame((state, delta) => {
@@ -72,26 +72,23 @@ export default function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 
                 ref.current.rotation.y -= delta * 0.1
             }
             if (location.pathname.includes(item.name)) {
-                ref.current.rotation.y += delta
-            } else {
-                ref.current.rotation.x === 0
+                ref.current.rotation.y -= delta * 0.1
             }
         })
 
         return (
             <>
-
                 <motion3d.group
                     scale={Math.max(0.35, Math.min(w / 4, 0.85))}
                     ref={group}
-                    // position={[(viewport.size.width < 768 ? 0 : 0 + w / 4), (viewport.size.width < 768 ? 0 : -1), 0]}
                     dispose={null}>
                     <motion3d.primitive
                         ref={ref}
                         name={item.name}
                         animate={controls}
+                        transition={{ duration: 0.5, type: "spring", stiffness: 500, damping: 100, bounce:0.25, mass:0.5, delay: index * 0.2 }}
                         object={scene}
-                      position={[(viewport.size.width < 768 ? 0 : Math.cos(r) * radius + w / 4), 0, Math.sin(r) * radius]}
+                    // position={[(viewport.size.width < 768 ? 0 : Math.cos(r) * radius + w / 4), 0, Math.sin(r) * radius]}
                     />
                 </motion3d.group>
             </>
@@ -102,13 +99,13 @@ export default function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 
         <div className='canvas__wrapper'>
             <Canvas camera={{ position, fov, }}>
                 <color attach={"background"} args={["#111111"]} />
-                <Environment preset="park" background blur={1}></Environment>
+
+                <Environment preset="city" blur={1}></Environment>
                 <Suspense fallback={null}>
                     {models && models.map((item: any, index: any) =>
                         <P key={item.name + index} item={item} index={index + 1} />
                     )}
                 </Suspense>
-
             </Canvas>
         </div>
 

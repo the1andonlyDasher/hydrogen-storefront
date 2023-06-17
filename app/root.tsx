@@ -18,9 +18,12 @@ import tailwind from './styles/tailwind-build.css';
 import { Seo } from '@shopify/hydrogen';
 import { defer } from '@shopify/remix-oxygen';
 import { CART_QUERY } from 'app/queries/cart';
+import { COLLECTIONS_QUERY } from "app/queries/models"
 import GL from '@components/GL';
 import { useAtom } from 'jotai';
 import { model } from '@components/atoms';
+import { useEffect, useState } from 'react';
+
 
 
 
@@ -61,18 +64,42 @@ async function getCart({ storefront }: any, cartId: any) {
 }
 
 
-export async function loader({ context, request }: LoaderArgs) {
+export async function loader({ context, params, request }: LoaderArgs) {
   const cartId = await context.session.get('cartId');
+  const { handle } = params;
+
   return defer({
     cart: cartId ? getCart(context, cartId) : undefined,
     layout: await context.storefront.query(LAYOUT_QUERY),
+    collection: await context.storefront.query(COLLECTIONS_QUERY, {
+      variables: {
+        handle
+      },
+    })
   });
 }
 
 export default function App() {
   const data: any = useLoaderData<typeof loader>() || {};
+  const [stableData, setData] = useState<any>(data);
   const [m, setM] = useAtom(model)
   const { name } = data.layout.shop;
+  useEffect(() => {
+    data && setData(data)
+    stableData && stableData.collection.collections.nodes.map((node: any) => {
+      node.products.edges.map((edge: any) =>
+        Object.values(edge).map((edgeItem: any) => {
+          edgeItem.media.nodes.map((med: any) => {
+            if (med.mediaContentType === 'MODEL_3D') {
+              if (!m.find((item: any) => item.name === edgeItem.handle)) {
+                m.push({ name: edgeItem.handle, url: `${med.sources[0].url}`, collection: node.handle }), console.log("pushed")
+              }
+            }
+          })
+        })
+      )
+    })
+  }, [data])
 
 
   return (
@@ -85,9 +112,9 @@ export default function App() {
         <Links />
       </head>
       <body className="">
-          <Layout title={name}/>
-          <Scripts />
-          <GL />
+        <Layout title={name} />
+        <Scripts />
+        <GL />
         <ScrollRestoration />
 
       </body>

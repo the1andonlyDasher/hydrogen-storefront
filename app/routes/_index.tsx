@@ -25,19 +25,19 @@ export default function Index() {
   const [m, setM] = useAtom(model)
   useEffect(() => {
     collections && setData(collections)
-    stableData && stableData.nodes.map((node: any) => {
-      node.products.edges.map((edge: any) =>
-        Object.values(edge).map((edgeItem: any) => {
-          edgeItem.media.nodes.map((med: any) => {
-            if (med.mediaContentType === 'MODEL_3D') {
-              if (!m.find((item: any) => item.name === edgeItem.handle)) {
-                m.push({ name: edgeItem.handle, url: `${med.sources[0].url}`, collection: node.handle }), console.log("pushed")
-              }
-            }
-          })
-        })
-      )
-    })
+    // stableData && stableData.nodes.map((node: any) => {
+    //   node.products.edges.map((edge: any) =>
+    //     Object.values(edge).map((edgeItem: any) => {
+    //       edgeItem.media.nodes.map((med: any) => {
+    //         if (med.mediaContentType === 'MODEL_3D') {
+    //           if (!m.find((item: any) => item.name === edgeItem.handle)) {
+    //             m.push({ name: edgeItem.handle, url: `${med.sources[0].url}`, collection: node.handle }), console.log("pushed")
+    //           }
+    //         }
+    //       })
+    //     })
+    //   )
+    // })
 
 
   }, [collections])
