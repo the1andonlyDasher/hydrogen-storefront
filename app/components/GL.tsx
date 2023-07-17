@@ -1,14 +1,13 @@
-import { Backdrop, Bounds, CameraControls, Center, Environment, GradientTexture, Resize, Stage, Text, useAspect, useGLTF } from "@react-three/drei";
+import * as THREE from "three";
+import { Backdrop, Bounds, CameraControls, Center, Environment, GradientTexture, Resize, Stage, Text, View, useAspect, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useAtom } from "jotai";
-import { useEffect, useRef, Suspense, useState, useMemo } from "react";
+import { useEffect, useRef, Suspense, useState, useMemo, forwardRef } from "react";
 import { model } from "./atoms";
 import { motion as motion3d } from "framer-motion-3d"
-import * as THREE from "three";
 import { useAnimationControls } from "framer-motion";
-import { useLoaderData, useLocation } from "@remix-run/react";
-import { LoaderArgs, json } from "@shopify/remix-oxygen";
-import { EffectComposer, DepthOfField, Bloom, Noise, Vignette } from "@react-three/postprocessing";
+import { useLocation } from "@remix-run/react";
+import AboutGL from "./AboutGL";
 
 interface productProps {
     index: number;
@@ -17,21 +16,36 @@ interface productProps {
         url: string,
         collection: string
     };
+};
 
-}
 
-export default function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 }) {
 
+function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 }) {
     const [m, setM] = useAtom(model)
     const location = useLocation();
     const [models, setModels] = useState<any>([])
     const [loaded, setLoaded] = useState(false)
 
-    useEffect(() => {
-        m && setModels(m)
-        console.log(models)
-        models && setLoaded(true)
-    }, [models, m])
+    const Shop = () => {
+        const [initiated, initiate] = useState(false);
+        useEffect(() => {
+       
+                m && setModels(m)
+                console.log(models)
+                models && setLoaded(true)
+       
+        }, [location])
+
+        return(
+            <Suspense fallback={null}>
+                {models && models.map((item: any, index: any) =>
+                    <P key={item.name + index} item={item} index={index + 1} />
+                )}
+            </Suspense>
+        )
+    }
+
+
 
 
     function P({ item, index }: productProps) {
@@ -85,6 +99,7 @@ export default function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 
                     <motion3d.primitive
                         ref={ref}
                         name={item.name}
+                        initial={{scale:0}}
                         animate={controls}
                         transition={{ duration: 0.5, type: "spring", stiffness: 500, damping: 100, bounce:0.25, mass:0.5, delay: index * 0.2 }}
                         object={scene}
@@ -96,16 +111,12 @@ export default function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 
     }
 
     return (
-        <div className='canvas__wrapper'>
+        <div className='canvas__wrapper' >
             <Canvas camera={{ position, fov, }}>
                 <color attach={"background"} args={["#111111"]} />
-
-                <Environment preset="city" blur={1}></Environment>
-                <Suspense fallback={null}>
-                    {models && models.map((item: any, index: any) =>
-                        <P key={item.name + index} item={item} index={index + 1} />
-                    )}
-                </Suspense>
+                <Environment preset="city"></Environment>
+                <Shop/>
+               {location.pathname =="/about" && <AboutGL/>}
             </Canvas>
         </div>
 
@@ -113,3 +124,10 @@ export default function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 
 
 }
 
+type sProps = {
+
+}
+
+const FwdGL = forwardRef<HTMLElement, sProps>((props, ref) => <GL {...props} />);
+
+export default FwdGL;

@@ -38,18 +38,19 @@
 
 .lr__wrapper {
   @extend %flex-full;
-  flex-direction: column;
+  // flex-direction: column;
   flex-wrap: wrap;
   align-content: center;
   justify-content: flex-start;
   align-items: center;
+  flex: 1 1 100%;
   margin: auto;
   box-sizing: border-box;
   @include mq(medium) {
     margin: auto;
   }
   @include mq(large){
-    flex-direction: row;
+    // flex-direction: row;
   }
 }
 .lr__wrapper :is(.right-wrapper, .left-wrapper) {
@@ -104,3 +105,55 @@
 }
 
 
+// hero section grid stuff
+
+.hero-grid{
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  :is(.hero-grid_left, .hero-grid_right) .img__wrapper{
+    @include mq(medium){
+      display: none;
+    }
+  }
+  .hero-grid_right{
+    display: none;
+    @include mq(medium){
+      display: grid;
+    }
+  }
+
+  @include mq(medium){
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.bg-grid_section2{
+ h2 {
+    font-size: clamp(10rem, 10vw, 15rem);
+    opacity: .15;
+    color: var(--clr-contrast-700);
+    width: auto;
+    margin: 1rem;
+}
+}
+
+.section__button {
+  position: relative;
+  &::before{
+    @extend %flex-full;
+    content:"";
+    border-bottom: 1px solid white;
+    position: absolute;
+    top:0;
+  }
+  &::after{
+    @extend %flex-full;
+    top:0;
+    position: absolute;
+    content:"";
+    border-bottom: 1px solid white;
+  }
+}
+
+.socials svg{
+  height: clamp(30px, 5vw, 3rem);
+}

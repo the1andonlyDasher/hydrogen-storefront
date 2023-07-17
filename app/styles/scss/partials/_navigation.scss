@@ -410,3 +410,20 @@ a {
 .instant-nav ul li:first-child {
   border-right: var(--clr-contrast-800) solid 2px;
 }
+
+header.mainnav{
+  
+  padding: 0 1.5rem 0 1.5rem;
+  @include mq(small) {
+    padding: 0 2.5rem 0 2.5rem;
+  }
+  @include mq(medium) {
+    padding: 0 5% 0 5%;
+  }
+  @include mq(large) {
+    padding: 0 10% 0 10%;
+  }
+  @include mq(xl) {
+    padding: 0 15% 0 15%;
+  }
+}

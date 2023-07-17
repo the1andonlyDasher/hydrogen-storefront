@@ -41,6 +41,20 @@ $ff-header: "Yanone Kaffeesatz", sans-serif;
 $ff-sub: "Economica", monospace;
 $ff-text: "Nunito Sans", sans-serif;
 
+
+// font-family utility classes
+
+.ff__header{
+  font-family: $ff-header!important;
+}
+
+.ff__sub{
+  font-family: $ff-sub!important;
+}
+
+.ff__text{
+  font-family: $ff-text!important;
+}
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -121,7 +135,7 @@ h5,
 p,
 .sub {
   text-align: left;
-  margin: 0.25rem auto;
+  margin: 0.5rem auto;
   width: 100%;
   color: var(--clr-bright-color);
   @include mq(large){
@@ -130,10 +144,6 @@ p,
     text-align: left;
   }
 }
-
-
-
-
 
 h1,
 h2,
@@ -145,11 +155,13 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(2rem, 6vw, 4rem);
+  // font-size: clamp(2rem, 6vw, 4rem);
+  font-size: var(--fs-header);
   position: relative;
   font-family: $ff-header;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.2;
+  color: var(--clr-contrast-100);
 }
 
 strong{
@@ -157,12 +169,15 @@ strong{
 }
 
 h2 {
-  font-size: clamp(3rem, 7vw, 4.5rem);
+  // font-size: clamp(3rem, 7vw, 4.5rem);
+  font-size: var(--fs-sub-big);
   position: relative;
-  font-family: $ff-header;
-  font-weight: 800;
+  font-family: $ff-sub;
+  font-weight: 700;
   line-height: 1.2;
   margin: var(--space-s) 0;
+  color: var(--clr-contrast-100);
+
   @include mq(large){
     margin: 1rem auto 1rem 0;
   }
@@ -180,9 +195,11 @@ h3 {
 
 h4 {
   font-size: var(--fs-sub-small);
-  font-family: $ff-header;
-  font-weight: 800;
+  font-family: $ff-sub;
+  font-weight: 700;
   line-height: 1.2;
+  color: var(--clr-contrast-200);
+
 }
 
 h5 {
@@ -200,10 +217,15 @@ p {
   line-height: 1.5;
   font-weight: inherit;
   max-width: 60ch;
+  color: var(--clr-contrast-400);
   margin: var(--space-s) auto var(--space-s) 0;
   @include mq(large){
   margin: var(--space-xs) auto var(--space-xs) 0;
   }
+}
+
+.p__small{
+  font-size: var(--fs-text-small);
 }
 
 a {
@@ -216,9 +238,9 @@ red{
 
 .btn__primary,
 .btn__outline {
-
+  border-radius: 2px;
   display: block;
-  font-family: $ff-text;
+  font-family: $ff-sub;
   position: relative;
   font-size: clamp(1rem, 5vw, 1.5rem);
   font-weight: 600;
@@ -236,30 +258,23 @@ red{
 }
 
 .btn__primary {
-  background-color: var(--clr-bright-color);
+  background-color: var(--clr-contrast-700);
   border: none;
-  border-radius: 200px;
-  color: var(--clr-dark-color);
+  color: var(--clr-contrast-100);
   position: relative;
   &:hover, &:active{
-    background-color: var(--clr-main-color);
+    background-color: var(--clr-contrast-800);
   }
 }
 
 .btn__outline {
   background-color: transparent;
-  color: var(--clr-main2-color);
-  border: none;
+  color: var(--clr-contrast-100);
+  border: var(--clr-contrast-400) solid 1px;
   position: relative;
-  box-shadow: inset 0px 0px 0px 2px var(--clr-main2-color);
-  animation: empty 0s;
-  animation-iteration-count: 1;
-  animation-play-state: paused;
-  border-radius: 200px;
+  // box-shadow: inset 0px 0px 0px 2px var(--clr-main2-color);
   &:hover, &:active{
-    background-color: var(--clr-main2-color);
-    color: var(--clr-bright-color);
-
+    background-color: var(--clr-contrast-800);
   }
 }
 
@@ -297,11 +312,25 @@ red{
   top: 0;
   left: 0;
   height: 100%;
+  width: 100dvw;
   width: 100vw;
+  padding: 0 1rem 0 1rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  @include mq(small) {
+    padding: 0 1.25rem 0 1.25rem;
+  }
+  @include mq(medium) {
+    padding: 0 2.5% 0 2.5%;
+  }
+  @include mq(large) {
+    padding: 0 5% 0 5%;
+  }
+  @include mq(xl) {
+    padding: 0 10% 0 10%;
+  }
 }
 
 .__s__b{
@@ -312,26 +341,28 @@ red{
   @extend %flex-center;
   height: auto;
   overflow: visible;
-  // min-height: 100vh;
-  // min-height: 100dvh;
-  padding: 50px 1.5rem 1rem 1.5rem;
+  min-height: 100vh;
+  min-height: 100dvh;
+  // padding: 0 .5rem 0 .5rem;
+  padding: 0;
   width: 100%;
   flex-direction: column;
   justify-content: center;
   flex:1 1 100%;
   position: relative;
-  @include mq(small) {
-    padding: 1rem 2.5rem 1rem 2.5rem;
-  }
-  @include mq(medium) {
-    padding: 1rem 5% 1rem 5%;
-  }
-  @include mq(large) {
-    padding: 1.5rem 10% 1rem 10%;
-  }
-  @include mq(xl) {
-    padding: 2rem 15% 1rem 15%;
-  }
+  // @include mq(small) {
+  //   padding: 0 1.25rem 0 1.25rem;
+  // }
+  // @include mq(medium) {
+  //   padding: 0 2.5% 0 2.5%;
+  // }
+  // @include mq(large) {
+  //   padding: 0 5% 0 5%;
+  // }
+  // @include mq(xl) {
+  //   padding: 0 5% 0 5%;
+  // }
+
   .__s__b {
     @extend %flex-center;
     flex-direction: column;
@@ -346,6 +377,37 @@ red{
   }
 }
 
+.sec-pad_left{
+  padding-left:  .5rem;
+  @include mq(small) {
+    padding-left: 1.25rem;
+  }
+  @include mq(medium) {
+    padding-left:  2.5%;
+  }
+  @include mq(large) {
+    padding-left:  5%;
+  }
+  @include mq(xl) {
+    padding-left: 5%;
+  }
+}
+
+.sec-pad_right{
+  padding-right: .5rem ;
+  @include mq(small) {
+    padding-right: 1.25rem;
+  }
+  @include mq(medium) {
+    padding-right: 2.5%;
+  }
+  @include mq(large) {
+    padding-right: 5%;
+  }
+  @include mq(xl) {
+    padding-right: 5%;
+  }
+}
 
 
 #data-scroll-content {

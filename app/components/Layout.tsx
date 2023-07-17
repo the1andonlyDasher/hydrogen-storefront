@@ -1,8 +1,8 @@
-import { ReactNode, useEffect, Suspense, useState } from "react";
+import { ReactNode, useEffect, Suspense, useState, useRef } from "react";
 import { Drawer, useDrawer } from "./Drawer";
 import { Await, useMatches, useFetchers, useLocation, Outlet, useOutlet, useLoaderData } from '@remix-run/react';
 import { CartLineItems, CartActions, CartSummary } from './Cart';
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import logo from "../images/logo.jpg"
 
 
@@ -16,7 +16,7 @@ function CartHeader({ cart, openDrawer }: any) {
       <Await resolve={cart}>
         {(data) => (
           <button
-            className="relative ml-auto flex items-center justify-center w-8 h-8"
+            className="relative flex items-center justify-center w-8 h-8"
             onClick={openDrawer}
           >
             <svg
@@ -49,12 +49,14 @@ export function AnimatedOutlet() {
   return <Suspense fallback={<div>Suspense</div>}>{outlet}</Suspense>;
 }
 
-export function Layout({title }: LayoutProps) {
+export function Layout({ title }: LayoutProps) {
   const { isOpen, openDrawer, closeDrawer } = useDrawer();
   const fetchers = useFetchers();
+  const toggle = useRef<any>(!null);
   const [root] = useMatches();
   const cart = root.data?.cart;
   const outlet = useOutlet()
+  const [toggled, setToggle] = useState(false)
 
   // Grab all the fetchers that are adding to cart
   const addToCartFetchers = [];
@@ -75,11 +77,11 @@ export function Layout({title }: LayoutProps) {
     if (typeof window !== "undefined") {
       // Get the hash from the url
       const hashId = window.location.hash;
-  
+
       if (hashId) {
         // Use the hash to find the first element with that id
         const element = document.querySelector(`${hashId}`);
-  
+
         if (element) {
           // Smooth scroll to that elment
           element.scrollIntoView({
@@ -97,45 +99,87 @@ export function Layout({title }: LayoutProps) {
     }
   };
 
+  const variants = {
+    initial: { x: 100, opacity: 0 },
+    enter: { x: 0, opacity: 1, transition: { type: "tween", ease: "easeIn", duration: 0.5, staggerChildren: 0.2 } },
+    exit: { x: -100, opacity: 0, transition: { type: "tween", ease: "easeOut", duration: 0.5 } },
+  }
+
+  const toggle_variants = {
+    hidden: {},
+    enter: { transition: { type: "tween", ease: "easeIn", duration: 0.5, staggerChildren: 0 } },
+  }
+
+
 
   return (
-    <div className="flex flex-col min-h-screen antialiased ">
-      <header
+    <div className="flex flex-col min-h-screen antialiased snap-y snap-mandatory">
+      <motion.header
+              variants={toggle_variants}
+              initial="hidden"
+              animate={toggled ? "enter" : "hidden"}
         role="banner"
-        className={`flex items-center h-16 p-6 md:p-8 lg:p-12 sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 antialiased transition shadow-sm`}
+        className={`mainnav flex items-center h-16 sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 antialiased transition shadow-sm`}
       >
         <div className="flex gap-12">
-          <a className="font-bold uppercase text-2xl font-normal" style={{fontFamily:"Yanone Kaffeesatz"}} href="/">
+          <a className="font-bold uppercase text-2xl font-normal" style={{ fontFamily: "Yanone Kaffeesatz" }} href="/">
             {title}
           </a>
 
         </div>
         <img
-            src={logo}
-            width={50}
-            height={50}
-            />
+          src={logo}
+          width={50}
+          height={50}
+        />
+        <div className="ml-auto desktop">
+          <ul className="menu px-5 flex flex-row flex-nowrap">
+            <li className="px-5">Home</li>
+            <li className="px-5">Über uns</li>
+            <li className="px-5">Shop</li>
+            <li className="px-5">Kontakt</li>
+          </ul>
+        </div>
+        <motion.div
+  
+          ref={toggle}
+          onClick={() => setToggle(!toggled)}
+          id="menu-toggle"
+          className="ml-auto"
+        >
+          <motion.div variants={{hidden:{rotate:0, top:"30%"}, enter:{rotate:45, top:"50%"}}} className="origin-center translate-y-[-50%]"></motion.div>
+          <motion.div variants={{hidden:{rotate:0, top:"70%"}, enter:{rotate:-45, top:"50%"}}} className="origin-center translate-y-[-50%]"></motion.div>
+        </motion.div>
+        <motion.div variants={{hidden:{left:"-100%"}, enter:{left:0}}} className="mobile absolute top-16 left-[-100%] h-full w-full bg-black">
+        <ul className="flex flex-col flex-nowrap w-full h-full">
+            <li className="py-15 mx-auto text-2xl w-full"><h5 >Home</h5></li>
+            <li className="py-15 mx-auto text-2xl w-full"><h5 >Über uns</h5></li>
+            <li className="py-15 mx-auto text-2xl w-full"><h5 >Shop</h5></li>
+            <li className="py-15 mx-auto text-2xl w-full"><h5 >Kontakt</h5></li>
+          </ul>
+        </motion.div>
         <CartHeader cart={cart} openDrawer={openDrawer} />
-      </header>
+      </motion.header>
       <AnimatePresence
         mode="wait"
+        onExitComplete={handExitComplete}
         initial={true}>
-      <motion.main
-        role="main"
-    className="main"
-        key={useLocation().pathname}
-        initial={{ x: 100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        exit={{ x: -100, opacity: 0 }}
-        transition={{ duration: .5, ease:"easeInOut" }}>
-<AnimatedOutlet/>
-</motion.main>
+        <motion.main
+          role="main"
+          className="main snap-y snap-mandatory"
+          key={useLocation().pathname}
+          variants={variants}
+          initial="initial"
+          animate="enter"
+          exit="leave">
+          <AnimatedOutlet />
+        </motion.main>
       </AnimatePresence>
       <Drawer open={isOpen} onClose={closeDrawer}>
-          <CartDrawer cart={cart} close={closeDrawer} />
-        </Drawer>
+        <CartDrawer cart={cart} close={closeDrawer} />
+      </Drawer>
     </div>
- 
+
   );
 }
 

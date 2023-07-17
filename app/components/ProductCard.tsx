@@ -90,6 +90,7 @@ export default function ProductCard({product}:any) {
           <h4 className="max-w-prose text-copy w-full overflow-hidden whitespace-nowrap text-ellipsis  font-medium">
             {product.title}
           </h4>
+          <p>{product.description}</p>
           <div className="flex gap-4">
             <span className="max-w-prose whitespace-pre-wrap inherit text-copy flex gap-4 font-medium text-xl">
               <Money withoutTrailingZeros data={price} />

@@ -22,7 +22,8 @@ import { COLLECTIONS_QUERY } from "app/queries/models"
 import GL from '@components/GL';
 import { useAtom } from 'jotai';
 import { model } from '@components/atoms';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import FwdGL from '@components/GL';
 
 
 
@@ -80,6 +81,7 @@ export async function loader({ context, params, request }: LoaderArgs) {
 }
 
 export default function App() {
+  const tracking = useRef<any>(!null);
   const data: any = useLoaderData<typeof loader>() || {};
   const [stableData, setData] = useState<any>(data);
   const [m, setM] = useAtom(model)
