@@ -3,7 +3,7 @@ import { LoaderArgs } from '@shopify/remix-oxygen';
 import { Image } from '@shopify/hydrogen';
 import { AnimatePresence, motion } from "framer-motion"
 import CollectionsPage from './collectionPage';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { model } from '@components/atoms';
 import { useAtom } from 'jotai';
 import img from "../../public/images/frisuer.png"
@@ -28,10 +28,12 @@ export async function loader({ context }: LoaderArgs) {
 }
 
 export default function Index() {
+  const ref = useRef<any>(!null);
   const { collections }: any = useLoaderData() || {}
   const [stableData, setData] = useState(collections);
   const [m, setM] = useAtom(model)
   useEffect(() => {
+    console.log(ref);
     collections && setData(collections)
     // stableData && stableData.nodes.map((node: any) => {
     //   node.products.edges.map((edge: any) =>
@@ -143,6 +145,7 @@ export default function Index() {
     <DoubleSec props={{
       left: false,
       sectionClass: "relative",
+      ref:ref,
       children: (<>
         <div className='grid grid-cols-1  relative h-full w-full m-auto max-h-[70%] justify-center align-center'>
           <div className="flex justify-center align-center flex-col h-full sec-pad_left gap-5">

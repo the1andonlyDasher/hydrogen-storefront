@@ -1,11 +1,18 @@
 import { motion, useAnimationControls } from "framer-motion";
+import { forwardRef } from "react";
 
-interface divProps {
+type divProps = {
     children?: any;
     height?: any;
+    id?: string;
+    ref?:any
 }
 
-function ScrollDiv({ height, children }: divProps) {
+interface Props {
+    props: divProps
+}
+
+function ScrollDiv({ props }: Props) {
     const controls = useAnimationControls();
 
     const divVariants = {
@@ -29,12 +36,15 @@ function ScrollDiv({ height, children }: divProps) {
             onViewportEnter={() => controls.start("enter")}
             viewport={{ margin: "100px", amount: "some", once:true }}
             transition={{ease:"easeInOut", duration: 0.75, }}
-            className={`h-[200vh] w-full`}
+            style={{height:`${props.height}`}}
+            ref={props.ref}
+            id={props.id}
         >
             <motion.div variants={innerDivVariants} transition={{ ease:"easeIn", delay: .5 }} className="dot border-l border-[#222]">
-                {children}
+                {props.children}
             </motion.div>
         </motion.div></>);
 }
 
-export default ScrollDiv;
+export const SDiv = forwardRef<HTMLDivElement, Props>((props, ref) => <ScrollDiv {...props}>{props.props.children}</ScrollDiv>);
+

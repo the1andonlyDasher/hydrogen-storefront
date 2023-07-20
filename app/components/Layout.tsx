@@ -150,7 +150,7 @@ export function Layout({ title }: LayoutProps) {
           <motion.div variants={{hidden:{rotate:0, top:"30%"}, enter:{rotate:45, top:"50%"}}} className="origin-center translate-y-[-50%]"></motion.div>
           <motion.div variants={{hidden:{rotate:0, top:"70%"}, enter:{rotate:-45, top:"50%"}}} className="origin-center translate-y-[-50%]"></motion.div>
         </motion.div>
-        <motion.div variants={{hidden:{left:"-100%"}, enter:{left:0}}} className="mobile absolute top-16 left-[-100%] h-full w-full bg-black">
+        <motion.div variants={{hidden:{left:"-100%"}, enter:{left:0}}} className="mobile absolute top-16 left-[-100%] h-[100vh] w-full bg-black">
         <ul className="flex flex-col flex-nowrap w-full h-full">
             <li className="py-15 mx-auto text-2xl w-full"><h5 >Home</h5></li>
             <li className="py-15 mx-auto text-2xl w-full"><h5 >Über uns</h5></li>

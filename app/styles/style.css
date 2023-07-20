@@ -906,6 +906,16 @@ div[data-scroll-content] .frame:first-child header {
     transform: rotate(360deg);
   }
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 shop-pay-button {
   flex: 1 1 auto;
 }
@@ -2558,7 +2568,6 @@ ul.transition li {
   top: 25%;
   display: inline-block;
   max-width: 600px;
-  padding: 0;
   padding: var(--space-s);
   color: #a0a0a0;
   line-height: 1.7em;
@@ -2619,6 +2628,33 @@ ul.transition li {
   overflow-x: hidden;
   flex-direction: column;
   flex: 1 1 auto;
+}
+
+.next,
+.prev {
+  top: calc(50% - 20px);
+  position: absolute;
+  background: white;
+  border-radius: 30px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  z-index: 2;
+}
+
+.next {
+  right: 10px;
+}
+
+.prev {
+  left: 10px;
+  transform: scale(-1);
 }
 
 .svg__wrapper, .blob__mobile__detail, .blob__detail {
