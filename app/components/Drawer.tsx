@@ -35,13 +35,13 @@ function Drawer({open, onClose, children}:any) {
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <Dialog.Panel className=" right-0 max-w-lg transform text-left align-middle shadow-xl transition-all antialiased bg-neutral-50 flex flex-col">
+                <Dialog.Panel className=" right-0 max-w-lg transform text-left align-middle shadow-xl transition-all antialiased bg-[#111] flex flex-col">
                   <header className="sticky top-0 flex items-center justify-between px-4 h-24 sm:px-8 md:px-12 flex-0">
                     <h2
                       id="cart-contents"
-                      className="whitespace-pre-wrap max-w-prose font-bold text-4xl text-black"
+                      className="whitespace-pre-wrap max-w-prose font-bold text-4xl text-neutral-50"
                     >
-                      Cart
+                      Warenkorb
                     </h2>
                     <button
                       type="button"
@@ -92,7 +92,7 @@ function IconClose() {
       viewBox="0 0 20 20"
       className="w-5 h-5"
     >
-      <title>Close</title>
+      <title>Schließen</title>
       <line
         x1="4.44194"
         y1="4.30806"

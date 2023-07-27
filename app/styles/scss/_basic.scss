@@ -499,3 +499,13 @@ div[data-scroll-content] .frame:first-child {
 shop-pay-button {
   flex: 1 1 auto;
 }
+
+.privacy-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--accent);
+  z-index: 2;
+}

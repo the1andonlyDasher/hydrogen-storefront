@@ -5,24 +5,41 @@ import { useFrame, useThree } from "@react-three/fiber"
 import scene from "../models/scene2.glb"
 import { useAtom } from "jotai"
 import { globalScroll } from "./atoms"
+import { motion } from "framer-motion-3d"
+import { useAnimation, useAnimationControls, useIsPresent } from "framer-motion"
+import { useLocation } from "@remix-run/react"
 
 const color = new THREE.Color()
 
 export default function Model({  ...props }:any) {
   const { size } = useThree()
+  const [active, setActive] = useState(false)
   size.updateStyle = true;
+  const [loaded, setLoaded] = useState(false)
   const [w, h] = useAspect(size.width, size.height)
   const [gScroll, setgScroll] = useAtom(globalScroll)
+  const location = useLocation()
   const group = useRef<any>(!null)
   const { nodes, materials, animations }:any = useGLTF(scene)
   const { actions }:any = useAnimations(animations, group)
   const [hovered, set] = useState()
   const extras = { receiveShadow: true, castShadow: true, "material-envMapIntensity": 0.2 }
-  useEffect(() => void (actions["CameraAction"].play().paused = true), [])
-  useEffect(() => {
-    if (hovered) group.current.getObjectByName(hovered).material.color.set("white")
-    document.body.style.cursor = hovered ? "pointer" : "auto"
-  }, [hovered])
+  useEffect(() => {void (actions["CameraAction"].play().paused = true), setLoaded(true)}, [])
+  useEffect(()=>{
+  
+    if(location.pathname === "/about" && loaded === true){
+      setActive(true)
+      controls.start({scale:1})
+    } else {
+      setActive(false)
+
+      controls.start({scale:0})
+    }
+  },[location, loaded])
+  // useEffect(() => {
+  //   if (hovered) group.current.getObjectByName(hovered).material.color.set("white")
+  //   document.body.style.cursor = hovered ? "pointer" : "auto"
+  // }, [hovered])
   useFrame((state) => {
     actions["CameraAction"].time = THREE.MathUtils.lerp(actions["CameraAction"].time, actions["CameraAction"].getClip().duration * gScroll.current, 0.05)
     group.current.children[0].children.forEach((child:any, index:number) => {
@@ -37,11 +54,16 @@ export default function Model({  ...props }:any) {
 
   const f = Math.min(Math.max(.5 * (w / 20), 0.5), 1)
 
+  const controls = useAnimationControls()
+
   return (
-    <group ref={group} {...props} dispose={null}>
-      <group
-        onPointerOver={(e:any) => (e.stopPropagation(), set(e.object.name))}
-        onPointerOut={(e:any) => (e.stopPropagation(), set(undefined))}
+    <motion.group ref={group} {...props} dispose={null} >
+      <motion.group
+        initial={{scale:0}}
+        animate={controls} 
+        exit={{scale:0}}
+        // onPointerOver={(e:any) => (e.stopPropagation(), set(e.object.name))}
+        // onPointerOut={(e:any) => (e.stopPropagation(), set(undefined))}
         position={[0.06, 4.04, 0.35]}>
         <mesh name="comb" geometry={nodes.comb.geometry} material={materials.dark_material} {...extras} />
         <mesh name="seat" geometry={nodes.seat.geometry} material={materials.dark_material} {...extras} />
@@ -53,9 +75,9 @@ export default function Model({  ...props }:any) {
         <mesh name="chair" geometry={nodes.chair.geometry} material={materials.dark_material}/>
         <mesh name="light" geometry={nodes.light.geometry} material={materials.dark_material}/>
         <mesh name="shaver" geometry={nodes.shaver.geometry} material={materials.dark_material}/>
-      </group>
+      </motion.group>
       <group name="Camera" position={[60,-85,53]} rotation={[1.62, 0.01, 0.11]}>
-        <PerspectiveCamera makeDefault={true} far={100} near={0.1} fov={22.9} rotation={[-Math.PI / 2, 0, 0]}>
+        <PerspectiveCamera makeDefault={active} far={100} near={0.1} fov={22.9} rotation={[-Math.PI / 2, 0, 0]}>
           <directionalLight
             // castShadow
             position={[10, 20, 15]}
@@ -70,7 +92,7 @@ export default function Model({  ...props }:any) {
           />
         </PerspectiveCamera>
       </group>
-    </group>
+    </motion.group>
   )
 }
 

@@ -1,8 +1,8 @@
 import { ReactNode, useEffect, Suspense, useState, useRef } from "react";
 import { Drawer, useDrawer } from "./Drawer";
-import { Await, useMatches, useFetchers, useLocation, Outlet, useOutlet, useLoaderData } from '@remix-run/react';
+import { Await, useMatches, useFetchers, useLocation, Outlet, useOutlet, useLoaderData, Link } from '@remix-run/react';
 import { CartLineItems, CartActions, CartSummary } from './Cart';
-import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
+import { AnimatePresence, motion, useAnimationControls, useIsPresent } from "framer-motion";
 import logo from "../images/logo.jpg"
 
 
@@ -57,6 +57,7 @@ export function Layout({ title }: LayoutProps) {
   const cart = root.data?.cart;
   const outlet = useOutlet()
   const [toggled, setToggle] = useState(false)
+  const isPresent = useIsPresent();
 
   // Grab all the fetchers that are adding to cart
   const addToCartFetchers = [];
@@ -100,9 +101,9 @@ export function Layout({ title }: LayoutProps) {
   };
 
   const variants = {
-    initial: { x: 100, opacity: 0 },
-    enter: { x: 0, opacity: 1, transition: { type: "tween", ease: "easeIn", duration: 0.5, staggerChildren: 0.2 } },
-    exit: { x: -100, opacity: 0, transition: { type: "tween", ease: "easeOut", duration: 0.5 } },
+    initial: {  opacity: 0 },
+    enter: {  opacity: 1, transition: { type: "tween", ease: "easeIn", duration: 0.5, staggerChildren: 0.2 } },
+    exit: {  opacity: 0, transition: { type: "tween", ease: "easeOut", duration: 0.5 } },
   }
 
   const toggle_variants = {
@@ -145,17 +146,17 @@ export function Layout({ title }: LayoutProps) {
           ref={toggle}
           onClick={() => setToggle(!toggled)}
           id="menu-toggle"
-          className="ml-auto"
+          className="ml-auto mobile"
         >
           <motion.div variants={{hidden:{rotate:0, top:"30%"}, enter:{rotate:45, top:"50%"}}} className="origin-center translate-y-[-50%]"></motion.div>
           <motion.div variants={{hidden:{rotate:0, top:"70%"}, enter:{rotate:-45, top:"50%"}}} className="origin-center translate-y-[-50%]"></motion.div>
         </motion.div>
-        <motion.div variants={{hidden:{left:"-100%"}, enter:{left:0}}} className="mobile absolute top-16 left-[-100%] h-[100vh] w-full bg-black">
-        <ul className="flex flex-col flex-nowrap w-full h-full">
-            <li className="py-15 mx-auto text-2xl w-full"><h5 >Home</h5></li>
-            <li className="py-15 mx-auto text-2xl w-full"><h5 >Über uns</h5></li>
-            <li className="py-15 mx-auto text-2xl w-full"><h5 >Shop</h5></li>
-            <li className="py-15 mx-auto text-2xl w-full"><h5 >Kontakt</h5></li>
+        <motion.div variants={{hidden:{left:"-100%"}, enter:{left:0}}} className="mobile absolute top-16 left-[-100%] h-[100vh] w-full bg-[#111]">
+        <ul className="flex flex-col flex-nowrap justify-center items-center w-full h-full px-[10%]">
+            <li className="py-14 mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/">Home</Link></li>
+            <li className="py-14 mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/about">Über uns</Link></li>
+            <li className="py-14 mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/shop">Shop</Link></li>
+            <li className="py-14 mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/contact">Kontakt</Link></li>
           </ul>
         </motion.div>
         <CartHeader cart={cart} openDrawer={openDrawer} />

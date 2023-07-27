@@ -1,7 +1,10 @@
-import {useLoaderData} from '@remix-run/react';
+import {useLoaderData, useLocation} from '@remix-run/react';
 import {LoaderArgs, json} from '@shopify/remix-oxygen';
-import { useEffect, useRef, useState } from 'react';
-import ProductCard from '@components/ProductCard';
+import ProductGrid from '../components/ProductGrid';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { useAtom, useSetAtom } from 'jotai';
+import {  model } from '@components/atoms';
 
 
 const seo = ({data}:any) => ({
@@ -49,39 +52,37 @@ export function meta({data}:any){
 export default function Collection() {
   const {collection}:any = useLoaderData() || {};
   const [stableData, setData]  = useState(collection);
-  const [products, setProducts] = useState(stableData.products.nodes || []);
 
   useEffect(() => {
     collection && setData(collection);
-    stableData &&  setProducts((prev:any) => [...prev, ...collection.products.nodes]);
-    console.log(products)
   }, [collection])
 
-  const ref = useRef<any>(!null);
-  const caption = useRef<any>(!null);
-  const scroll = useRef<any>(0);
-  return ( <>
-  <div
-  ref={ref}
-  onScroll={(e:any) => {
-    scroll.current = e.target.scrollTop / (e.target.scrollHeight - window.innerHeight)
-    caption.current.innerText = scroll.current.toFixed(2)
-  }}
-  className="mainScroll scroll">
-    {products.map((product:any, index: number) => (
-  <div style={{ height: "200vh" }}>
-    <div className="dot">
-          <ProductCard key={product.id + index} product={product} />
-          </div>
-    </div>
-    ))}
-
- 
-  <span className="caption" ref={caption}>
-    0.00
-  </span>
-</div>
-  </> );
+  
+  return (
+    <>
+    <section className="w-full gap-4 md:gap-8 grid">
+      <div className='w-full grid min-h-[10rem]'></div>
+      <header className="grid w-full gap-8 py-8 justify-items-start">
+      <div className="w-full max-w-full flex flex-wrap  rounded-[2px]">
+          <h1 className="text-4xl whitespace-pre-wrap font-bold inline-block">
+            {stableData.title}
+          </h1>
+          {stableData.description && (
+            <div className="flex items-baseline justify-between w-full">
+                <p className=" whitespace-pre-wrap inherit text-copy flex-auto ">
+                  {stableData.description}
+                </p>
+            </div>
+          )}
+      </div>
+      </header>
+      <ProductGrid
+        collection={stableData}
+        url={`/collections/${stableData.handle}`}
+      />
+      </section>
+    </>
+  );
 }
 
 const COLLECTION_QUERY = `#graphql

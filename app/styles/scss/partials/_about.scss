@@ -129,7 +129,7 @@
 .prev {
   top: calc(50% - 20px);
   position: absolute;
-  background: white;
+  // background: white;
   border-radius: 30px;
   width: 40px;
   height: 40px;
@@ -151,3 +151,4 @@
   left: 10px;
   transform: scale(-1);
 }
+

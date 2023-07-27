@@ -44,9 +44,6 @@
     // transform-origin: center;
     // transform: translate(0, 0) rotate(0deg);
   }
-  @include mq(medium) {
-    display: none;
-  }
 }
 
 

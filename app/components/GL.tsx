@@ -77,7 +77,7 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 }) {
                 }
             }
             console.log("running GL", m)
-        }, [location, m])
+        }, [loaded])
 
 
         useFrame((state, delta) => {
@@ -116,7 +116,7 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 }) {
                 <color attach={"background"} args={["#111111"]} />
                 <Environment preset="city"></Environment>
                 <Shop/>
-               {location.pathname =="/about" && <AboutGL/>}
+               <AboutGL/>
             </Canvas>
         </div>
 
