@@ -31,8 +31,7 @@ export default function ProductGrid({collection, url}:gridProps) {
   }, [fetcher.data]);
   return (
 <>
-
-      <div className="grid-flow-row grid gap-2 gap-y-6 w-full" style={{gridTemplateColumns:`repeat(auto-fit, minmax(min(200px, 100%), 1fr))`}}>  {/*  md:gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 */}
+      <div className="grid-flow-row grid gap-2 gap-y-6 w-full" style={{gridTemplateColumns:`repeat(auto-fit, minmax(min(250px, 100%), 1fr))`}}>  {/*  md:gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 */}
         {products.map((product:any, index: number) => (
           <ProductCard key={product.id + index} product={product} />
         ))}
@@ -44,7 +43,7 @@ export default function ProductGrid({collection, url}:gridProps) {
             disabled={fetcher.state !== 'idle'}
             onClick={fetchMoreProducts}
           >
-            {fetcher.state !== 'idle' ? 'Loading...' : 'Load more products'}
+            {fetcher.state !== 'idle' ? 'Laden...' : 'Lade mehr Produkte'}
           </button>
         </div>
       )}

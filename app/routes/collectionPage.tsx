@@ -57,6 +57,7 @@ const COLLECTIONS_QUERY = `#graphql
           node {
           id
           title
+          description
           }
           }
           }

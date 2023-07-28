@@ -343,13 +343,13 @@ red{
   overflow: visible;
   min-height: 100vh;
   min-height: 100dvh;
-  // padding: 0 .5rem 0 .5rem;
   padding: 0;
   width: 100%;
   flex-direction: column;
   justify-content: center;
   flex:1 1 100%;
   position: relative;
+  // padding: 0 .5rem 0 .5rem;
   // @include mq(small) {
   //   padding: 0 1.25rem 0 1.25rem;
   // }

@@ -34,12 +34,12 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 }) {
                 console.log(models)
                 models && setLoaded(true)
        
-        }, [location])
+        }, [])
 
         return(
             <Suspense fallback={null}>
                 {models && models.map((item: any, index: any) =>
-                    <P key={item.name + index} item={item} index={index + 1} />
+                    <P key={item.name + index} item={item} index={1 + index} />
                 )}
             </Suspense>
         )
@@ -67,7 +67,7 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 }) {
             controls.start({ scale: 0 })
             if (loaded === true) {
                 if (location.pathname.includes(`/${item.name}`)) {
-                    controls.start({ scale: (item.name === "adidas-classic" ? 0.5 : 0.75), x: (viewport.size.width < 768 ? 0 : 0 - w / 8), z: 0, y: (viewport.size.width < 768 ? 0 : -1), transition: { duration: 1, type: "spring" } })
+                    controls.start({ scale: 0.75, x: (viewport.size.width < 768 ? 0 : 0 - w / 8), z: 0, y: (viewport.size.width < 768 ? 0 : -1), transition: { duration: 1, type: "spring" } })
                 } else {
                     if (location.pathname.includes(`/collections/${item.collection}`)) {
                         controls.start({ scale: 0.65, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: 0 }).then(() => console.log("Done"))
@@ -103,7 +103,7 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15 }) {
                         animate={controls}
                         transition={{ duration: 0.5, type: "spring", stiffness: 500, damping: 100, bounce:0.25, mass:0.5, delay: index * 0.2 }}
                         object={scene}
-                    // position={[(viewport.size.width < 768 ? 0 : Math.cos(r) * radius + w / 4), 0, Math.sin(r) * radius]}
+                    position={[(viewport.size.width < 768 ? 0 : Math.cos(r) * radius + w / 4), 0, Math.sin(r) * radius]}
                     />
                 </motion3d.group>
             </>

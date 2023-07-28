@@ -184,7 +184,7 @@ export default function ProductHandle() {
               {stableProductData.vendor}
             </span>
           </div>
-          <ProductOptions options={stableProductData.options} selectedVariant={stableSelectedVariantData} />
+         {stableSelectedVariantData && <ProductOptions options={stableProductData.options} selectedVariant={stableSelectedVariantData} />} 
           <Money
             withoutTrailingZeros
             data={stableSelectedVariantData.price}

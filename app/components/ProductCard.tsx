@@ -1,6 +1,7 @@
 import { WebGLFrame } from '@context';
 import {Link} from '@remix-run/react';
 import {Image, MediaFile, Money} from '@shopify/hydrogen';
+import { useEffect } from 'react';
 
 function ProductGallery({media}:any) {
   if (!media.length) {
@@ -76,23 +77,27 @@ export default function ProductCard({product}:any) {
     EXTERNAL_VIDEO: 'ExternalVideo',
   };
 
+  useEffect(()=>{
+    console.log(product)
+  },[])
+
   return (
     <Link to={`/products/${product.handle}`}>
       <div className="grid gap-6">
         <div className="shadow-sm rounded relative">
-          {isDiscounted && (
+          { isDiscounted && (
             <label className="subpixel-antialiased absolute top-0 right-0 m-4 text-right text-notice text-red-600 text-xs">
               Sale
             </label>
           )}
         </div>
-        <div className="grid gap-1">
-          <h4 className="max-w-prose text-copy w-full overflow-hidden whitespace-nowrap text-ellipsis  font-medium">
+        <div className="grid gap-1 bg-[#0f0f0f] border border-[#101010] p-6">
+          <div style={{fontFamily:"Economica"}} className="max-w-prose text-copy w-full overflow-hidden whitespace-nowrap text-ellipsis font-medium text-2xl">
             {product.title}
-          </h4>
-          <p>{product.description}</p>
+          </div>
+          <div className='text-small text-[#333] text-thin py-4  max-h-14  overflow-hidden truncate'>{product.descriptionHtml}</div>
           <div className="flex gap-4">
-            <span className="max-w-prose whitespace-pre-wrap inherit text-copy flex gap-4 font-medium text-xl">
+            <span className="max-w-prose whitespace-pre-wrap inherit text-copy flex gap-4 font-medium text-xl text-[var(--clr-contrast-400)]">
               <Money withoutTrailingZeros data={price} />
               {isDiscounted && (
                 <Money

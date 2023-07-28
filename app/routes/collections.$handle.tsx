@@ -101,6 +101,7 @@ const COLLECTION_QUERY = `#graphql
         nodes {
           id
           title
+          descriptionHtml
           publishedAt
           handle
           media(first: 10) {
