@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import React, { useEffect, useRef, useState } from "react"
-import { useGLTF, useAnimations, PerspectiveCamera, useAspect } from "@react-three/drei"
+import { useGLTF, useAnimations, PerspectiveCamera, useAspect, useScroll } from "@react-three/drei"
 import { useFrame, useThree } from "@react-three/fiber"
 import scene from "../models/scene2.glb"
 import { useAtom } from "jotai"
@@ -22,28 +22,22 @@ export default function Model({  ...props }:any) {
   const group = useRef<any>(!null)
   const { nodes, materials, animations }:any = useGLTF(scene)
   const { actions }:any = useAnimations(animations, group)
-  const [hovered, set] = useState()
-  const extras = { receiveShadow: true, castShadow: true, "material-envMapIntensity": 0.2 }
-  useEffect(() => {void (actions["CameraAction"].play().paused = true), setLoaded(true)}, [])
+  const extras = { receiveShadow: false, castShadow: false, "material-envMapIntensity": 0.2 }
+  useEffect(() => { (actions["CameraAction"].reset().fadeIn(0.5).play().paused = true), setLoaded(true)}, [location, loaded])
   useEffect(()=>{
-  
+
     if(location.pathname === "/about" && loaded === true){
       setActive(true)
       controls.start({scale:1})
     } else {
       setActive(false)
-
       controls.start({scale:0})
     }
   },[location, loaded])
-  // useEffect(() => {
-  //   if (hovered) group.current.getObjectByName(hovered).material.color.set("white")
-  //   document.body.style.cursor = hovered ? "pointer" : "auto"
-  // }, [hovered])
-  useFrame((state) => {
+
+  useFrame((state, delta) => {
     actions["CameraAction"].time = THREE.MathUtils.lerp(actions["CameraAction"].time, actions["CameraAction"].getClip().duration * gScroll.current, 0.05)
     group.current.children[0].children.forEach((child:any, index:number) => {
-      child.material.color.lerp(color.set(hovered === child.name ? "tomato" : "#202020"), hovered ? 0.1 : 0.05)
       const et = state.clock.elapsedTime
        child.position.y = Math.sin((et + index * 2000) / 2) * 1
        child.rotation.x = Math.sin((et + index * 2000) / 3) / 40

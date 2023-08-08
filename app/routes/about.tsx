@@ -11,20 +11,15 @@ import { currentSection } from "@components/atoms";
 const About = () => {
   const ref = useRef<any>(!null);
   const progress = useRef<any>(!null);
-  const caption = useRef<any>(!null);
   const scroll: any = useRef<any>(0);
   const [gScroll, setgScroll] = useAtom(globalScroll)
   const [sectionCurrent, setSection] = useAtom(currentSection)
   const { scrollYProgress }: any = useScroll({ container: ref })
   const scaleX = useSpring(scrollYProgress)
   const x = useSpring(scrollYProgress)
-  const isPresent = useIsPresent();
-
-
 
   useEffect(() => {
     setgScroll(scroll)
-    names.map((item:any)=>console.log(Object.values(item)))
   }, [scroll]);
 
   const names = 

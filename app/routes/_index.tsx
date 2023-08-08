@@ -35,24 +35,9 @@ export default function Index() {
   const isPresent = useIsPresent();
 
   useEffect(() => {
-    console.log(ref);
     collections && setData(collections)
-    // stableData && stableData.nodes.map((node: any) => {
-    //   node.products.edges.map((edge: any) =>
-    //     Object.values(edge).map((edgeItem: any) => {
-    //       edgeItem.media.nodes.map((med: any) => {
-    //         if (med.mediaContentType === 'MODEL_3D') {
-    //           if (!m.find((item: any) => item.name === edgeItem.handle)) {
-    //             m.push({ name: edgeItem.handle, url: `${med.sources[0].url}`, collection: node.handle }), console.log("pushed")
-    //           }
-    //         }
-    //       })
-    //     })
-    //   )
-    // })
-
-
   }, [collections])
+
   function solid(arg0: string): import("@fortawesome/fontawesome-svg-core").IconProp {
     throw new Error('Function not implemented.');
   }
@@ -205,7 +190,7 @@ export default function Index() {
             </div>
             <img className="self-end my-0 mx-auto z-[2] w-[90%]" src={duo} alt="Stephan und Simon" style={{ scale: "1", transformOrigin: "bottom right", maxWidth:"500px" }} />
             <div className='mt-auto img__wrapper '>
-            <button className='btn__primary'aria-label='link'>Zum Shop</button>
+            <button className='btn__primary'aria-label='link'><Link to="/shop">Zum Shop</Link></button>
           </div>
           </div>
         </div>
@@ -218,7 +203,7 @@ export default function Index() {
               <h2>Finde tolle Produkte</h2>
               <p>...die zu dir passen.</p>
             </div>
-          <button className='btn__primary'aria-label='link'>Zum Shop</button>
+          <button className='btn__primary'aria-label='link'><Link to="/shop">Zum Shop</Link></button>
           </div>
         </div>
       </>

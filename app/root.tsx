@@ -22,7 +22,7 @@ import { COLLECTIONS_QUERY } from "app/queries/models"
 import GL from '@components/GL';
 import { useAtom } from 'jotai';
 import { model } from '@components/atoms';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import FwdGL from '@components/GL';
 
 
@@ -81,27 +81,41 @@ export async function loader({ context, params, request }: LoaderArgs) {
 }
 
 export default function App() {
-  const tracking = useRef<any>(!null);
   const data: any = useLoaderData<typeof loader>() || {};
   const [stableData, setData] = useState<any>(data);
+  const prices:any = []
   const [m, setM] = useAtom(model)
   const { name } = data.layout.shop;
+  
   useEffect(() => {
-    data && setData(data)
     stableData && stableData.collection.collections.nodes.map((node: any) => {
-      node.products.edges.map((edge: any) =>
+      node.products.edges.map((edge: any, index: number) =>
         Object.values(edge).map((edgeItem: any) => {
           edgeItem.media.nodes.map((med: any) => {
             if (med.mediaContentType === 'MODEL_3D') {
               if (!m.find((item: any) => item.name === edgeItem.handle)) {
-                m.push({ name: edgeItem.handle, url: `${med.sources[0].url}`, collection: node.handle }), console.log("pushed")
+                m.push({ name: edgeItem.handle, url: `${med.sources[0].url}`, collection: node.handle, price:  prices[index] })
               }
             }
           })
         })
       )
     })
-  }, [data])
+
+    data && setData(data)
+    stableData && stableData.collection.collections.nodes.map((node: any) => {
+      node.products.edges.map((edge: any) =>
+        Object.values(edge).map((edgeItem: any) => 
+        edgeItem.variants.nodes.map((node:any)=>
+        Object.values(node).map((item:any)=>{
+if(Object.prototype.toString.call(item) === "[object Object]"){
+  prices.push(item.amount)
+}
+      }))))})
+
+
+
+  }, [stableData])
 
 
   return (

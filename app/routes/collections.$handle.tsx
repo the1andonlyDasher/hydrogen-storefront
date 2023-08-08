@@ -53,9 +53,17 @@ export default function Collection() {
   const {collection}:any = useLoaderData() || {};
   const [stableData, setData]  = useState(collection);
 
-  useEffect(() => {
+useEffect(() => {
     collection && setData(collection);
-  }, [collection])
+    var o = stableData.products.nodes.map((object:any)=>(Object.values(object)[6]))
+    var k = Object.values(o)
+    var p = k.map((node:any)=>Object.values(node)[0])
+    var q = p.map((item:any)=>Object.values(item)[0])
+    var r = Object.values(q)
+    var s = Object.values(r)
+    var u = s.map((item:any)=>Object.values(item)[2])
+    console.log(u.map((item:any)=>Object.values(item)[0]))
+}, [collection])
 
   
   return (

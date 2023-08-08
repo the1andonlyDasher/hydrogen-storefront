@@ -135,10 +135,10 @@ export function Layout({ title }: LayoutProps) {
         />
         <div className="ml-auto desktop">
           <ul className="menu px-5 flex flex-row flex-nowrap">
-            <li className="px-5">Home</li>
-            <li className="px-5">Über uns</li>
-            <li className="px-5">Shop</li>
-            <li className="px-5">Kontakt</li>
+            <li className="px-5"><Link to="/">Home</Link></li>
+            <li className="px-5"><Link to="/about">Über uns</Link></li>
+            <li className="px-5"><Link to="/shop">Shop</Link></li>
+            <li className="px-5"><Link to="/contact">Kontakt</Link></li>
           </ul>
         </div>
         <motion.div

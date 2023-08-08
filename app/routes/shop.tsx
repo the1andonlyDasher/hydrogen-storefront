@@ -35,7 +35,6 @@ export default function Index() {
   const isPresent = useIsPresent();
 
   useEffect(() => {
-    console.log(ref);
     collections && setData(collections)
     // stableData && stableData.nodes.map((node: any) => {
     //   node.products.edges.map((edge: any) =>
@@ -59,7 +58,7 @@ export default function Index() {
 
   return (<>
      
-    <section className="w-full gap-4" >
+    <section className="w-full gap-4" id="shopSection">
       <h2 className="whitespace-pre-wrap max-w-prose font-bold text-lead my-3">
         Collections
       </h2>
