@@ -2,11 +2,12 @@
 import { Carousel } from "@components/Carousel";
 import { SDiv } from "@components/ScrollDiv";
 import { globalScroll } from "@components/atoms";
-import { AnimatePresence, motion, useIsPresent, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { useAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
 import { InView } from 'react-intersection-observer';
 import { currentSection } from "@components/atoms";
+import Footer from "@components/Footer";
 
 const About = () => {
   const ref = useRef<any>(!null);
@@ -104,7 +105,6 @@ const About = () => {
        </InView>)
       )}
     </div>
-
   </>);
 };
 

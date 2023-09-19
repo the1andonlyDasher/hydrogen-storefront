@@ -193,7 +193,7 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15, w = 0.7, gap =
         const group = useRef<any>(!null)
         const { scene }: any = useGLTF(item.url, true, undefined, (loader: any) => {
             loader.manager.onStart = function (url: any, itemsLoaded: any, itemsTotal: any) { console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.'); };
-            loader.manager.onLoad = function () { setGLoaded(true), console.log("done loading") };
+            loader.manager.onLoad = function () { setGLoaded(true)};
         })
         const controls = useAnimationControls()
 
@@ -204,9 +204,9 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15, w = 0.7, gap =
                     controls.start({ scale: 2.0, x: (viewport.size.width < 768 ? 0 : 0 - w / 8), z: 0, y: (viewport.size.width < 768 ? 0 : -1), transition: { duration: 1, type: "spring" } })
                 } else {
                     if (loc.pathname.includes(`/collections/${item.collection}`)) {
-                        controls.start({ scale: 0.65, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: 0 }).then(() => console.log("Done"))
+                        controls.start({ scale: 0.65, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: 0 })
                     } else {
-                        controls.start({ scale: 0, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: 0 }).then(() => console.log("Done"))
+                        controls.start({ scale: 0, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: 0 })
                     }
                 }
             }

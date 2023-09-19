@@ -85,7 +85,7 @@
   flex-direction: column;
 }
 
-form {
+.form {
   @extend %flex-center;
   flex: 1 1 100%;
   margin: 0 auto 0 0;
@@ -97,14 +97,14 @@ form {
   color: var(--clr-dark-color);
 }
 
-form div {
+.form div {
   margin: 1rem auto;
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-form :is(#name, #email) {
+.form :is(#name, #email) {
   max-width: 500px;
 }
 
@@ -121,7 +121,7 @@ legend {
   padding: 0.5rem;
 }
 
-form :is(label, select, input, textarea, .input) {
+.form :is(label, select, input, textarea, .input) {
   position: relative;
   line-height: 1.5;
   text-align: left;
@@ -129,48 +129,48 @@ form :is(label, select, input, textarea, .input) {
   margin: 0;
 }
 
-form .input {
+.form .input {
   display: grid;
 }
 
-form label {
+.form label {
   font-weight: 500;
   padding-bottom: var(--space-xs);
   font-size: var(--fs-text);
   color: var(--clr-contrast-300)
 }
 
-form :is(input, select, textarea) {
+.form :is(input, select, textarea) {
   padding: var(--space-xs);
   font-size: var(--fs-text-small);
   font-weight: 500;
 }
 
-form input:active {
+.form input:active {
   border:2px solid var(--clr-contrast-200);
 }
 
-form input:focus-visible,
+.form input:focus-visible,
 textarea:focus-visible {
   border:2px solid var(--clr-contrast-200);
 
 }
 
-form .btn-inner{
+.form .btn-inner{
   margin: 2rem auto 0 0;
 }
 
-form .btn-group {
+.form .btn-group {
   @extend %flex-center;
   justify-content: flex-start;
   width: 100%;
 }
 
-form a {
+.form a {
   margin: 1rem auto 0 0;
 }
 
-form .btn__primary {
+.form .btn__primary {
   margin-top: var(--space-m);
   outline: none;
   width: 100%;
@@ -179,7 +179,7 @@ form .btn__primary {
   flex: unset;
 }
 
-form .btn-group .btn-group:nth-child(n + 2) {
+.form .btn-group .btn-group:nth-child(n + 2) {
   margin-left: 1rem;
 }
 
@@ -217,9 +217,21 @@ input::placeholder, textarea::placeholder {
   color: var(--clr-contrast-600)
 }
 
-form :is(select, input, textarea) {
+.form :is(select, input, textarea) {
   background-color: #21212122;
   border: 1px solid #222;
   border-radius: 2px;
   color: var(--clr-contrast-200)
+}
+
+form[method="post"]{
+  @extend %flex-center;
+  flex: 1 1 100%;
+  margin: 0 auto 0 0;
+  flex-direction: column;
+  width: 100%;
+  margin: var(--space-m) 0 0 0;
+  flex: 1 1 auto;
+  min-width: 250px;
+  color: var(--clr-dark-color);
 }

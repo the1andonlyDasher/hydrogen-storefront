@@ -15,6 +15,7 @@ import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import Footer from '@components/Footer';
 
 export function meta() {
   return [
@@ -45,19 +46,19 @@ export default function Index() {
   return (<>
         <DoubleSec props={{
       left: true,
-      sectionClass: "relative border-[#222] border-l",
+      sectionClass: "relative border-[#222] border-l ",
       children: (<>
         <div className='flex flex-col bg-[#141414] relative h-full w-full m-auto max-h-[375px] justify-center align-center'>
-        <div className='mb-auto img__wrapper'>
+        <div className='mb-auto mx-4 img__wrapper'>
               <h4>Denk immer daran</h4>
               <h1>Es ist alles nur Kopfsache</h1>
               </div>
           <div className="flex justify-center align-center flex-col h-full sec-pad_right gap-5 p-5">
             <img className="self-end my-0 mx-auto z-[2] w-[90%]" src={img} alt="Stephan und Simon" style={{  transformOrigin: "bottom right", maxWidth:"500px" }} />
           </div>
-          <div className='mb-auto img__wrapper'>
-              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut.</p>
-              <button className="btn__primary" type="button">Termin buchen</button>
+          <div className='mb-auto mx-4 my-6 img__wrapper'>
+              <p className='my-5'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut.</p>
+              <Link to="https://www.studiobookr.com/kopfsache-by-stephan-mueller-56870#/"><button className="btn__primary" type="button">Termin buchen</button></Link>
             </div>
         </div>
       </>),
@@ -68,7 +69,8 @@ export default function Index() {
               <h4>Denk immer daran</h4>
               <h1>Es ist alles nur Kopfsache</h1>
               <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut.</p>
-              <button className="btn__primary" type="button">Termin buchen</button>
+              <Link to="https://www.studiobookr.com/kopfsache-by-stephan-mueller-56870#/"><button className="btn__primary" type="button">Termin buchen</button></Link>
+
             </div>
           </div>
         </div>
@@ -77,8 +79,13 @@ export default function Index() {
     }} />
     <DoubleSec props={{
       left: true,
-      sectionClass: "relative",
+      sectionClass: "relative ",
       children: (<>
+             <div className='grid grid-cols-1  relative  relative h-full w-full m-auto max-h-[70%] justify-center align-center'>
+          <div className='flex justify-center align-center flex-col bg-[#111] p-5'>
+            <img className="self-end mb-10  z-[2]" src={chair} alt="Stephan mit Kunde" style={{ scale: "0.9", transformOrigin: "bottom right" }} />
+          </div>
+        </div>
         <div className='flex justify-center align-center absolute top-0 left-0 w-full h-full z-[1] overflow-hidden'>
           <div className='bg-grid_section2 flex flex-wrap w-full my-auto grid-cols-5 grid-rows-[repeat(2,_minmax(2rem,_1fr))] justify-center align-center'>
             <h2>Schneiden</h2>
@@ -92,14 +99,22 @@ export default function Index() {
             <h2>Tönen</h2>
           </div>
         </div>
-        <div className='grid grid-cols-1  relative  relative h-full w-full m-auto max-h-[70%] justify-center align-center'>
-          <div className='flex justify-center align-center flex-col bg-[#111] p-5'>
-            <img className="self-end mb-10  z-[2]" src={chair} alt="Stephan mit Kunde" style={{ scale: "0.9", transformOrigin: "bottom right" }} />
-          </div>
-        </div>
+ 
       </>),
       deskChildren: (<>
-        <div className="flex justify-center align-center flex-col bg-[#101010] sec-pad_left realative ">
+        <div className="flex justify-center align-center flex-col bg-[#101010] sec-pad_left sec-pad_right realative">
+        <div className='flex gap-5 flex-col'>
+            <div className=''>
+              <h5 className='text-[var(--clr-contrast-400)]'>Unsere Philosophie:</h5>
+              <h3>Bei uns ist jeder Kunde herzlich willkommen...</h3>
+              <p>... wir freuen uns über deinen Besuch!</p>
+            </div>
+            <div className=''>
+              <h4>Ein umfangreiches Angebot...</h4>
+              <p>...erwartet dich bei uns! Was auch immer Dir vorschwebt, zusammen werden wir deine Vorstellung Realität werden lassen.</p>
+              <button className='btn__outline' role='button' type="button">Call to Action</button>
+            </div>
+          </div>
           <div className='img__wrapper flex justify-center align-center absolute top-0 left-0 w-full h-full z-[1] overflow-hidden'>
             <div className='bg-grid_section2 flex flex-wrap w-full my-auto grid-cols-5 grid-rows-[repeat(2,_minmax(2rem,_1fr))] justify-center align-center'>
               <h2>Schneiden</h2>
@@ -113,18 +128,7 @@ export default function Index() {
               <h2>Tönen</h2>
             </div>
           </div>
-          <div className='flex gap-5 flex-col px-10 py-5'>
-            <div className=''>
-              <h4>Unsere Philosophie:</h4>
-              <h3>Bei uns ist jeder Kunde herzlich willkommen...</h3>
-              <p>...ob nun jung, oder alt, wir freuen uns über deinen Besuch!</p>
-            </div>
-            <div className=''>
-              <h4>Hier kann noch etwas hin</h4>
-              <p>Kleiner Text, der nicht so viel beinhalten sollte, gerade mal ein paar zeilen oder so.</p>
-              <button className='btn__outline' role='button' type="button">Call to Action</button>
-            </div>
-          </div>
+
         </div>
       </>
       )
@@ -190,7 +194,28 @@ export default function Index() {
             </div>
             <img className="self-end my-0 mx-auto z-[2] w-[90%]" src={duo} alt="Stephan und Simon" style={{ scale: "1", transformOrigin: "bottom right", maxWidth:"500px" }} />
             <div className='mt-auto img__wrapper '>
-            <button className='btn__primary'aria-label='link'><Link to="/shop">Zum Shop</Link></button>
+            {stableData.nodes.map((collection: any) => {
+          return (
+            <Link className='btn__primary text-center' aria-label='link' to={`/collections/${collection.handle}`} key={collection.id}>
+              Zum Shop
+              {/* <div className="grid gap-4">
+                {collection?.image && (
+                  <Image
+                    alt={`Image of ${collection.title}`}
+                    data={collection.image}
+                    key={collection.id}
+                    sizes="(max-width: 32em) 100vw, 33vw"
+                  />
+                )}
+                <h2 className="whitespace-pre-wrap max-w-prose font-medium text-copy">
+                  {collection.title}
+                </h2>
+                
+              </div> */}
+            </Link>
+          );
+        })}
+            {/* <button className='btn__primary'aria-label='link'><Link to="/shop">Zum Shop</Link></button> */}
           </div>
           </div>
         </div>
@@ -203,13 +228,34 @@ export default function Index() {
               <h2>Finde tolle Produkte</h2>
               <p>...die zu dir passen.</p>
             </div>
-          <button className='btn__primary'aria-label='link'><Link to="/shop">Zum Shop</Link></button>
+            {stableData.nodes.map((collection: any) => {
+          return (
+            <Link className='btn__primary text-center' aria-label='link' to={`/collections/${collection.handle}`} key={collection.id}>
+              Zum Shop
+              {/* <div className="grid gap-4">
+                {collection?.image && (
+                  <Image
+                    alt={`Image of ${collection.title}`}
+                    data={collection.image}
+                    key={collection.id}
+                    sizes="(max-width: 32em) 100vw, 33vw"
+                  />
+                )}
+                <h2 className="whitespace-pre-wrap max-w-prose font-medium text-copy">
+                  {collection.title}
+                </h2>
+                
+              </div> */}
+            </Link>
+          );
+        })}
+          {/* <button className='btn__primary'aria-label='link'><Link to="/shop">Zum Shop</Link></button> */}
           </div>
         </div>
       </>
       )
     }} />
-
+<Footer/>
   </>
   );
 }

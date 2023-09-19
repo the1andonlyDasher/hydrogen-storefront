@@ -1359,15 +1359,15 @@ shop-pay-button {
 
 .footer-links li a {
   font-size: var(--fs-text);
-  color: var(--clr-main2-color);
-  box-shadow: inset 0px 0px 0px 2px var(--clr-main2-color);
+  color: var(--clr-contrast-200);
+  box-shadow: inset 0px 0px 0px 1px var(--clr-contrast-200);
   text-align: center;
   width: 100%;
   margin: 0;
 }
 .footer-links li a:hover, .footer-links li a:active {
-  color: var(--clr-bright-color);
-  background-color: var(--clr-main2-color);
+  color: var(--clr-contrast-500);
+  background-color: var(--clr-contrast-200);
 }
 @media screen and (min-width: 500px) {
   .footer-links li a {
@@ -1975,7 +1975,7 @@ header.mainnav {
 }
 
 /* base classes */
-.thanks__message, form .btn-group, form {
+form[method=post], .thanks__message, .form .btn-group, .form {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2027,7 +2027,7 @@ header.mainnav {
   flex-direction: column;
 }
 
-form {
+.form {
   flex: 1 1 100%;
   margin: 0 auto 0 0;
   flex-direction: column;
@@ -2038,14 +2038,14 @@ form {
   color: var(--clr-dark-color);
 }
 
-form div {
+.form div {
   margin: 1rem auto;
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-form :is(#name, #email) {
+.form :is(#name, #email) {
   max-width: 500px;
 }
 
@@ -2062,7 +2062,7 @@ legend {
   padding: 0.5rem;
 }
 
-form :is(label, select, input, textarea, .input) {
+.form :is(label, select, input, textarea, .input) {
   position: relative;
   line-height: 1.5;
   text-align: left;
@@ -2070,46 +2070,46 @@ form :is(label, select, input, textarea, .input) {
   margin: 0;
 }
 
-form .input {
+.form .input {
   display: grid;
 }
 
-form label {
+.form label {
   font-weight: 500;
   padding-bottom: var(--space-xs);
   font-size: var(--fs-text);
   color: var(--clr-contrast-300);
 }
 
-form :is(input, select, textarea) {
+.form :is(input, select, textarea) {
   padding: var(--space-xs);
   font-size: var(--fs-text-small);
   font-weight: 500;
 }
 
-form input:active {
+.form input:active {
   border: 2px solid var(--clr-contrast-200);
 }
 
-form input:focus-visible,
+.form input:focus-visible,
 textarea:focus-visible {
   border: 2px solid var(--clr-contrast-200);
 }
 
-form .btn-inner {
+.form .btn-inner {
   margin: 2rem auto 0 0;
 }
 
-form .btn-group {
+.form .btn-group {
   justify-content: flex-start;
   width: 100%;
 }
 
-form a {
+.form a {
   margin: 1rem auto 0 0;
 }
 
-form .btn__primary {
+.form .btn__primary {
   margin-top: var(--space-m);
   outline: none;
   width: 100%;
@@ -2118,7 +2118,7 @@ form .btn__primary {
   flex: unset;
 }
 
-form .btn-group .btn-group:nth-child(n+2) {
+.form .btn-group .btn-group:nth-child(n+2) {
   margin-left: 1rem;
 }
 
@@ -2151,11 +2151,22 @@ input::placeholder, textarea::placeholder {
   color: var(--clr-contrast-600);
 }
 
-form :is(select, input, textarea) {
+.form :is(select, input, textarea) {
   background-color: rgba(33, 33, 33, 0.1333333333);
   border: 1px solid #222;
   border-radius: 2px;
   color: var(--clr-contrast-200);
+}
+
+form[method=post] {
+  flex: 1 1 100%;
+  margin: 0 auto 0 0;
+  flex-direction: column;
+  width: 100%;
+  margin: var(--space-m) 0 0 0;
+  flex: 1 1 auto;
+  min-width: 250px;
+  color: var(--clr-dark-color);
 }
 
 .base__cover .inner {

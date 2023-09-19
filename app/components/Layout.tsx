@@ -3,7 +3,8 @@ import { Drawer, useDrawer } from "./Drawer";
 import { Await, useMatches, useFetchers, useLocation, Outlet, useOutlet, useLoaderData, Link } from '@remix-run/react';
 import { CartLineItems, CartActions, CartSummary } from './Cart';
 import { AnimatePresence, motion, useAnimationControls, useIsPresent } from "framer-motion";
-import logo from "../images/logo.jpg"
+import logo from "../images/logo.png"
+import Footer from "./Footer";
 
 
 interface LayoutProps {
@@ -54,6 +55,7 @@ export function Layout({ title }: LayoutProps) {
   const fetchers = useFetchers();
   const toggle = useRef<any>(!null);
   const [root] = useMatches();
+  const location = useLocation()
   const cart = root.data?.cart;
   const outlet = useOutlet()
   const [toggled, setToggle] = useState(false)
@@ -159,7 +161,9 @@ export function Layout({ title }: LayoutProps) {
             <li className="py-14 mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/contact">Kontakt</Link></li>
           </ul>
         </motion.div>
+        {/* <div className={location.pathname.includes("collections/kopfsache") ? "block" : "hidden"}> */}
         <CartHeader cart={cart} openDrawer={openDrawer} />
+        {/* </div> */}
       </motion.header>
       <AnimatePresence
         mode="wait"
@@ -180,6 +184,7 @@ export function Layout({ title }: LayoutProps) {
         <CartDrawer cart={cart} close={closeDrawer} />
       </Drawer>
     </div>
+
 
   );
 }

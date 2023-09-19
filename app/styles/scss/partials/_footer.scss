@@ -85,14 +85,14 @@
 .footer-links li a {
   @extend %trans;
   font-size: var(--fs-text);
-  color: var(--clr-main2-color);
-  box-shadow: inset 0px 0px 0px 2px var(--clr-main2-color);
+  color: var(--clr-contrast-200);
+  box-shadow: inset 0px 0px 0px 1px var(--clr-contrast-200);
   text-align: center;
   width: 100%;
   margin: 0;
   &:hover, &:active{
-    color: var(--clr-bright-color);
-    background-color: var(--clr-main2-color);
+    color: var(--clr-contrast-500);
+    background-color: var(--clr-contrast-200);
   }
   @include mq(small){
     width: auto;

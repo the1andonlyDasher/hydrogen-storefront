@@ -15,6 +15,7 @@ import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import Footer from '@components/Footer';
 
 export function meta() {
   return [
@@ -85,6 +86,7 @@ export default function Index() {
         })}
       </div>
     </section>
+    <Footer/>
   </>
   );
 }
