@@ -123,7 +123,7 @@ const ContactForm = ({ props }: contactProps) => {
   return (
     <>
         <section data-section-name={props.sectionName} id={props.id} className="">
-      <div className="__s__b sec-pad_left sec-pad_right">
+      <div className="__s__b">
         <h2 data-before={props.title}>{props.title}</h2>
         <p>{props.subtitle}</p>
       <motion.div

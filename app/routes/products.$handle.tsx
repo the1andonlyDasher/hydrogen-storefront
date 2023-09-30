@@ -124,7 +124,7 @@ function ProductForm({ variantId }: any) {
   const lines = [{ merchandiseId: variantId, quantity: 1 }];
 
   return (
-    <fetcher.Form action="/cart" method="post">
+    <fetcher.Form action="/cart" method="post" className='w-full'>
       <input type="hidden" name="cartAction" value={'ADD_TO_CART'} />
       <input
         type="hidden"
@@ -132,8 +132,8 @@ function ProductForm({ variantId }: any) {
         value={selectedLocale?.country ?? 'US'}
       />
       <input type="hidden" name="lines" value={JSON.stringify(lines)} />
-      <button className="self-start bg-black text-white px-6 py-3 w-full rounded-md text-center font-medium ">
-        Add to Bag
+      <button className="self-start bg-black text-white my-4 px-6 py-3 w-full rounded-md text-center font-medium ">
+        In den Warenkorb
       </button>
     </fetcher.Form>
   );

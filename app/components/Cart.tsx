@@ -17,7 +17,7 @@ export function CartSummary({cost}:any) {
       <>
         <dl className="space-y-2">
           <div className="flex items-center justify-between">
-            <dt>Subtotal</dt>
+            <dt>Summe</dt>
             <dd>
               {cost?.subtotalAmount?.amount ? (
                 <Money data={cost?.subtotalAmount} />
@@ -28,9 +28,10 @@ export function CartSummary({cost}:any) {
           </div>
           <div className="flex items-center justify-between">
             <dt className="flex items-center">
-              <span>Shipping estimate</span>
+              <span>Versandkosten</span>
             </dt>
-            <dd className="text-green-600">Free and carbon neutral</dd>
+            <dd>€2,99</dd>
+            {/* <dd className="text-green-600">Free and carbon neutral</dd> */}
           </div>
         </dl>
       </>
@@ -46,7 +47,7 @@ export function CartSummary({cost}:any) {
           href={checkoutUrl}
           className="bg-black text-white px-6 py-3 w-full rounded-md text-center font-medium"
         >
-          Continue to Checkout
+          Weiter zur Kasse
         </a>
       </div>
     );
@@ -57,7 +58,7 @@ function ItemRemoveButton({lineIds}:any) {
     const fetcher = useFetcher();
   
     return (
-      <fetcher.Form action="/cart" method="post">
+      <fetcher.Form action="/cart" method="post" className='flex flex-start m-0'>
         <input type="hidden" name="cartAction" value="REMOVE_FROM_CART" />
         <input type="hidden" name="linesIds" value={JSON.stringify(lineIds)} />
         <button
@@ -78,7 +79,7 @@ function ItemRemoveButton({lineIds}:any) {
         viewBox="0 0 20 20"
         className="w-5 h-5"
       >
-        <title>Remove</title>
+        <title>Entfernen</title>
         <path
           d="M4 6H16"
           strokeWidth="1.25"
@@ -106,7 +107,7 @@ function LineItem({lineItem}:any) {
   const {merchandise, quantity} = lineItem;
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 bg-[#111]">
       <Link
         to={`/products/${merchandise.product.handle}`}
         className="flex-shrink-0"
@@ -120,9 +121,9 @@ function LineItem({lineItem}:any) {
         >
           {merchandise.product.title}
         </Link>
-        <div className="text-gray-800 text-sm">{merchandise.title}</div>
-        <div className="text-gray-800 text-sm">Qty: {quantity}</div>
-            <ItemRemoveButton lineIds={[lineItem.id]} />
+        <div className="text-gray-500 text-sm">{merchandise.title}</div>
+        <div className="text-gray-500 text-sm">Stk: {quantity}</div>
+        <ItemRemoveButton lineIds={[lineItem.id]} />
 
       </div>
       <Money data={lineItem.cost.totalAmount} />
