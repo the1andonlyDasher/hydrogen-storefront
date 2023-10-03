@@ -103,6 +103,7 @@
 // hero section grid stuff
 
 .hero-grid {
+  padding: 1.5rem 0;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   :is(.hero-grid_left, .hero-grid_right) .img__wrapper {
     @include mq(medium) {

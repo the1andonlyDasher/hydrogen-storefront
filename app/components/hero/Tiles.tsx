@@ -36,7 +36,8 @@ const Tile = ({ i, id, children, mainText, fallbacksrc, bgImage }:any) => {
       variants={tileVariants}
       initial="start"
       animate={tileControls}
-      style={{backgroundImage:`url('${bgImage}')`, backgroundSize:"cover", backgroundPosition:"top"}}
+      className="bg-cover bg-center"
+      style={{backgroundImage:`url('${bgImage}')`}}
       exit="exit"
       data-maintext={mainText}
       data-fallbacksrc={fallbacksrc}

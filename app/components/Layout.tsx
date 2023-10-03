@@ -132,6 +132,7 @@ export function Layout({ title }: LayoutProps) {
         </div>
         <img
           src={logo}
+          className="w-auto max-h-[25px]"
           width={50}
           height={50}
         />

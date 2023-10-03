@@ -41,8 +41,10 @@ export default function Index() {
   const [stableData, setData] = useState(collections);
   const [m, setM] = useAtom(model)
   const isPresent = useIsPresent();
+  const video = useRef<any>(!null)
 
   useEffect(() => {
+    video.current.play();
     collections && setData(collections)
   }, [collections])
 
@@ -55,15 +57,18 @@ export default function Index() {
       left: true,
       sectionClass: "relative border-[#222] border-l ",
       children: (<>
-        <div className='flex flex-col bg-[#141414] relative h-full w-full m-auto max-h-[375px] justify-center align-center'>
-          <div className='mb-auto mx-4 img__wrapper'>
+        <div className='flex flex-col relative h-full w-full m-auto justify-center align-center md:max-h-[375px] '>
+          <div className='mb-auto mx-4 img__wrapper py-2'>
             <h4>Denk immer daran</h4>
             <h1>Es ist alles nur Kopfsache</h1>
           </div>
-          <div className="flex justify-center align-center flex-col h-full sec-pad_right gap-5 p-5">
-            <img className="self-end my-0 mx-auto z-[2] w-[90%]" src={img} alt="Stephan und Simon" style={{ transformOrigin: "bottom right", maxWidth: "500px" }} />
+          <div className="flex justify-center align-center flex-col h-full sec-pad_right gap-5 mx-4">
+            <video ref={video} autoPlay loop muted className='max-h-[600px] max-w-[300px] sm:max-w-none'>
+              <source src="/images/vid.mp4" type='video/mp4'></source>
+            </video>
+            {/* <img className="self-end my-0 mx-auto z-[2] w-[90%]" src={img} alt="Stephan und Simon" style={{ transformOrigin: "bottom right", maxWidth: "500px" }} /> */}
           </div>
-          <div className='mb-auto mx-4 my-6 img__wrapper'>
+          <div className='mb-auto mx-4 img__wrapper'>
             <p className='my-5'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut.</p>
             <Link to="https://www.studiobookr.com/kopfsache-by-stephan-mueller-56870#/"><button className="btn__primary" type="button">Termin buchen</button></Link>
           </div>
@@ -166,12 +171,12 @@ export default function Index() {
             <div className='flex flex-no
                 wrap flex-row w-full gap-5 my-12 img__wrapper'>
               <div className='flex flex-nowrap w-auto flex-[1_1_50%] h-full justify-start img__wrapper'>
-            <Tiles gridClass="about-grid about-grid-left" array={stephanBilder} perspective={false}/>
-                {/* <div className='rounded-br-lg w-full min-h-[200px]  h-[100%] flex-[1_1_100%] bg-cover bg-top' style={{ backgroundImage: `url(${stephan})` }}></div> */}
+            {/* <Tiles gridClass="about-grid about-grid-left" array={stephanBilder} perspective={false}/> */}
+                <div className='rounded-br-lg w-full min-h-[200px]  h-[100%] flex-[1_1_100%] bg-cover bg-top' style={{ backgroundImage: `url(${stephan})` }}></div>
               </div>
               <div className='flex flex-nowrap w-auto flex-[1_1_50%] h-full justify-start img__wrapper'>
-            <Tiles gridClass="about-grid about-grid-right" array={simonBilder} perspective={false}/>
-                {/* <div className='rounded-br-lg w-full min-h-[200px] h-[100%] flex-[1_1_100%] bg-cover bg-top' style={{ backgroundImage: `url(${simon})` }}></div> */}
+            {/* <Tiles gridClass="about-grid about-grid-right" array={simonBilder} perspective={false}/> */}
+                <div className='rounded-br-lg w-full min-h-[200px] h-[100%] flex-[1_1_100%] bg-cover bg-top' style={{ backgroundImage: `url(${simon})` }}></div>
               </div>
             </div>
             <div className='hidden flex-nowrap w-full h-full justify-start md:flex'>
@@ -220,7 +225,7 @@ export default function Index() {
       //     <div className='absolute top-0 left-0 w-full h-full bg-center' style={{backgroundImage:`url('${products}')`}}></div>
       // </>),
       children: (<>
-        <div className='grid grid-cols-1  relative h-full w-full m-auto max-h-[50%] justify-center align-center'>
+        <div className='grid grid-cols-1  relative h-full w-full m-auto justify-center align-center md:max-h-[50%]'>
           <div className="flex justify-center align-center flex-col h-full gap-5">
             <div className='flex flex-col h-full  my-auto bg-center bg-cover min-h-[400px]' style={{ backgroundImage: `url('${products}')` }}></div>
             <div className='mb-auto img__wrapper '>
