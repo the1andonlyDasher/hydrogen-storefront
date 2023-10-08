@@ -4,7 +4,7 @@ import { useIsPresent } from "framer-motion"
 import { useEffect, useRef, useState } from 'react';
 import { model } from '@components/atoms';
 import { useAtom } from 'jotai';
-import products from "../../public/images/kopf.jpg"
+import products from "../../public/images/kopf-min.jpg"
 import simon from "../../public/images/simon.jpg"
 import stephan from "../../public/images/stephan.jpg"
 import DoubleSec from '@components/DoubleSection';
@@ -120,7 +120,7 @@ export default function Index() {
             <div className='my-4 md:px-8'>
               <h4 className='my-2'>Ein umfangreiches Angebot...</h4>
               <p>...erwartet dich bei uns! Was auch immer Dir vorschwebt, zusammen werden wir deine Vorstellung Realität werden lassen.</p>
-              <button className='btn__outline' role='button' type="button">Call to Action</button>
+              {/* <button className='btn__outline' role='button' type="button">Unsere Leistungen</button> */}
             </div>
           </div>
           <div className='img__wrapper flex justify-center align-center absolute top-0 left-0 w-full h-full z-[-1] overflow-hidden'>
