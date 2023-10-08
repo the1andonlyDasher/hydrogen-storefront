@@ -1,22 +1,17 @@
 import { Link, useLoaderData } from '@remix-run/react';
 import { LoaderArgs } from '@shopify/remix-oxygen';
-import { Image } from '@shopify/hydrogen';
-import { AnimatePresence, motion, useIsPresent } from "framer-motion"
-import CollectionsPage from './collectionPage';
+import { useIsPresent } from "framer-motion"
 import { useEffect, useRef, useState } from 'react';
 import { model } from '@components/atoms';
 import { useAtom } from 'jotai';
-import img from "../../public/images/frisuer.png"
-import chair from "../../public/images/chair.png"
 import products from "../../public/images/kopf.jpg"
 import simon from "../../public/images/simon.jpg"
 import stephan from "../../public/images/stephan.jpg"
-import Sec from '@components/Section';
 import DoubleSec from '@components/DoubleSection';
-import { faFacebookF, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
-import { faEnvelope, faPhone, faPhoneAlt, faPhoneSquare } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Footer from '@components/Footer';
 import Tiles from '@components/hero/Tiles';
 import { icons } from '@components/hero/icons';
@@ -114,15 +109,15 @@ export default function Index() {
 
       </>),
       deskChildren: (<>
-        <div className="flex justify-center h-full align-center flex-col bg-[#0f0f0f00] sec-pad_left sec-pad_right realative md:bg-[#0f0f0f]">
+        <div className="flex justify-center h-full align-center flex-col bg-[#0f0f0f00] p-0 realative md:bg-[#0f0f0f] md:sec-pad_left md:sec-pad_right">
           <div className='flex gap-5 flex-col'>
-            <div className='my-4 p-4'>
+            <div className='my-4 md:px-8'>
               <h5 className='text-[var(--clr-contrast-400)]'>Unsere Philosophie:</h5>
               <h3 className='my-2'>Bei uns sind Alle herzlich willkommen...</h3>
               <p>... wir freuen uns über deinen Besuch!</p>
             </div>
             <Tiles addClass="img__wrapper" gridClass="feature-grid" array={icons}/>
-            <div className='my-4 p-4'>
+            <div className='my-4 md:px-8'>
               <h4 className='my-2'>Ein umfangreiches Angebot...</h4>
               <p>...erwartet dich bei uns! Was auch immer Dir vorschwebt, zusammen werden wir deine Vorstellung Realität werden lassen.</p>
               <button className='btn__outline' role='button' type="button">Call to Action</button>
@@ -151,7 +146,7 @@ export default function Index() {
       sectionClass: "relative",
       ref: ref,
       children: (<>
-        <div className='grid grid-cols-1  relative h-full w-full m-auto  justify-center align-center py-12'>
+        <div className='grid grid-cols-1  relative h-full w-full m-auto  justify-center align-center py-20'>
           <div className="flex justify-center align-center flex-col h-full">
             <div className='hidden h-full justify-center align-center flex-col pr-10 md:flex  border-b border-[#222]'>
               <div className=''>
@@ -197,7 +192,7 @@ export default function Index() {
         </div>
       </>),
       deskChildren: (<>
-        <div className="flex justify-center align-center flex-col border-l border-[#222] py-12">
+        <div className="flex justify-center align-center flex-col border-l border-[#222] py-20">
           <div className='flex-auto flex'></div>
           <div className='flex relative h-full justify-center align-center flex-col'>
 

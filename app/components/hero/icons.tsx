@@ -20,13 +20,13 @@ import {
 // ];
 
 export const icons = [
-  "/images/p1.jpg",
-  "/images/p2.jpg",
-  "/images/p3.jpg",
-  "/images/p4.jpg",
-  "/images/p5.jpg",
-  "/images/p6.jpg",
-  "/images/p7.jpg",
-  "/images/p8.jpg",
+  "/images/p1.webp",
+  "/images/p2.webp",
+  "/images/p3.webp",
+  "/images/p4.webp",
+  "/images/p5.webp",
+  "/images/p6.webp",
+  "/images/p7.webp",
+  "/images/p8.webp",
 
 ] 

@@ -1,56 +1,45 @@
-import React, { useRef } from "react";
-import {
-  motion,
-  useAnimation,
-  useScroll,
-  useSpring,
-  useInView,
-} from "framer-motion";
-import { icons } from "./icons";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { mainTexts } from "./mainTexts";
-import { useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Tile = ({ i, id, children, mainText, fallbacksrc, bgImage }:any) => {
-  const tileVariants = {
-    start: { scale: 0, opacity: 0 },
-    entered: {
-      scale: 1,
-      opacity: 1,
+
+const tileVariants: any = {
+  initial: (i: number) => ({
+    scale: 0
+  }),
+  enter: (i: number) => ({
+    scale: 1,
+    transition: {
+      type: "spring",
+      duration: 0.5,
+      delay: Math.random() * i,
     },
-    exit: { scale: 0, opacity: 0 },
-    hover: { scale: 1.2, zIndex: 10 },
-    hoverEnd: { scale: 1, zIndex: 1 },
-  };
-  const tileControls = useAnimation();
-  const ref = useRef<any>(!null);
-  const inView = useInView(ref, { once: true });
+  }),
+  exit: (i: number) => ({
+    scale: 0,
+    transition: {
+      type: "spring",
+      duration: .5,
+      delay: Math.random() * i ,
+    },
+  })
+}
 
-  useEffect(() => {
-      tileControls.start("entered");
-  }, [tileControls]);
+const Tile = ({ i, id, children, mainText, fallbacksrc, bgImage }: any) => {
 
+  const [hovering, setHover] = useState<any>(false)
   return (
     <motion.div
-      ref={ref}
       variants={tileVariants}
-      initial="start"
-      animate={tileControls}
-      className="bg-cover bg-center"
-      style={{backgroundImage:`url('${bgImage}')`}}
+      initial="initial"
+      whileInView="enter"
+      viewport={{once: true}}
       exit="exit"
+      className="bg-cover bg-center"
+      style={{ backgroundImage: `url('${bgImage}')` }}
       data-maintext={mainText}
       data-fallbacksrc={fallbacksrc}
       id={id}
-      onError={(e) =>{}
-      }
-      onMouseEnter={(e) => {
-        tileControls.start("hover");
-      }}
-      onMouseLeave={() => {
-        tileControls.start("hoverEnd");
-
-      }}
     >
       {children}
     </motion.div>
@@ -59,48 +48,49 @@ const Tile = ({ i, id, children, mainText, fallbacksrc, bgImage }:any) => {
 
 
 
-const tiles = (array:any) => {
+const tiles = (array: any) => {
   const defaultItems = [...Array(array.length)];
   return (
-    defaultItems.map((value, i) => 
-    <Tile
-      key={i}
-      id={"tile" + i}
-      i={value}
-      mainText={mainTexts[i]}
-      bgImage={array[i]}
-      animate={{
-        transition: {
-          type: "srping",
-          scale: {
-            duration: Math.random() * i,
-            delay: Math.random() * i,
-          },
-        },
-      }}
-    >
-      
-    </Tile>
- ))
+    defaultItems.map((value, i) =>
+      <Tile
+        key={i}
+        id={"tile" + i}
+        i={value}
+        mainText={mainTexts[i]}
+        bgImage={array[i]}
+      >
+
+      </Tile>
+    ))
 };
 
-export default function Tiles({addClass, gridClass, array, perspective}:any) {
+export default function Tiles({ addClass, gridClass, array, perspective }: any) {
+
+  const gridVariants = {
+    initial: { transition: { staggerChildren: 0.2 } },
+    enter: { transition: { staggerChildren: 0.2 } },
+    exit: { transition: { staggerChildren: 0.2 } },
+  }
 
   return (
     <>
-    {perspective === true ?(
-            <div className={`${addClass} container`}>
-            <div className="feature-grid-container grid grid--columns">
-              <motion.div className={`grid ${gridClass}`}>{tiles(array)}</motion.div>
-            </div>
-          </div>
-    ) :(
-      <div className={`${addClass} container`}>
-      <div className=" grid grid--columns">
-        <motion.div className={`grid ${gridClass}`}>{tiles(array)}</motion.div>
-      </div>
-    </div>
-    )}
+      {perspective === true ? (
+        <motion.div variants={gridVariants} className={`${addClass} container`}>
+          <motion.div variants={gridVariants} className="feature-grid-container grid grid--columns">
+            <motion.div variants={gridVariants} className={`grid ${gridClass}`}>
+              {tiles(array)}
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      ) : (
+        <motion.div variants={gridVariants} className={`${addClass} container`}>
+          <motion.div variants={gridVariants} className=" grid grid--columns">
+            <motion.div variants={gridVariants} className={`grid ${gridClass}`}>
+              {tiles(array)}
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      )}
 
     </>
   );

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { Bounds, Environment, Html, Scroll, ScrollControls, View, useAspect, useGLTF } from "@react-three/drei";
+import { Bounds, Center, Environment, Html, Scroll, ScrollControls, View, useAspect, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useAtom } from "jotai";
 import { useEffect, useRef, Suspense, useState, useMemo, forwardRef } from "react";
@@ -170,11 +170,11 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15, w = 0.7, gap =
 
         return (
             <Suspense fallback={null}>
-
+                <Center>
                 {models && models.map((item: any, index: any) =>
                     <P key={item.name + index} item={item} index={index + 1} />
                 )}
-
+                </Center>
             </Suspense>
         )
     }

@@ -15,7 +15,7 @@ const Footer = () => {
         <ul className="footer-links">
           <li><Link className="btn__outline" to="/Datenschutz">Datenschutz</Link></li>
           <li><Link className="btn__outline" to="/Impressum">Impressum</Link></li>
-          <li><Link className="btn__outline" to="/">AGB</Link></li>
+          <li><Link className="btn__outline" to="/AGB">AGB</Link></li>
         </ul>
         <div className="w-full flex justify-center items-center flex-col">
           <div className="flex justify-center flex-col my-2">

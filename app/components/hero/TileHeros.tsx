@@ -13,16 +13,13 @@ interface TileProps{
 const TileHero = ({ id, mainText, sideText }: TileProps) => {
   const variants = {
     initial: {
-      opcaity: 0,
-      display: "none",
+      opacity: 0,
     },
-    animate: {
-      opcaity: 0,
-      display: "none",
+    enter: {
+      opacity: 1,
     },
     exit: {
-      opcaity: 0,
-      display: "none",
+      opacity: 0,
     },
   };
   return (
