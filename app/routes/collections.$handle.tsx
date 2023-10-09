@@ -54,6 +54,7 @@ export default function Collection() {
   const [stableData, setData]  = useState(collection);
 
 useEffect(() => {
+  console.log(collection)
     collection && setData(collection);
     var o = stableData.products.nodes.map((object:any)=>(Object.values(object)[6]))
     var k = Object.values(o)

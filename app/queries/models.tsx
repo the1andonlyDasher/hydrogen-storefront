@@ -1,6 +1,6 @@
 export const COLLECTIONS_QUERY = `#graphql
-  query FeaturedCollections {
-    collections(first: 3, query: "collection_type:smart") {
+  query  {
+    collections(first: 3) {
       nodes {
         products(first: 100) {
           edges {

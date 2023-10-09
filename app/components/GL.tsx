@@ -11,14 +11,9 @@ import { ReactThreeFiber, extend, } from '@react-three/fiber'
 import { useCursor, MeshPortalMaterial, CameraControls, Gltf, Text } from '@react-three/drei'
 import { easing } from 'maath'
 import * as geometry from "maath/geometry";
-import medium from '../../public/fonts/economica-v13-latin-700.woff'
-import regular from '../../public/fonts/nunito-sans-v15-latin-regular.woff'
 import { RoundedPlaneGeometry } from 'maath/geometry'
 import { useLocation, useRoute } from "wouter"
 import { useLocation as useLoc } from "@remix-run/react";
-import { Flex, Box } from "@react-three/flex"
-
-
 
 
 declare global {
@@ -30,7 +25,6 @@ declare global {
 }
 
 extend(geometry)
-
 
 interface productProps {
     index: number;
@@ -54,7 +48,8 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15, w = 0.7, gap =
     const cover_controls = useAnimation();
 
     useEffect(()=>{
-    gLoaded === true && cover_controls.start({opacity:0, transition:{type:"tween", ease:"easeOut"}}).then(()=>{cover_controls.start({display:"none"})})
+        console.log(gLoaded)
+    gLoaded && cover_controls.start({opacity:0, transition:{type:"tween", ease:"easeOut"}}).then(()=>{cover_controls.start({display:"none"})})
 
     },[gLoaded])
 
@@ -124,13 +119,13 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15, w = 0.7, gap =
         useFrame((state, dt) => easing.damp(portal.current, 'blend', params?.id === id ? 1 : 0, 0.2, dt))
         return (
             <group {...props}>
-                <Text font={medium} fontSize={0.2} maxWidth={2} anchorY="top" anchorX="left" lineHeight={1.2} position={[-0.5, 0.75, 0.01]} material-toneMapped={false}>
+                <Text font={"fonts/economica-v13-latin-700.woff"} fontSize={0.2} maxWidth={2} anchorY="top" anchorX="left" lineHeight={1.2} position={[-0.5, 0.75, 0.01]} material-toneMapped={false}>
                     {name.split("-").join(" ")}
                 </Text>
-                <Text font={medium} fontSize={0.15} anchorX="right" anchorY="bottom-baseline" position={[0.5, -0.7, 0.01]} material-toneMapped={false}>
+                <Text font={"fonts/economica-v13-latin-700.woff"} fontSize={0.15} anchorX="right" anchorY="bottom-baseline" position={[0.5, -0.7, 0.01]} material-toneMapped={false}>
                     {price} €
                 </Text>
-                <Text font={medium} fontSize={0.075} anchorX="left" anchorY="bottom-baseline" position={[-0.5, -0.7, 0.01]} material-toneMapped={false}>
+                <Text font={"fonts/economica-v13-latin-700.woff"} fontSize={0.075} anchorX="left" anchorY="bottom-baseline" position={[-0.5, -0.7, 0.01]} material-toneMapped={false}>
                     {/* {author} */}
                     Kopfsache
                 </Text>
