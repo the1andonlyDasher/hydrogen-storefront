@@ -4,8 +4,7 @@ import { Canvas, ReactThreeFiber, extend, useFrame, useThree } from '@react-thre
 import { useCursor, MeshPortalMaterial, CameraControls, Gltf, Text } from '@react-three/drei'
 import { easing } from 'maath'
 import * as geometry from "maath/geometry";
-import medium from '../../public/fonts/economica-v13-latin-700.woff'
-import regular from '../../public/fonts/nunito-sans-v15-latin-regular.woff'
+
 import { useNavigate, useParams } from '@remix-run/react'
 import { RoundedPlaneGeometry } from 'maath/geometry'
 
@@ -46,13 +45,13 @@ function Frame({ id, name, author, bg, width = 1, height = 1.61803398875, childr
   useFrame((state, dt) => easing.damp(portal.current, 'blend', itemId === id ? 1 : 0, 0.2, dt))
   return (
     <group {...props}>
-      <Text font={medium} fontSize={0.3} anchorY="top" anchorX="left" lineHeight={0.8} position={[-0.375, 0.715, 0.01]} material-toneMapped={false}>
+      <Text font={"/fonts/economica-v13-latin-700.woff"} fontSize={0.3} anchorY="top" anchorX="left" lineHeight={0.8} position={[-0.375, 0.715, 0.01]} material-toneMapped={false}>
         {name}
       </Text>
-      <Text font={medium} fontSize={0.1} anchorX="right" position={[0.4, -0.659, 0.01]} material-toneMapped={false}>
+      <Text font={"/fonts/economica-v13-latin-700.woff"} fontSize={0.1} anchorX="right" position={[0.4, -0.659, 0.01]} material-toneMapped={false}>
         /{id}
       </Text>
-      <Text font={medium} fontSize={0.04} anchorX="right" position={[0.0, -0.677, 0.01]} material-toneMapped={false}>
+      <Text font={"/fonts/economica-v13-latin-700.woff"} fontSize={0.04} anchorX="right" position={[0.0, -0.677, 0.01]} material-toneMapped={false}>
         {author}
       </Text>
       <mesh name={id} onDoubleClick={(e) => (e.stopPropagation(), navigate('/item/' + e.object.name))} onPointerOver={(e) => hover(true)} onPointerOut={() => hover(false)}>

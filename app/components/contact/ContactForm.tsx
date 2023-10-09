@@ -14,20 +14,6 @@ interface contactProps {
   props: props
 }
 
-const SvgComponent = (props:any) => (
-  <svg
-    width={3.988}
-    height={6.983}
-    viewBox="0 0 1.055 1.848"
-    xmlSpace="preserve"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
-    <path d="M1.016.831a.13.13 0 0 1 0 .185l-.793.794a.131.131 0 0 1-.186-.185L.736.924.037.223A.131.131 0 0 1 .223.037z" />
-  </svg>
-);
-
-
 const ContactForm = ({ props }: contactProps) => {
   const form = useRef<any>(false);
   const [email, setEmail] = useState("")
@@ -38,21 +24,25 @@ const ContactForm = ({ props }: contactProps) => {
   const inView = useInView(form, { once: true, margin: "100px 0px 100px 0px" });
 
   const variants = {
-    initial: { opacity: 0},
+    initial: { opacity: 0, x: -10 },
     enter: {
       opacity: 1,
-      transition: { ease: "easeIn", duration: 0.5, delay: 0.5 },
+      x: 0,
+      transition: { ease: "easeIn", duration: 0.5 },
     },
-    exit: { opacity: 0},
+    exit: {
+      x: 10, opacity: 0,
+      transition: { ease: "easeOut", duration: 0.5 },
+    },
   }
 
   const formVariants = {
-    initial: { opacity: 0},
+    initial: { opacity: 0, },
     enter: {
       opacity: 1,
-      transition: { ease: "easeIn", duration: 0.5, delay: 0.5, staggerChildren: 0.2 },
+      transition: { ease: "easeIn", duration: 0.5, staggerChildren: 0.25 },
     },
-    exit: { opacity: 0},
+    exit: { opacity: 0, transition: { ease: "easeOut", duration: 0.5, staggerChildren: 0.25 } },
   };
   const messageVariants = {
     initial: { opacity: 0 },

@@ -40,6 +40,7 @@ export default function Index() {
 
   useEffect(() => {
     video.current.play();
+    console.log(stableData)
     collections && setData(collections)
   }, [collections])
 
