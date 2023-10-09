@@ -70,14 +70,14 @@ function ProductGallery({ media }: any) {
 
 
     <div
-      className={`grid gap-4 overflow-x-scroll grid-flow-col md:grid-flow-row  md:p-0 md:overflow-x-auto md:grid-cols-2 w-[90vw] md:w-full lg:col-span-2`}
+      className={`grid gap-4 overflow-x-hidden grid-flow-col md:grid-flow-row  md:p-0 md:overflow-x-auto md:grid-cols-2 w-[90vw] md:w-full lg:col-span-2`}
     >
       {media.map((med: any, i: number) => {
         let extraProps = {};
 
         if (med.mediaContentType === 'MODEL_3D') {
 
-          console.log(`${med.sources[0].url}`)
+          // console.log(`${med.sources[0].url}`)
           extraProps = {
             interactionPromptThreshold: '0',
             ar: true,
@@ -85,7 +85,7 @@ function ProductGallery({ media }: any) {
             disableZoom: true,
             style: { height: '100%', margin: '0 auto' },
           };
-        }
+       
 
         const data = {
           ...med,
@@ -111,6 +111,7 @@ function ProductGallery({ media }: any) {
             />
           </div>
         );
+      }
       })}
     </div>
   );
@@ -166,30 +167,34 @@ export default function ProductHandle() {
 
     <section>
       {/* <div className="grid items-start gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3"> */}
-      <div className="w-full max-w-full  grid items-start gap-6 lg:gap-20 md:grid-cols-[repeat(2,_minmax(auto,_1fr))] lg:grid-cols-[repeat(3,_minmax(auto,_1fr))]">
-        <div className="w-full max-w-full grid md:grid-flow-row md:p-0  md:grid-cols-2 md:w-full lg:col-span-2">
+      <div className="product-grid w-full max-w-full  grid items-start gap-6 lg:gap-20 md:grid-cols-[repeat(2,_minmax(auto,_1fr))]">
+        <div className=" product w-full max-w-full grid md:grid-flow-row md:p-0  md:grid-cols-2 md:w-full lg:col-span-2">
           <div className="md:col-span-2 snap-center card-image aspect-square md:w-full w-[80vw]  rounded">
             <div
               className={`grid gap-4  grid-flow-col md:grid-flow-row  md:p-0  md:grid-cols-2 w-[90vw] md:w-full lg:col-span-2`}
             ></div>
-            {/* <ProductGallery media={stableProductData.media.nodes} /> */}
+                      <ProductGallery media={stableProductData.media.nodes} />
           </div>
         </div>
-        <div className="md:sticky md:mx-auto max-w-xl md:max-w-full grid gap-8 p-0 md:p-6 md:px-0 top-[6rem] lg:top-[8rem] xl:top-[10rem]">
-          <div className="grid gap-2">
+        <div className="grid gap-2 name">
             <h1 className="text-4xl font-bold leading-10 whitespace-normal">
               {stableProductData.title}
             </h1>
             <span className="max-w-prose whitespace-pre-wrap inherit text-copy opacity-50 font-medium">
               {stableProductData.vendor}
             </span>
-          </div>
-         {stableSelectedVariantData && <ProductOptions options={stableProductData.options} selectedVariant={stableSelectedVariantData} />} 
-          <Money
+            <Money
             withoutTrailingZeros
             data={stableSelectedVariantData.price}
             className="text-xl font-semibold mb-2"
           />
+          </div>
+          <div className='grid gap-2 desc border-t border-[#222]'>
+          <p>{stableProductData.descriptionHtml}</p>
+          </div>
+        <div className=" buy grid">
+
+         {/* {stableSelectedVariantData && <ProductOptions options={stableProductData.options} selectedVariant={stableSelectedVariantData} />}  */}
           {orderable && (
               <div className="flex flex-wrap space-y-2 max-w-[400px]">
                 <ShopPayButton
@@ -201,11 +206,9 @@ export default function ProductHandle() {
                 <ProductForm variantId={stableSelectedVariantData?.id} className='w-full flex flex-auto'/>
               </div>
           )}
-          <div
+          {/* <div
             className="prose border-t border-gray-200 pt-6 text-black text-md"
-          // dangerouslySetInnerHTML={{ __html:stableProductData.descriptionHtml  }}
-          />
-          <p>{stableProductData.descriptionHtml}</p>
+          /> */}
         </div>
       </div>
     </section>

@@ -16,6 +16,7 @@ import Footer from '@components/Footer';
 import Tiles from '@components/hero/Tiles';
 import { icons } from '@components/hero/icons';
 import { simonBilder, stephanBilder } from '@components/images/images';
+import { AboutContainer } from '@components/AboutContainer';
 
 
 
@@ -32,6 +33,8 @@ export async function loader({ context }: LoaderArgs) {
 
 export default function Index() {
   const ref = useRef<any>(!null);
+  const [simonClicked, setSimonClicked] = useState(false)
+  const [stephanClicked, setStephanClicked] = useState(false)
   const { collections }: any = useLoaderData() || {}
   const [stableData, setData] = useState(collections);
   const [m, setM] = useAtom(model)
@@ -152,10 +155,10 @@ export default function Index() {
             <div className='hidden h-full justify-center align-center flex-col pr-10 md:flex  border-b border-[#222]'>
               <div className=''>
                 <h2 className='my-2'>Hi, ich bin Stephan</h2>
-                <p className='my-2'>Friseurmeister seit 200#. Ich freue mich darauf Dir zu Deinem neuen Look zu verhelfen.</p>
+                <p className='my-2'>Friseurmeister seit 2009. Ich freue mich darauf Dir zu Deinem neuen Look zu verhelfen.</p>
               </div>
               <div className='my-4'>
-                <h4 className='my-2'>Erfahre mehr über mich <a className='underline' aria-label='link'>hier!</a></h4>
+                <h4 className='my-2'>Erfahre mehr über mich <a href="/about" className='underline' aria-label='link'>hier!</a></h4>
               </div>
             </div>
             <div className='flex  justify-center align-center flex-col pr-10 img__wrapper'>
@@ -180,7 +183,7 @@ export default function Index() {
               {/* <div className='rounded-tl-lg max-w-[100%] min-h-[200px] h-[100%] flex-[1_1_100%] bg-cover bg-top' style={{ backgroundImage: `url(${simon})` }}></div> */}
             </div>
             <div className='img__wrapper'>
-              <h4>Erfahre mehr über uns <a className='underline' aria-label='link'>hier!</a></h4>
+              <h4>Erfahre mehr über uns <a href="/about" className='underline' aria-label='link'>hier!</a></h4>
               <p>Bleibe gerne mit uns in Verbindung:</p>
               <div className='socials flex justify-even my-5 w-full py-5'>
                 <Link to=""><FontAwesomeIcon className='pr-10' icon={faFacebookF} /></Link>
@@ -193,6 +196,8 @@ export default function Index() {
         </div>
       </>),
       deskChildren: (<>
+      <AboutContainer  props={{clicked:stephanClicked, text:"Seit 2009 übe ich mit Hingabe und Begeisterung den Beruf des Friseurs aus und führe seit 2018 meinen eigenen Salon. Meine Leidenschaft für dieses Handwerk ist nicht nur eine Karriere, sondern eine Lebensweise, die es mir ermöglicht, Menschen glücklich zu machen und ihnen ein strahlendes Lächeln ins Gesicht zu zaubern Bei mir steht der Kunde im Mittelpunkt. Mein oberstes Ziel ist es, Ihre individuellen Wünsche und Bedürfnisse zu verstehen und diese in einzigartige Frisuren umzusetzen, die Ihre Persönlichkeit unterstreichen. Egal, ob Sie eine klassische oder moderne Frisur bevorzugen, ob Sie eine Veränderung wünschen oder einfach nur verwöhnt werden möchten, ich stehe Ihnen mit Rat und Tat zur Seite. Mein Team und ich legen großen Wert auf Qualität und Innovation. Wir bleiben stets auf dem neuesten Stand der Trends und Techniken, um Ihnen die bestmöglichen Ergebnisse zu liefern. Wir verwenden hochwertige Produkte, die Ihrem Haar die Pflege und Aufmerksamkeit schenken, die es verdient. Ihre Zufriedenheit steht für uns an erster Stelle. Neben erstklassigen Haarschnitten bieten wir auch eine Vielzahl weiterer Services an. Unsere Leistungen umfassen unter anderem professionelles Styling für besondere Anlässe, Farbveränderungen, Haarverlängerungen und -verdichtungen sowie entspannende Kopf- und Haarpflegebehandlungen. In unserem Salon können Sie sich verwöhnen lassen und eine Auszeit vom Alltag genießen. Bei Stephan Müller erwartet Sie nicht nur ein Friseurbesuch, sondern ein einzigartiges Erlebnis. Unsere angenehme und entspannte Atmosphäre lässt Sie den Stress des Tages vergessen und sich vollkommen fallen lassen. Wir legen großen Wert auf eine persönliche und individuelle Betreuung, um sicherzustellen, dass Sie sich bei uns rundum wohl fühlen. Kundenfeedback ist uns besonders wichtig. Wir freuen uns über jede Rückmeldung. denn sie hilft uns, uns kontinuierlich zu verbessern und unsere Dienstleistungen an Ihre Bedürfnisse anzupassen. Ihr Vertrauen ist für uns die größte Motivation, unsere Leidenschaft für den Friseurberuf Tag für Tag zu leben. Besuchen Sie uns in unserem Salon und lassen Sie sich von unserer Leidenschaft für das Friseurhandwerk überzeugen. Wir freuen uns darauf, Ihnen zu einem neuen Look zu verhelfen und Ihnen ein Lächeln ins Gesicht zu zaubern. Vereinbaren Sie noch heute einen Termin und erleben Sie den Unterschied bei Stephan Müller - Ihrem Friseurmeister aus Leidenschaft!"}} />
+      <AboutContainer  props={{clicked:simonClicked, text:"Seit 2020 bin ich stolz darauf, Teil dieses wunderbaren Salons zu sein und meiner Leidenschaft für das Friseurhandwerk nachzugehen. Die Arbeit als Friseur erfüllt mich mit Freude und Begeisterung, und ich strebe danach, das Beste aus jedem meiner Kunden herauszuholen. Mein Ziel ist es, Ihnen ein außergewöhnliches Erlebnis zu bieten und Ihnen mit meiner Expertise zu einem unverwechselbaren Look zu verhelfen Für mich ist es von großer Bedeutung, mich stetig weiterzubilden und mit den neuesten Trends und Techniken vertraut zu sein. Die Friseurbranche ist dynamisch und entwickelt sich kontinuierlich weiter. Daher investiere ich viel Zeit und Energie in meine Weiterbildung, um sicherzustellen, dass ich Ihnen immer die aktuellsten und innovativsten Lösungen bieten kann. Durch regelmäßige Schulungen und Workshops halte ich mich über die neuesten Schnitt- und Stylingtechniken auf dem Laufenden. Neben meinem Streben nach Exzellenz in der Arbeit als Friseur bin ich bestrebt, Ihnen ein angenehmes und entspanntes Erlebnis zu bieten. Ich schaffe eine warme und einladende Atmosphäre, in der Sie sich wohlfühlen und den Alltagsstress hinter sich lassen können. Mein Ziel ist es, dass Sie sich bei mir wohl und gut aufgehoben fühlen, während ich mich mit Hingabe um Ihre Haare Kümmere ich freue mich darauf, sie im Salon begrüßen zu dürfen und Ihnen mit meiner Leidenschaft für das Friseurhandwerk ein strahlendes Lächeln ins Gesicht zu zaubern. Vereinbaren Sie noch heute einen Termin und lassen Sie uns gemeinsam das Beste aus Ihrem Haar herausholen. Mit Simon Speier haben Sie einen Friseur an Ihrer Seite, der mit Liebe zum Detail Ihre Erwartungen übertreffen wird."}} />
         <div className="flex justify-center align-center flex-col border-l border-[#222] py-20">
           <div className='flex-auto flex'></div>
           <div className='flex relative h-full justify-center align-center flex-col'>
@@ -205,8 +210,8 @@ export default function Index() {
           <div className='hidden h-full justify-center align-center flex-col px-10 md:flex'>
             <div className=''>
               <h2 className='my-2'>Hi, ich bin Simon!</h2>
-              <p className='my-2'>Ich arbeite mit Stephan zusammen seit 20??.Gemeinsam werden wir dich verwandeln.</p>
-              <h4 className='my-2'>Erfahre mehr über mich <a className='underline' aria-label='link'>hier!</a></h4>
+              <p className='my-2'>Ich arbeite mit Stephan zusammen seit 2020.Gemeinsam werden wir dich verwandeln.</p>
+              <h4 className='my-2'>Erfahre mehr über mich <a className='underline' href="/about" aria-label='link'>hier!</a></h4>
             </div>
           </div>
         </div>
