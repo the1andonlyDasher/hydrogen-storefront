@@ -30,7 +30,6 @@ const SvgComponent = (props:any) => (
 
 const ContactForm = ({ props }: contactProps) => {
   const form = useRef<any>(false);
-
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
   const [firstName, setFirstName] = useState("");
@@ -124,7 +123,7 @@ const ContactForm = ({ props }: contactProps) => {
   return (
     <>
         <section data-section-name={props.sectionName} id={props.id} className="">
-      <div className="__s__b sec-pad_left sec-pad_right">
+      <div className="__s__b">
         <h2 data-before={props.title}>{props.title}</h2>
         <p>{props.subtitle}</p>
       <motion.div
@@ -141,6 +140,7 @@ const ContactForm = ({ props }: contactProps) => {
         </button>
       </motion.div>
       <motion.form
+      className="form"
         ref={form}
         onSubmit={sendEmail}
         variants={formVariants}

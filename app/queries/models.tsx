@@ -30,6 +30,25 @@ export const COLLECTIONS_QUERY = `#graphql
               }
             }
           }
+                    variants(first: 1) {
+            nodes {
+              id
+              image {
+                url
+                altText
+                width
+                height
+              }
+              price {
+                amount
+                currencyCode
+              }
+              compareAtPrice {
+                amount
+                currencyCode
+              }
+            }
+          }
           }
           }
           }

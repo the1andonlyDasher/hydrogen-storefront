@@ -3,7 +3,8 @@ import { Drawer, useDrawer } from "./Drawer";
 import { Await, useMatches, useFetchers, useLocation, Outlet, useOutlet, useLoaderData, Link } from '@remix-run/react';
 import { CartLineItems, CartActions, CartSummary } from './Cart';
 import { AnimatePresence, motion, useAnimationControls, useIsPresent } from "framer-motion";
-import logo from "../images/logo.jpg"
+import logo from "../images/logo.png"
+import Footer from "./Footer";
 
 
 interface LayoutProps {
@@ -54,6 +55,7 @@ export function Layout({ title }: LayoutProps) {
   const fetchers = useFetchers();
   const toggle = useRef<any>(!null);
   const [root] = useMatches();
+  const location = useLocation()
   const cart = root.data?.cart;
   const outlet = useOutlet()
   const [toggled, setToggle] = useState(false)
@@ -120,9 +122,9 @@ export function Layout({ title }: LayoutProps) {
               initial="hidden"
               animate={toggled ? "enter" : "hidden"}
         role="banner"
-        className={`mainnav flex items-center h-16 sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 antialiased transition shadow-sm`}
+        className={`mainnav flex items-center h-16 sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 antialiased transition shadow-sm `}
       >
-        <div className="flex gap-12">
+        <div className="flex gap-12 ">
           <a className="font-bold uppercase text-2xl font-normal" style={{ fontFamily: "Yanone Kaffeesatz" }} href="/">
             {title}
           </a>
@@ -130,15 +132,16 @@ export function Layout({ title }: LayoutProps) {
         </div>
         <img
           src={logo}
+          className="w-auto max-h-[25px]"
           width={50}
           height={50}
         />
         <div className="ml-auto desktop">
           <ul className="menu px-5 flex flex-row flex-nowrap">
-            <li className="px-5">Home</li>
-            <li className="px-5">Über uns</li>
-            <li className="px-5">Shop</li>
-            <li className="px-5">Kontakt</li>
+            <li className="px-5"><Link to="/">Home</Link></li>
+            <li className="px-5"><Link to="/about">Über uns</Link></li>
+            <li className="px-5"><Link to="/collections/kopfsache">Shop</Link></li>
+            <li className="px-5"><Link to="/contact">Kontakt</Link></li>
           </ul>
         </div>
         <motion.div
@@ -159,7 +162,9 @@ export function Layout({ title }: LayoutProps) {
             <li className="py-14 mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/contact">Kontakt</Link></li>
           </ul>
         </motion.div>
+        {/* <div className={location.pathname.includes("collections/kopfsache") ? "block" : "hidden"}> */}
         <CartHeader cart={cart} openDrawer={openDrawer} />
+        {/* </div> */}
       </motion.header>
       <AnimatePresence
         mode="wait"
@@ -181,6 +186,7 @@ export function Layout({ title }: LayoutProps) {
       </Drawer>
     </div>
 
+
   );
 }
 
@@ -197,7 +203,7 @@ function CartDrawer({ cart, close }: any) {
                     <CartLineItems linesObj={data.lines} />
                   </div>
                 </div>
-                <div className="w-full md:px-12 px-4 py-6 space-y-6 border border-1 border-gray-00">
+                <div className="w-full md:px-12 px-4 py-6 space-y-6">
                   <CartSummary cost={data.cost} />
                   <CartActions checkoutUrl={data.checkoutUrl} />
                 </div>
@@ -205,13 +211,13 @@ function CartDrawer({ cart, close }: any) {
             ) : (
               <div className="flex flex-col space-y-7 justify-center items-center md:py-8 md:px-12 px-4 py-6 h-screen">
                 <h2 className="whitespace-pre-wrap max-w-prose font-bold text-4xl">
-                  Your cart is empty
+                  Der Warenkorb ist leer
                 </h2>
                 <button
                   onClick={close}
                   className="inline-block rounded-sm font-medium text-center py-3 px-6 max-w-xl leading-none bg-black text-white w-full"
                 >
-                  Continue shopping
+                  Weiter einkaufen
                 </button>
               </div>
             )}

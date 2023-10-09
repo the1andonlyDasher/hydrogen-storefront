@@ -15,6 +15,7 @@ import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import Footer from '@components/Footer';
 
 export function meta() {
   return [
@@ -35,7 +36,6 @@ export default function Index() {
   const isPresent = useIsPresent();
 
   useEffect(() => {
-    console.log(ref);
     collections && setData(collections)
     // stableData && stableData.nodes.map((node: any) => {
     //   node.products.edges.map((edge: any) =>
@@ -59,7 +59,7 @@ export default function Index() {
 
   return (<>
      
-    <section className="w-full gap-4" >
+    <section className="w-full gap-4" id="shopSection">
       <h2 className="whitespace-pre-wrap max-w-prose font-bold text-lead my-3">
         Collections
       </h2>
@@ -86,6 +86,7 @@ export default function Index() {
         })}
       </div>
     </section>
+    <Footer/>
   </>
   );
 }

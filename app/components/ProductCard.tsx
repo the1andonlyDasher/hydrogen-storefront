@@ -27,7 +27,7 @@ function ProductGallery({media}:any) {
 
         if (med.mediaContentType === 'MODEL_3D') {
 
-          console.log(`${med.sources[0].url}`)
+ 
           extraProps = {
             interactionPromptThreshold: '0',
             ar: true,
@@ -77,9 +77,6 @@ export default function ProductCard({product}:any) {
     EXTERNAL_VIDEO: 'ExternalVideo',
   };
 
-  useEffect(()=>{
-    console.log(product)
-  },[])
 
   return (
     <Link to={`/products/${product.handle}`}>

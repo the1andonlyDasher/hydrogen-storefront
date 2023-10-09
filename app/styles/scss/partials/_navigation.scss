@@ -412,17 +412,17 @@ a {
 }
 
 header.mainnav{
-    padding: 0 1rem 0 1rem;
+    padding: 0 1.5rem 0 1.5rem;
     @include mq(small) {
-      padding: 0 1.25rem 0 1.25rem;
+      padding: 0 2.5rem 0 2.5rem;
     }
     @include mq(medium) {
-      padding: 0 2.5% 0 2.5%;
-    }
-    @include mq(large) {
       padding: 0 5% 0 5%;
     }
-    @include mq(xl) {
+    @include mq(large) {
       padding: 0 10% 0 10%;
+    }
+    @include mq(xl) {
+      padding: 0 15% 0 15%;
     }
 }
