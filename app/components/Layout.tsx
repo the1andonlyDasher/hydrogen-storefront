@@ -156,10 +156,10 @@ export function Layout({ title }: LayoutProps) {
         </motion.div>
         <motion.div variants={{hidden:{left:"-100%"}, enter:{left:0}}} className="mobile absolute top-16 left-[-100%] h-[100vh] w-full bg-[#111]">
         <ul className="flex flex-col flex-nowrap justify-center items-center w-full h-full px-[10%]">
-            <li className="py-14 mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/">Home</Link></li>
-            <li className="py-14 mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/about">Über uns</Link></li>
-            <li className="py-14 mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/shop">Shop</Link></li>
-            <li className="py-14 mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/contact">Kontakt</Link></li>
+            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/">Home</Link></li>
+            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/about">Über uns</Link></li>
+            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/collections/kopfsache">Shop</Link></li>
+            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/contact">Kontakt</Link></li>
           </ul>
         </motion.div>
         {/* <div className={location.pathname.includes("collections/kopfsache") ? "block" : "hidden"}> */}

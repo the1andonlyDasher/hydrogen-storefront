@@ -2767,7 +2767,7 @@ ul.transition li {
 .dot {
   pointer-events: none;
   position: sticky;
-  top: 25%;
+  top: 10%;
   display: inline-block;
   max-width: 600px;
   padding: var(--space-s);
@@ -3102,6 +3102,37 @@ ul.transition li {
   aspect-ratio: 1;
   margin: 0 auto;
   color: var(--clr-main2-color);
+}
+
+/* base classes */
+.product-grid {
+  grid-template-areas: "product" "name" "desc" "buy";
+}
+@media screen and (min-width: 880px) {
+  .product-grid {
+    grid-template-areas: "product product" "product product" "name buy" "desc desc";
+  }
+}
+@media screen and (min-width: 1024px) {
+  .product-grid {
+    grid-template-areas: "product name" "product buy" "product desc";
+  }
+}
+
+.product-grid .product {
+  grid-area: product;
+}
+
+.product-grid .desc {
+  grid-area: desc;
+}
+
+.product-grid .name {
+  grid-area: name;
+}
+
+.product-grid .buy {
+  grid-area: buy;
 }
 
 :root {
