@@ -45,7 +45,7 @@ function ProductGallery({media}:any) {
             altText: med.alt || 'Product image',
           },
         };
-
+        if (med.mediaContentType === 'MediaImage') {
         return (
           <div
             className={`${
@@ -62,6 +62,7 @@ function ProductGallery({media}:any) {
             />
           </div>
         );
+      }
       })}
     </div>
   );
@@ -88,11 +89,12 @@ export default function ProductCard({product}:any) {
             </label>
           )}
         </div>
-        <div className="grid gap-1 bg-[#0f0f0f] border border-[#101010] p-6">
-          <div style={{fontFamily:"Economica"}} className="max-w-prose text-copy w-full overflow-hidden whitespace-nowrap text-ellipsis font-medium text-2xl">
+        <div className="product-card grid bg-[#0f0f0f] border border-[#101010]">
+<div className="grid p-text p-6 gap-4">
+<div style={{fontFamily:"Economica"}} className="max-w-prose text-copy w-full overflow-hidden whitespace-nowrap text-ellipsis font-medium text-2xl">
             {product.title}
           </div>
-          <div className='text-small text-[#333] text-thin py-4  max-h-14  overflow-hidden truncate'>{product.descriptionHtml}</div>
+          <div className='text-small text-[#333] text-thin max-h-14  overflow-hidden truncate'>{product.descriptionHtml}</div>
           <div className="flex gap-4">
             <span className="max-w-prose whitespace-pre-wrap inherit text-copy flex gap-4 font-medium text-xl text-[var(--clr-contrast-400)]">
               <Money withoutTrailingZeros data={price} />
@@ -104,6 +106,9 @@ export default function ProductCard({product}:any) {
                 />
               )}
             </span>
+          </div>
+</div>
+<div className="grid p-img bg-cover bg-center" style={{backgroundImage:`url('${product.variants.nodes[0].image.url}')`}}>
           </div>
         </div>
       </div>

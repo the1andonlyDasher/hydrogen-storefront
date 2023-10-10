@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import {  model } from '@components/atoms';
+import Footer from '@components/Footer';
 
 
 const seo = ({data}:any) => ({
@@ -54,7 +55,7 @@ export default function Collection() {
   const [stableData, setData]  = useState(collection);
 
 useEffect(() => {
-  console.log(collection)
+  // console.log(collection)
     collection && setData(collection);
     var o = stableData.products.nodes.map((object:any)=>(Object.values(object)[6]))
     var k = Object.values(o)
@@ -63,7 +64,7 @@ useEffect(() => {
     var r = Object.values(q)
     var s = Object.values(r)
     var u = s.map((item:any)=>Object.values(item)[2])
-    console.log(u.map((item:any)=>Object.values(item)[0]))
+    // console.log(u.map((item:any)=>Object.values(item)[0]))
 }, [collection])
 
   
@@ -90,6 +91,7 @@ useEffect(() => {
         url={`/collections/${stableData.handle}`}
       />
       </section>
+      <Footer/>
     </>
   );
 }

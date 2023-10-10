@@ -5,6 +5,8 @@ import { CartLineItems, CartActions, CartSummary } from './Cart';
 import { AnimatePresence, motion, useAnimationControls, useIsPresent } from "framer-motion";
 import logo from "../images/logo.png"
 import Footer from "./Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 
 interface LayoutProps {
@@ -59,6 +61,7 @@ export function Layout({ title }: LayoutProps) {
   const cart = root.data?.cart;
   const outlet = useOutlet()
   const [toggled, setToggle] = useState(false)
+  const [open, setOpen] = useState(false)
   const isPresent = useIsPresent();
 
   // Grab all the fetchers that are adding to cart
@@ -113,7 +116,15 @@ export function Layout({ title }: LayoutProps) {
     enter: { transition: { type: "tween", ease: "easeIn", duration: 0.5, staggerChildren: 0 } },
   }
 
+  const list_variants = {
+    open:{scaleY:1, transition:{staggerChildren: 0.2, when:"beforeChildren"}},
+    closed:{scaleY:0, transition:{staggerChildren: 0.2, when:"afterChildren"}},
+  }
 
+  const listItem_variants = {
+    open:{opacity: 1, x:0, transition:{ease:"easeIn"}},
+    closed:{opacity: 0, x:-10,transition:{ease:"easeOut"}},
+  }
 
   return (
     <div className="flex flex-col min-h-screen antialiased snap-y snap-mandatory">
@@ -147,7 +158,7 @@ export function Layout({ title }: LayoutProps) {
         <motion.div
   
           ref={toggle}
-          onClick={() => setToggle(!toggled)}
+          onClick={() => {setToggle(!toggled), setOpen(false)}}
           id="menu-toggle"
           className="ml-auto mobile"
         >
@@ -155,11 +166,17 @@ export function Layout({ title }: LayoutProps) {
           <motion.div variants={{hidden:{rotate:0, top:"70%"}, enter:{rotate:-45, top:"50%"}}} className="origin-center translate-y-[-50%]"></motion.div>
         </motion.div>
         <motion.div variants={{hidden:{left:"-100%"}, enter:{left:0}}} className="mobile absolute top-16 left-[-100%] h-[100vh] w-full bg-[#111]">
-        <ul className="flex flex-col flex-nowrap justify-center items-center w-full h-full px-[10%]">
-            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/">Home</Link></li>
-            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/about">Über uns</Link></li>
-            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/collections/kopfsache">Shop</Link></li>
-            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-4xl text-left" onClick={()=>setToggle(!toggled)}><Link to="/contact">Kontakt</Link></li>
+        <ul className="flex flex-col flex-nowrap justify-start items-center w-full h-full px-[10%] pt-[5%]">
+            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/">Home</Link></li>
+            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/about">Über uns</Link></li>
+            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/collections/kopfsache">Shop</Link></li>
+            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/contact">Kontakt</Link></li>
+            <motion.li className="flex flex-row justify-start gap-4 py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica'] text-gray-500" onClick={()=>setOpen(!open)}><a>Öffnungszeiten</a><motion.div className="w-10 h-10" animate={open ? {rotate: "180deg"} : {rotate:"0deg"}}><FontAwesomeIcon  icon={faChevronDown} className="text-thin text-md" /></motion.div></motion.li>
+            <motion.ul variants={list_variants} animate={open? "open" : "closed"} className="py-8 w-full">
+              <motion.li variants={listItem_variants} className="flex flex-row space-between"><h5>Di-Do</h5><h5 className="ml-auto">08:30 - 18:30</h5></motion.li>
+              <motion.li variants={listItem_variants} className="flex flex-row space-between"><h5>Fr</h5><h5 className="ml-auto">10:00 - 20:00</h5></motion.li>
+              <motion.li variants={listItem_variants} className="flex flex-row space-between"><h5>Sa</h5><h5 className="ml-auto">08:30 - 15:00</h5></motion.li>
+            </motion.ul>
           </ul>
         </motion.div>
         {/* <div className={location.pathname.includes("collections/kopfsache") ? "block" : "hidden"}> */}

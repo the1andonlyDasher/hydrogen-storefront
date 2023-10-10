@@ -1,6 +1,7 @@
 import {Link, useLoaderData} from '@remix-run/react';
 import { LoaderArgs } from '@shopify/remix-oxygen';
 import {Image} from '@shopify/hydrogen';
+import Footer from '@components/Footer';
 
 export function meta() {
   return [
@@ -18,6 +19,7 @@ export default function Index() {
   const {collections}:any = useLoaderData() || {}
   // console.log(collections);
   return (
+    <>
     <section className="w-full gap-4">
     <h2 className="whitespace-pre-wrap max-w-prose font-bold text-lead my-3">
       Collections
@@ -45,6 +47,8 @@ export default function Index() {
       })}
     </div>
   </section>
+  <Footer/>
+  </>
   );
 }
 

@@ -3110,7 +3110,7 @@ ul.transition li {
 }
 @media screen and (min-width: 880px) {
   .product-grid {
-    grid-template-areas: "product product" "product product" "name buy" "desc desc";
+    grid-template-areas: "product product" "name buy" "desc desc";
   }
 }
 @media screen and (min-width: 1024px) {
@@ -3133,6 +3133,24 @@ ul.transition li {
 
 .product-grid .buy {
   grid-area: buy;
+}
+
+.model-viewer {
+  width: 90% !important;
+  height: 90% !important;
+}
+
+.product-card {
+  grid-template-columns: 65% 35%;
+  grid-template-areas: "text img";
+}
+
+.p-text {
+  grid-area: text;
+}
+
+.p-img {
+  grid-area: img;
 }
 
 :root {

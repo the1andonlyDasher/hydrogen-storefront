@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { Bounds, Center, Environment, Html, Scroll, ScrollControls, View, useAspect, useGLTF } from "@react-three/drei";
+import { Bounds, Center, Environment, Html, PivotControls, Scroll, ScrollControls, View, useAspect, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useAtom } from "jotai";
 import { useEffect, useRef, Suspense, useState, useMemo, forwardRef } from "react";
@@ -187,26 +187,29 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15, w = 0.7, gap =
         const ref = useRef<any>(!null)
         const group = useRef<any>(!null)
         const { scene }: any = useGLTF(item.url, true, undefined, (loader: any) => {
-            loader.manager.onStart = function (url: any, itemsLoaded: any, itemsTotal: any) { console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.'); };
+            // loader.manager.onStart = function (url: any, itemsLoaded: any, itemsTotal: any) { console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.'); };
             loader.manager.onLoad = function () { setGLoaded(true)};
         })
         const controls = useAnimationControls()
+        const y = -1 * Math.max((Math.min( 0.5, Math.min(w / 4, 2))) - 1.25 / (w / 4), -2);
 
         useEffect(() => {
-            controls.start({ scale: 0 })
             if (loaded === true) {
-                // if (loc.pathname.includes(`/${item.name}`)) {
-                //     controls.start({ scale: 2.0, x: (viewport.size.width < 768 ? 0 : 0 - w / 8), z: 0, y: (viewport.size.width < 768 ? 0 : -1), transition: { duration: 1, type: "spring" } })
-                // } else {
+                if (loc.pathname.includes(`/${item.name}`)) {
+                    controls.start({ scale: (viewport.size.width < 1024 ? Math.max(2, Math.min(w / 4, 3)) : Math.max(1.35, Math.min(w / 4, 2.5))), x: (viewport.size.width < 1024 ? 0 : 0 - w / 4), z: 0, y: (viewport.size.width < 1024 ? -0.5 : -2), transition: { duration: 1, type: "spring" }})
+                } else {
                     if (loc.pathname.includes(`/collections/${item.collection}`)) {
-                        controls.start({ scale: 0.65, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: 0 })
+                        controls.start({ scale: 0.65, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: y })
                     } else {
-                        controls.start({ scale: 0, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: 0 })
+                        controls.start({ scale: 0, x: Math.cos(r) * radius, z: Math.sin(r) * radius, y: y })
                     }
-                // }
+                }
             }
-        }, [loc])
+        }, [loc, w])
 
+        useEffect(()=>{
+            // console.log(y)
+        })
 
         useFrame((state, delta) => {
             if (loc.pathname.includes("/collections/")) {
@@ -220,6 +223,8 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15, w = 0.7, gap =
 
         return (
             <>
+            {/* <PivotControls offset={[0,0,0]} anchor={[0,0,0]} opacity={0} activeAxes={[false, false, false]}>
+               <Center top position={[1.5, 0, 0]}> */}
                 <motion3d.group
                     scale={Math.max(0.35, Math.min(w / 4, 0.85))}
                     ref={group}
@@ -227,13 +232,16 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15, w = 0.7, gap =
                     <motion3d.primitive
                         ref={ref}
                         name={item.name}
-                        initial={{ scale: 0 }}
+                        initial={{ scale: 0, x: Math.cos(r) * radius, z: Math.sin(r), y:0 }}
                         animate={controls}
                         transition={{ duration: 0.5, type: "spring", stiffness: 500, damping: 100, bounce: 0.25, mass: 0.5, delay: index * 0.2 }}
                         object={scene}
-                    // position={[(viewport.size.width < 768 ? 0 : Math.cos(r) * radius + w / 4), 0, Math.sin(r) * radius]}
+                        //  position={[0,loc.pathname.includes("/products/") ? (viewport.size.width < 1024 ? -2 : -3.75):y,0]}
+                        //  position={[(viewport.size.width < 768 ? 0 : Math.cos(r) * radius + w / 4), -2, Math.sin(r) * radius]}
                     />
                 </motion3d.group>
+                {/* </Center>
+                </PivotControls> */}
             </>
         )
     }
