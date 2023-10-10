@@ -23,7 +23,7 @@ export default function Model({  ...props }:any) {
   const { nodes, materials, animations }:any = useGLTF(scene)
   const { actions }:any = useAnimations(animations, group)
   const extras = { receiveShadow: false, castShadow: false, "material-envMapIntensity": 0.2 }
-  useEffect(() => { (actions["CameraAction"].reset().fadeIn(0.5).play().paused = true), setLoaded(true)}, [location, loaded])
+  useEffect(() => { (actions["CameraAction"].reset().fadeIn(0.5).play().paused = true), setLoaded(true)}, [])
   useEffect(()=>{
 
     if(location.pathname === "/about" && loaded === true){
