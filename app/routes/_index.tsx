@@ -64,7 +64,7 @@ export default function Index() {
           </div>
           <div className="flex justify-center align-center flex-col h-full sec-pad_right gap-5 mx-4">
             <video ref={video} autoPlay loop muted className='max-h-[600px] max-w-[300px] sm:max-w-none'>
-              <source src="/images/vid.mp4" type='video/mp4'></source>
+              <source src="/images/vid.webm" type='video/webm'></source>
             </video>
             {/* <img className="self-end my-0 mx-auto z-[2] w-[90%]" src={img} alt="Stephan und Simon" style={{ transformOrigin: "bottom right", maxWidth: "500px" }} /> */}
           </div>
