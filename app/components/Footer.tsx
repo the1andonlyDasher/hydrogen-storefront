@@ -21,10 +21,10 @@ const Footer = () => {
           <div className="flex justify-center flex-col my-2">
         <p className=' text-center'>Erreichen kannst du uns über:</p>
               <div className='socials flex justify-between flex-row w-full py-5'>
-                <Link to="" className="max-h-4"><FontAwesomeIcon  icon={faFacebookF} /></Link>
-                <Link to="" className="max-h-4"><FontAwesomeIcon  icon={faInstagram} /></Link>
-                <Link to="" className="max-h-4"><FontAwesomeIcon  icon={faEnvelope} /></Link>
-                <Link to="" className="max-h-4"><FontAwesomeIcon  icon={faPhoneSquare} /></Link>
+                <Link to="https://www.facebook.com/people/Kopfsache-by-Stephan/100070527370504/" className="max-h-4"><FontAwesomeIcon  icon={faFacebookF} /></Link>
+                <Link to="https://www.instagram.com/kopfsache.by.stephan/" className="max-h-4"><FontAwesomeIcon  icon={faInstagram} /></Link>
+                <Link to="mailto:stephan.muller4@aol.de" className="max-h-4"><FontAwesomeIcon  icon={faEnvelope} /></Link>
+                <Link to="tel:+49152 23024555" className="max-h-4"><FontAwesomeIcon  icon={faPhoneSquare} /></Link>
               </div>
               </div>
               </div>

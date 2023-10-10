@@ -2,11 +2,18 @@ import { useLoaderData, useMatches, useFetcher } from '@remix-run/react';
 import { LoaderArgs, json } from '@shopify/remix-oxygen';
 import { MediaFile, Money, ShopPayButton } from '@shopify/hydrogen-react';
 import ProductOptions from '@components/ProductOptions'
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { m, motion, useAnimationControls } from 'framer-motion';
+import { motion as motion3d } from "framer-motion-3d"
+import { useEffect, useRef, useState } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import { model } from '@components/atoms';
 import { useLocation } from '@remix-run/react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Camera } from 'three';
+import { Environment, PerspectiveCamera, useAspect, useGLTF } from '@react-three/drei';
+import { useRoute } from 'wouter';
+import { attach } from '@react-three/fiber/dist/declarations/src/core/utils';
+import Footer from '@components/Footer';
 
 
 export async function loader({ params, context, request }: LoaderArgs) {
@@ -105,7 +112,7 @@ function ProductGallery({ media }: any) {
           >
             <MediaFile
               tabIndex={0}
-              className={`w-full h-full aspect-square object-cover`}
+              className={`w-full h-full aspect-square object-cover model-viewer`}
               data={data}
               {...extraProps}
             />
@@ -143,7 +150,9 @@ function ProductForm({ variantId }: any) {
 
 
 export default function ProductHandle() {
-  const location = useLocation();
+  const [m, setM]:any = useAtom(model)
+  const [productModel, setModel] = useState<any>();
+  const loc = useLocation();
   const { handle }: any = useLoaderData<typeof loader>() || {};
   const { product, selectedVariant, storeDomain }: any = useLoaderData<typeof loader>() || {};
   const [stableProductData, setProductData] = useState(product)
@@ -160,20 +169,75 @@ export default function ProductHandle() {
     storeDomain && setStoreDomainData(storeDomain)
     handle && setHandleData(handle)
 
-
   }, [product, selectedVariant, storeDomain, handle])
 
-  return (
 
+  interface productProps {
+
+    item: {
+        name: string,
+        url: string,
+        collection: string
+    };
+};
+
+  function P() {
+    const { scene }: any = useGLTF(`${stableProductData.media.nodes[0].sources[0].url}`, true, undefined, (loader: any) => {
+      loader.manager.onStart = function (url: any, itemsLoaded: any, itemsTotal: any) { console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.'); };
+  })
+    const { size } = useThree()
+    size.updateStyle = true;
+    const [w, h] = useAspect(size.width, size.height)
+    const ref = useRef<any>(!null)
+    const group = useRef<any>(!null)
+
+    const controls = useAnimationControls()
+
+    useEffect(()=>{
+       controls.start({scale:Math.max(0.35, Math.min(w / 4, 2))}) 
+    })
+
+    useFrame((state, delta) => {
+            ref.current.rotation.y -= delta * 0.1
+
+    })
+
+    return (
+
+          <motion3d.group
+          scale={Math.max(0.35, Math.min(w / 4, 0.85))}
+          ref={group}
+          dispose={null}>
+          <motion3d.primitive
+              ref={ref}
+              initial={{ scale: 0 }}
+              animate={controls}
+              transition={{ duration: 0.5, type: "spring", stiffness: 500, damping: 100, bounce: 0.25, mass: 0.5, delay: 0.2 }}
+              object={scene}
+               position={[0,0 ,0]}
+          />
+      </motion3d.group>
+        );
+
+}
+  
+
+  return (
+<>
     <section>
       {/* <div className="grid items-start gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3"> */}
-      <div className="product-grid w-full max-w-full  grid items-start gap-6 lg:gap-20 md:grid-cols-[repeat(2,_minmax(auto,_1fr))]">
-        <div className=" product w-full max-w-full grid md:grid-flow-row md:p-0  md:grid-cols-2 md:w-full lg:col-span-2">
+      <div className="product-grid w-full max-w-full  grid items-start gap-6 lg:gap-10 md:grid-cols-[repeat(2,_minmax(auto,_1fr))]">
+        <div className=" product max-h-[500px] w-full max-w-full grid md:grid-flow-row md:p-0  md:grid-cols-2 md:w-full lg:col-span-2">
           <div className="md:col-span-2 snap-center card-image aspect-square md:w-full w-[80vw]  rounded">
             <div
               className={`grid gap-4  grid-flow-col md:grid-flow-row  md:p-0  md:grid-cols-2 w-[90vw] md:w-full lg:col-span-2`}
             ></div>
-                      <ProductGallery media={stableProductData.media.nodes} />
+            {/* <Canvas style={{zIndex: 100}}>
+              <color args={["lime"]} attach="background" />
+              <Environment preset='dawn'/>
+               <P/>
+            </Canvas> */}
+                      {/* <ProductGallery media={stableProductData.media.nodes} /> */}
           </div>
         </div>
         <div className="grid gap-2 name">
@@ -189,7 +253,7 @@ export default function ProductHandle() {
             className="text-xl font-semibold mb-2"
           />
           </div>
-          <div className='grid gap-2 desc border-t border-[#222]'>
+          <div className='grid gap-2 desc border-t border-[#222] md:pt-6'>
           <p>{stableProductData.descriptionHtml}</p>
           </div>
         <div className=" buy grid">
@@ -212,7 +276,8 @@ export default function ProductHandle() {
         </div>
       </div>
     </section>
-
+<Footer/>
+</>
   );
 }
 
