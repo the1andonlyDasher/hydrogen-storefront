@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "scripts": {
     "build": "npm run build:css && shopify hydrogen build --entry ./server",
-    "build:css": "postcss app/styles/tailwind.css -o app/styles/tailwind-build.css --env production",
+    "build:css": "postcss app/styles/tailwind.css -u autoprefixer -o app/styles/tailwind-build.css --env production",
     "dev": "npm run build:css && concurrently -m -g -r npm:dev:css \"shopify hydrogen dev\"",
     "dev:css": "postcss app/styles/tailwind.css -o app/styles/tailwind-build.css -w",
     "preview": "npm run build && shopify hydrogen preview",
