@@ -6,7 +6,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
-import styles from './styles/prefixed/style.css';
+import styles from './styles/style.css';
 import favicon from '../public/favicon.ico';
 import { type LinksFunction, type LoaderArgs } from '@shopify/remix-oxygen';
 import { Layout } from './components/Layout';
