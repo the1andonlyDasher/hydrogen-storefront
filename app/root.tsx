@@ -2,14 +2,10 @@
 import {
   Links,
   Meta,
-  Outlet,
-  Path,
   Scripts,
   ScrollRestoration,
   useLoaderData,
-  useLocation,
 } from '@remix-run/react';
-import type { Shop } from '@shopify/hydrogen/storefront-api-types';
 import styles from './styles/prefixed/style.css';
 import favicon from '../public/favicon.ico';
 import { type LinksFunction, type LoaderArgs } from '@shopify/remix-oxygen';
@@ -22,8 +18,7 @@ import { COLLECTIONS_QUERY } from "app/queries/models"
 import GL from '@components/GL';
 import { useAtom } from 'jotai';
 import { model } from '@components/atoms';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import FwdGL from '@components/GL';
+import { useEffect, useState } from 'react';
 
 
 
