@@ -148,7 +148,7 @@ export default function Index() {
     }} />
     <DoubleSec props={{
       left: false,
-      sectionClass: "relative",
+      sectionClass: "relative ",
       ref: ref,
       children: (<>
         <div className='grid grid-cols-1  relative h-full w-full m-auto  justify-center align-center py-20'>
@@ -219,7 +219,7 @@ export default function Index() {
     }} />
     <DoubleSec props={{
       left: false,
-      sectionClass: "relative",
+      sectionClass: "relative ",
       header: "Hol dir deine Haarpflege direkt bei uns!",
       // background:(<>
       //     <div className='absolute top-0 left-0 w-full h-full bg-center' style={{backgroundImage:`url('${products}')`}}></div>
