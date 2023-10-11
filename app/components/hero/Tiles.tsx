@@ -84,7 +84,7 @@ export default function Tiles({ addClass, gridClass, array, perspective }: any) 
         </motion.div>
       ) : (
         <motion.div variants={gridVariants} className={`${addClass} container`}>
-          <motion.div variants={gridVariants} className=" grid grid--columns">
+          <motion.div variants={gridVariants} className="relative w-full h-full grid grid--columns">
             <motion.div variants={gridVariants} className={`grid ${gridClass}`}>
               {tiles(array)}
             </motion.div>
