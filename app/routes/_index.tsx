@@ -63,8 +63,10 @@ export default function Index() {
             <h1>Es ist alles nur Kopfsache</h1>
           </div>
           <div className="flex justify-center align-center flex-col h-full sec-pad_right gap-5 mx-4">
-            <video ref={video} autoPlay loop muted className='max-h-[600px] max-w-[300px] sm:max-w-none'>
+            <video ref={video} preload='yes' autoPlay loop muted playsInline className='max-h-[600px] max-w-[300px] sm:max-w-none'>
               <source src="/images/vid.webm" type='video/webm'></source>
+              <source src="/images/vid.mov" type='video/mp4'></source>
+              <track kind="captions" ></track>
             </video>
             {/* <img className="self-end my-0 mx-auto z-[2] w-[90%]" src={img} alt="Stephan und Simon" style={{ transformOrigin: "bottom right", maxWidth: "500px" }} /> */}
           </div>
@@ -80,7 +82,7 @@ export default function Index() {
             <div className=''>
               <h4>Denk immer daran</h4>
               <h1>Es ist alles nur Kopfsache</h1>
-              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut.</p>
+              <p>Tauche ein in die Welt von Kopfsache by Stephan und lass Dich verwöhnen!</p>
               <Link to="https://www.studiobookr.com/kopfsache-by-stephan-mueller-56870#/"><button className="btn__primary" type="button">Termin buchen</button></Link>
 
             </div>
