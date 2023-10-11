@@ -10,7 +10,7 @@ import {
   useLocation,
 } from '@remix-run/react';
 import type { Shop } from '@shopify/hydrogen/storefront-api-types';
-import styles from './styles/style.css';
+import styles from './styles/prefixed/style.css';
 import favicon from '../public/favicon.ico';
 import { type LinksFunction, type LoaderArgs } from '@shopify/remix-oxygen';
 import { Layout } from './components/Layout';
