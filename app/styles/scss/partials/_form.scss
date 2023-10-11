@@ -201,6 +201,8 @@ textarea:focus-visible {
   justify-content: flex-start;
   display: none;
   flex-wrap: wrap;
+  flex-direction: row;
+  align-items: baseline;
   text-align: center;
   width: 100%;
   padding: var(--space-m) 0;
