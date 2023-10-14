@@ -22,8 +22,8 @@ const arrow_variants = {
 };
 
 const desc_variants = {
-    closed: { gridTemplateRows: "0fr", margin:"0 0" },
-    open: { gridTemplateRows: "1fr", margin:"1rem 0" }
+    closed: { gridTemplateRows: "0fr", opacity:0, paddingTop:0  },
+    open: { gridTemplateRows: "1fr", opacity:1, paddingTop: "1rem" }
 }
 
 const ServiceBasic = ({ props }: serviceProps) => {
@@ -44,7 +44,7 @@ const ServiceBasic = ({ props }: serviceProps) => {
                         <FontAwesomeIcon icon={faChevronDown} scale={5} />
                     </motion.div>
                 </motion.div>
-                <motion.div variants={desc_variants} animate={click ? "open" : "closed"} className="grid">
+                <motion.div variants={desc_variants} animate={click ? "open" : "closed"} className="grid overflow-hidden">
                     <p className="m-0 overflow-hidden">{props.description}</p>
                 </motion.div>
             </motion.dl>
