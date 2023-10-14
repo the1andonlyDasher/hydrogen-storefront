@@ -14,7 +14,16 @@ import { Environment, PerspectiveCamera, useAspect, useGLTF } from '@react-three
 import { useRoute } from 'wouter';
 import { attach } from '@react-three/fiber/dist/declarations/src/core/utils';
 import Footer from '@components/Footer';
+import { SeoHandleFunction } from '@shopify/hydrogen';
 
+const seo: SeoHandleFunction<typeof loader> = ({data}) => ({
+  title: data?.product?.seo?.title,
+  description: data?.product?.seo?.description,
+});
+
+export const handle = {
+  seo,
+};
 
 export async function loader({ params, context, request }: LoaderArgs) {
   const storeDomain = context.storefront.getShopifyDomain();
@@ -172,54 +181,7 @@ export default function ProductHandle() {
   }, [product, selectedVariant, storeDomain, handle])
 
 
-  interface productProps {
 
-    item: {
-        name: string,
-        url: string,
-        collection: string
-    };
-};
-
-  function P() {
-    const { scene }: any = useGLTF(`${stableProductData.media.nodes[0].sources[0].url}`, true, undefined, (loader: any) => {
-      loader.manager.onStart = function (url: any, itemsLoaded: any, itemsTotal: any) { console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.'); };
-  })
-    const { size } = useThree()
-    size.updateStyle = true;
-    const [w, h] = useAspect(size.width, size.height)
-    const ref = useRef<any>(!null)
-    const group = useRef<any>(!null)
-
-    const controls = useAnimationControls()
-
-    useEffect(()=>{
-       controls.start({scale:Math.max(0.35, Math.min(w / 4, 2))}) 
-    })
-
-    useFrame((state, delta) => {
-            ref.current.rotation.y -= delta * 0.1
-
-    })
-
-    return (
-
-          <motion3d.group
-          scale={Math.max(0.35, Math.min(w / 4, 0.85))}
-          ref={group}
-          dispose={null}>
-          <motion3d.primitive
-              ref={ref}
-              initial={{ scale: 0 }}
-              animate={controls}
-              transition={{ duration: 0.5, type: "spring", stiffness: 500, damping: 100, bounce: 0.25, mass: 0.5, delay: 0.2 }}
-              object={scene}
-               position={[0,0 ,0]}
-          />
-      </motion3d.group>
-        );
-
-}
   
 
   return (

@@ -57,7 +57,7 @@ function GL({ position = new THREE.Vector3(2, 3, 20.5), fov = 15, w = 0.7, gap =
         useEffect(() => {
             setModels(m)
             models &&  setLoaded(true)
-            console.log(models)
+            // console.log(models)
         }, [])
 
         return (

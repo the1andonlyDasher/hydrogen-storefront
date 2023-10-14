@@ -1324,6 +1324,9 @@ shop-pay-button {
     padding: 2rem 0;
   }
 }
+.footer p {
+  color: var(--clr-contrast-200);
+}
 
 .footer h5 {
   color: var(--clr-main2-color);
@@ -1359,15 +1362,15 @@ shop-pay-button {
 
 .footer-links li a {
   font-size: var(--fs-text);
-  color: var(--clr-contrast-200);
-  box-shadow: inset 0px 0px 0px 1px var(--clr-contrast-200);
+  color: var(--clr-contrast-100);
+  box-shadow: inset 0px 0px 0px 1px var(--clr-contrast-100);
   text-align: center;
   width: 100%;
   margin: 0;
 }
 .footer-links li a:hover, .footer-links li a:active {
-  color: var(--clr-contrast-500);
-  background-color: var(--clr-contrast-200);
+  color: var(--clr-contrast-700);
+  background-color: var(--clr-contrast-100);
 }
 @media screen and (min-width: 600px) {
   .footer-links li a {

@@ -20,12 +20,12 @@ const tileVariants: any = {
     transition: {
       type: "spring",
       duration: .5,
-      delay: Math.random() * i ,
+      delay: Math.random() * i,
     },
   })
 }
 
-const Tile = ({ i, id, children, mainText, fallbacksrc, bgImage }: any) => {
+const Tile = ({ i, id, children, mainText, fallbacksrc, bgImage, bgPosition }: any) => {
 
   const [hovering, setHover] = useState<any>(false)
   return (
@@ -33,9 +33,9 @@ const Tile = ({ i, id, children, mainText, fallbacksrc, bgImage }: any) => {
       variants={tileVariants}
       initial="initial"
       whileInView="enter"
-      viewport={{once: true}}
+      viewport={{ once: true }}
       exit="exit"
-      className="bg-cover bg-center"
+      className={`bg-cover ${bgPosition}`}
       style={{ backgroundImage: `url('${bgImage}')` }}
       data-maintext={mainText}
       data-fallbacksrc={fallbacksrc}
@@ -48,7 +48,7 @@ const Tile = ({ i, id, children, mainText, fallbacksrc, bgImage }: any) => {
 
 
 
-const tiles = (array: any) => {
+const tiles = (bgPosition: any, array: any) => {
   const defaultItems = [...Array(array.length)];
   return (
     defaultItems.map((value, i) =>
@@ -58,13 +58,14 @@ const tiles = (array: any) => {
         i={value}
         mainText={mainTexts[i]}
         bgImage={array[i]}
+        bgPosition={bgPosition}
       >
 
       </Tile>
     ))
 };
 
-export default function Tiles({ addClass, gridClass, array, perspective }: any) {
+export default function Tiles({ addClass, gridClass, array, perspective, bgPosition }: any) {
 
   const gridVariants = {
     initial: { transition: { staggerChildren: 0.2 } },
@@ -75,18 +76,18 @@ export default function Tiles({ addClass, gridClass, array, perspective }: any) 
   return (
     <>
       {perspective === true ? (
-        <motion.div variants={gridVariants} className={`${addClass} container`}>
+        <motion.div variants={gridVariants} className={`container ${addClass}`}>
           <motion.div variants={gridVariants} className="feature-grid-container grid grid--columns">
             <motion.div variants={gridVariants} className={`grid ${gridClass}`}>
-              {tiles(array)}
+              {tiles(bgPosition, array)}
             </motion.div>
           </motion.div>
         </motion.div>
       ) : (
-        <motion.div variants={gridVariants} className={`${addClass} container`}>
+        <motion.div variants={gridVariants} className={`container ${addClass}`}>
           <motion.div variants={gridVariants} className="relative w-full h-full grid grid--columns">
             <motion.div variants={gridVariants} className={`grid ${gridClass}`}>
-              {tiles(array)}
+              {tiles(bgPosition, array)}
             </motion.div>
           </motion.div>
         </motion.div>
