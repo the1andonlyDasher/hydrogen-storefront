@@ -35,6 +35,7 @@ export default function Index() {
   const video = useRef<any>(!null)
 
   useEffect(() => {
+    video.current.muted = true;
     video.current.play();
     // console.log(stableData)
     collections && setData(collections)
