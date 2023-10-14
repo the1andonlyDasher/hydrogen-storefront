@@ -63,7 +63,7 @@ export default function Index() {
             {/* <img className="self-end my-0 mx-auto z-[2] w-[90%]" src={img} alt="Stephan und Simon" style={{ transformOrigin: "bottom right", maxWidth: "500px" }} /> */}
           </div>
           <div className='mb-auto mx-4 img__wrapper'>
-            <p className='my-5'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut.</p>
+            <p className='my-5'>Tauche ein in die Welt von Kopfsache by Stephan und lass Dich verwöhnen!</p>
             <Link to="https://www.studiobookr.com/kopfsache-by-stephan-mueller-56870#/"><button className="btn__primary" type="button">Termin buchen</button></Link>
           </div>
         </div>
