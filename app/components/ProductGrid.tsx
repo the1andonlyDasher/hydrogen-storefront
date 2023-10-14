@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 import { useFetcher } from '@remix-run/react';
+import { useAtom } from 'jotai';
+import { model } from './atoms';
 
 interface gridProps{
   url:any;
@@ -22,6 +24,8 @@ export default function ProductGrid({collection, url}:gridProps) {
     // https://remix.run/docs/en/v1/guides/routing#what-is-the-index-query-param
     fetcher.load(`${url}?index&cursor=${endCursor}`);
   }
+
+
   useEffect(() => {
     if (!fetcher.data) return;
     const {collection} = fetcher.data;
@@ -29,6 +33,8 @@ export default function ProductGrid({collection, url}:gridProps) {
     setNextPage(collection.products.pageInfo.hasNextPage);
     setEndCursor(collection.products.pageInfo.endCursor);
   }, [fetcher.data]);
+
+  
   return (
 <>
       <div className="grid-flow-row grid gap-6 gap-y-6 w-full" style={{gridTemplateColumns:`repeat(auto-fit, minmax(min(250px, 100%), 1fr))`}}>  {/*  md:gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 */}

@@ -583,6 +583,9 @@ video {
   }
 }
 /* New component styles can go here */
+.visible {
+  visibility: visible;
+}
 .fixed {
   position: fixed;
 }
