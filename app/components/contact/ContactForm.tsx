@@ -126,7 +126,7 @@ const ContactForm = ({ props }: contactProps) => {
         <h4>Vielen Dank!</h4>
         <p>Wir werden Ihre Anfrage bearbeiten und Sie kontaktieren.</p>
         <button className="btn__outline" onClick={bringBackform}>
-          Weitere E-Mail schreiben
+          Weitere Nachricht schreiben
         </button>
       </motion.div>
       <motion.form

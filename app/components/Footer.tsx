@@ -21,11 +21,11 @@ const Footer = () => {
           <div className="flex justify-center flex-col my-2">
         <p className=' text-center'>Erreichen kannst du uns über:</p>
               <div className='socials flex justify-between flex-row w-full py-5'>
-                <Link to="https://www.facebook.com/people/Kopfsache-by-Stephan/100070527370504/" className="max-h-4"><FontAwesomeIcon  icon={faFacebookF} /></Link>
-                <Link to="https://www.instagram.com/kopfsache.by.stephan/" className="max-h-4"><FontAwesomeIcon  icon={faInstagram} /></Link>
-                <Link to="mailto:stephan.muller4@aol.de" className="max-h-4"><FontAwesomeIcon  icon={faEnvelope} /></Link>
-                <Link to="tel:+49152 23024555" className="max-h-4"><FontAwesomeIcon  icon={faPhoneSquare} /></Link>
-              </div>
+              <Link title="Facebook von Kopfsache by Stephan" aria-label='Facebook von Kopfsache by Stephan' to="https://www.facebook.com/people/Kopfsache-by-Stephan/100070527370504/" className="max-h-4"><FontAwesomeIcon  icon={faFacebookF} /></Link>
+                <Link title="Instagram von Kopfsache by Stephan" aria-label='Instagram von Kopfsache by Stephan' to="https://www.instagram.com/kopfsache.by.stephan/" className="max-h-4"><FontAwesomeIcon  icon={faInstagram} /></Link>
+                <Link title="Email-Adresse von Kopfsache by Stephan" aria-label='Email-Adresse von Kopfsache by Stephan' to="mailto:stephan.muller4@aol.de" className="max-h-4"><FontAwesomeIcon  icon={faEnvelope} /></Link>
+                <Link title="Telefonnummer von Kopfsache by Stephan" aria-label='Telefonnummer von Kopfsache by Stephan' to="tel:+49152 23024555" className="max-h-4"><FontAwesomeIcon  icon={faPhoneSquare} /></Link>
+                </div>
               </div>
               </div>
       </footer>

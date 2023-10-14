@@ -22,7 +22,13 @@ import { useEffect, useState } from 'react';
 
 
 
-
+export const handle = {
+  seo: {
+    title: 'Kopfsache by Stephan',
+    description:
+      'Kopfsache by Stephan ist dein Friseur und Barber Shop in Unterensingen. Entdecke neue Haarschnitte, Styles und Produkte.',
+  },
+};
 
 
 

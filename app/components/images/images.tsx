@@ -1,2 +1,2 @@
-export const stephanBilder = ["/images/stephan.jpg", "/images/stephan2.jpg"]
-export const simonBilder = ["/images/simon.jpg", "/images/simon2.jpg"]
+export const stephanBilder = ["/images/stephan.webp", "/images/stephan2.webp"]
+export const simonBilder = ["/images/simon.webp", "/images/simon2.webp"]

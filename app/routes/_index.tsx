@@ -4,14 +4,14 @@ import { useIsPresent } from "framer-motion"
 import { useEffect, useRef, useState } from 'react';
 import { model } from '@components/atoms';
 import { useAtom } from 'jotai';
-import products from "../../public/images/kopf-min.jpg"
-import simon from "../../public/images/simon.jpg"
-import stephan from "../../public/images/stephan.jpg"
+import products from "../../public/images/kopf_comp.webp"
+import simon from "../../public/images/simon.webp"
+import stephan from "../../public/images/stephan.webp"
 import DoubleSec from '@components/DoubleSection';
 import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPhoneSquare } from '@fortawesome/free-solid-svg-icons';
 import Footer from '@components/Footer';
 import Tiles from '@components/hero/Tiles';
 import { icons } from '@components/hero/icons';
@@ -19,14 +19,6 @@ import { simonBilder, stephanBilder } from '@components/images/images';
 
 import { COLLECTIONS_QUERY } from '@queries/models';
 
-
-
-export function meta() {
-  return [
-    { title: 'Hydrogen' },
-    { description: 'A custom storefront powered by Hydrogen' },
-  ];
-}
 
 export async function loader({ context }: LoaderArgs) {
   return await context.storefront.query(COLLECTIONS_QUERY);
@@ -97,7 +89,7 @@ export default function Index() {
       children: (<>
         <div className='hidden grid-cols-1  relative  relative h-full w-full m-auto max-h-[70%] justify-center align-center z-10 md:grid'>
           <div className='flex justify-center align-center flex-col p-5'>
-            <Tiles gridClass="feature-grid" array={icons}/>
+            <Tiles bgPosition="bg-center" gridClass="feature-grid" array={icons}/>
           </div>
         </div>
         <div className='hidden justify-start align-center absolute top-0 left-[50%] w-full h-full z-[1] overflow-hidden md:flex'>
@@ -123,7 +115,7 @@ export default function Index() {
               <h3 className='my-2'>Bei uns sind Alle herzlich willkommen...</h3>
               <p>... wir freuen uns über deinen Besuch!</p>
             </div>
-            <Tiles addClass="img__wrapper" gridClass="feature-grid" array={icons}/>
+            <Tiles bgPosition="bg-center" addClass="img__wrapper" gridClass="feature-grid" array={icons}/>
             <div className='my-4 md:px-8'>
               <h4 className='my-2'>Ein umfangreiches Angebot...</h4>
               <p>...erwartet dich bei uns! Was auch immer Dir vorschwebt, zusammen werden wir deine Vorstellung Realität werden lassen.</p>
@@ -182,18 +174,18 @@ export default function Index() {
               </div>
             </div>
             <div className='hidden flex-nowrap w-full h-full justify-start md:flex'>
-            <Tiles gridClass="about-grid about-grid-right" array={simonBilder} perspective={false}/>          
+            <Tiles bgPosition="bg-top" gridClass="about-grid about-grid-right" array={simonBilder} perspective={false}/>          
               {/* <div className='rounded-tl-lg max-w-[100%] min-h-[200px] h-[100%] flex-[1_1_100%] bg-cover bg-top' style={{ backgroundImage: `url(${simon})` }}></div> */}
             </div>
             <div className='img__wrapper'>
               <h4>Erfahre mehr über uns <a href="/about" className='underline' aria-label='link'>hier!</a></h4>
               <p>Bleibe gerne mit uns in Verbindung:</p>
-              <div className='socials flex justify-even my-5 w-full py-5'>
-                <Link to=""><FontAwesomeIcon className='pr-10' icon={faFacebookF} /></Link>
-                <Link to=""><FontAwesomeIcon className='pr-10' icon={faInstagram} /></Link>
-                <Link to=""><FontAwesomeIcon className='pr-10' icon={faEnvelope} /></Link>
-                <Link to=""><FontAwesomeIcon className='pr-10' icon={faMessage} /></Link>
-              </div>
+              <div className='socials flex justify-evenly my-5 w-full py-5'>
+              <Link title="Facebook von Kopfsache by Stephan" aria-label='Facebook von Kopfsache by Stephan' to="https://www.facebook.com/people/Kopfsache-by-Stephan/100070527370504/" className="max-h-4"><FontAwesomeIcon  icon={faFacebookF} /></Link>
+                <Link title="Instagram von Kopfsache by Stephan" aria-label='Instagram von Kopfsache by Stephan' to="https://www.instagram.com/kopfsache.by.stephan/" className="max-h-4"><FontAwesomeIcon  icon={faInstagram} /></Link>
+                <Link title="Email-Adresse von Kopfsache by Stephan" aria-label='Email-Adresse von Kopfsache by Stephan' to="mailto:stephan.muller4@aol.de" className="max-h-4"><FontAwesomeIcon  icon={faEnvelope} /></Link>
+                <Link title="Telefonnummer von Kopfsache by Stephan" aria-label='Telefonnummer von Kopfsache by Stephan' to="tel:+49152 23024555" className="max-h-4"><FontAwesomeIcon  icon={faPhoneSquare} /></Link>
+                </div>
             </div>
           </div>
         </div>
@@ -204,7 +196,7 @@ export default function Index() {
           <div className='flex relative h-full justify-center align-center flex-col'>
 
             <div className='flex-nowrap w-full h-full justify-start space-x-10 md:space-x-15 border-b border-[#222]'>
-              <Tiles gridClass="about-grid about-grid-left" array={stephanBilder} perspective={false}/>
+              <Tiles bgPosition="bg-top"  gridClass="about-grid about-grid-left" array={stephanBilder} perspective={false}/>
               {/* <div className='rounded-br-lg max-w-[100%] h-[100%] flex-[1_1_100%] bg-cover bg-top' style={{ backgroundImage: `url(${stephan})` }}></div> */}
             </div>
           </div>
@@ -248,7 +240,7 @@ export default function Index() {
         </div>
       </>),
       deskChildren: (<>
-        <div className="flex justify-center align-center flex-col">
+        <div className="flex justify-center align-center flex-col border-l border-[#222]">
 
           <div className='flex gap-5 flex-col px-10 py-5 h-full max-h-[50%] my-auto bg-[#0f0f0f]'>
             <div className='m-auto'>

@@ -144,6 +144,7 @@ export function Layout({ title }: LayoutProps) {
         <img
           src={logo}
           className="w-auto max-h-[25px]"
+          alt="Kopfsache by Stephan Logo"
           width={50}
           height={50}
         />
@@ -152,6 +153,7 @@ export function Layout({ title }: LayoutProps) {
             <li className="px-5"><Link to="/">Home</Link></li>
             <li className="px-5"><Link to="/about">Über uns</Link></li>
             <li className="px-5"><Link to="/collections/kopfsache">Shop</Link></li>
+            <li className="px-5"><Link to="/prices">Preise</Link></li>
             <li className="px-5"><Link to="/contact">Kontakt</Link></li>
           </ul>
         </div>
@@ -170,14 +172,15 @@ export function Layout({ title }: LayoutProps) {
             <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/">Home</Link></li>
             <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/about">Über uns</Link></li>
             <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/collections/kopfsache">Shop</Link></li>
+            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/prices">Preise</Link></li>
             <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/contact">Kontakt</Link></li>
-            <motion.li className="flex flex-row justify-start gap-4 py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica'] text-gray-500" onClick={()=>setOpen(!open)}><a>Öffnungszeiten</a><motion.div className="w-10 h-10" animate={open ? {rotate: "180deg"} : {rotate:"0deg"}}><FontAwesomeIcon  icon={faChevronDown} className="text-thin text-md" /></motion.div></motion.li>
-            <motion.ul variants={list_variants} animate={open? "open" : "closed"} className="py-8 w-full">
+            <motion.li className="flex flex-row justify-start gap-4 py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica'] text-gray-500" onClick={()=>setOpen(!open)}><div>Öffnungszeiten</div><motion.div className="w-10 h-10" animate={open ? {rotate: "180deg"} : {rotate:"0deg"}}><FontAwesomeIcon  icon={faChevronDown} className="text-thin text-md" /></motion.div></motion.li>
+          </ul>
+          <motion.ul variants={list_variants} animate={open? "open" : "closed"} className="py-8 w-full">
               <motion.li variants={listItem_variants} className="flex flex-row space-between py-2"><h5>Di-Do</h5><h5 className="ml-auto">08:30 - 18:30</h5></motion.li>
               <motion.li variants={listItem_variants} className="flex flex-row space-between py-2"><h5>Fr</h5><h5 className="ml-auto">10:00 - 20:00</h5></motion.li>
               <motion.li variants={listItem_variants} className="flex flex-row space-between py-2"><h5>Sa</h5><h5 className="ml-auto">08:30 - 15:00</h5></motion.li>
             </motion.ul>
-          </ul>
         </motion.div>
         {/* <div className={location.pathname.includes("collections/kopfsache") ? "block" : "hidden"}> */}
         <CartHeader cart={cart} openDrawer={openDrawer} />
