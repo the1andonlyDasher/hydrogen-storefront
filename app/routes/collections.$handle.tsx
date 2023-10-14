@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import {  model } from '@components/atoms';
 import Footer from '@components/Footer';
+import { COLLECTIONS_QUERY } from '@queries/models';
 
 
 const seo = ({data}:any) => ({
@@ -21,15 +22,12 @@ export async function loader({params, context, request}:LoaderArgs) {
   const {handle} = params;
   const searchParams = new URL(request.url).searchParams;
   const cursor = searchParams.get('cursor');
-
   const {collection}:any = await context.storefront.query(COLLECTION_QUERY, {
     variables: {
       handle,
       cursor,
-    },
+    }
   });
-
-
 
   // Handle 404s
   if (!collection) {
@@ -52,20 +50,41 @@ export function meta({data}:any){
 
 export default function Collection() {
   const {collection}:any = useLoaderData() || {};
+  const [m, setM] = useAtom(model)
+  const prices:any = []
   const [stableData, setData]  = useState(collection);
+  const [products, setProducts] = useState(stableData.products.nodes || []);
 
-useEffect(() => {
-  // console.log(collection)
-    collection && setData(collection);
-    var o = stableData.products.nodes.map((object:any)=>(Object.values(object)[6]))
-    var k = Object.values(o)
-    var p = k.map((node:any)=>Object.values(node)[0])
-    var q = p.map((item:any)=>Object.values(item)[0])
-    var r = Object.values(q)
-    var s = Object.values(r)
-    var u = s.map((item:any)=>Object.values(item)[2])
-    // console.log(u.map((item:any)=>Object.values(item)[0]))
-}, [collection])
+//   useEffect(() => {
+//     runLoader()
+// }, [stableData])
+
+  // function runLoader(){
+
+  //   products.map((node:any)=>
+  //   node.media.nodes.map((med: any, index:number) => {
+  //     if (med.mediaContentType === 'MODEL_3D') {
+  //                 if (!m.find((item: any) => item.name === node.handle)) {
+  //                  var k:any = Object.values(med)[2];
+  //                  var url = k[1].url
+  //                 m.push({ name: node.handle, url: `${med.sources[0].url}`, collection: stableData.handle, price:  prices[index] })
+  //                 }
+  //               }
+  //   })
+  //   )
+  //   // console.log(m, fetcher.data)
+  //   collection && setData(collection);
+  //   var o = products.map((object:any)=>(Object.values(object)[6]))
+  //   var k = Object.values(o)
+  //   var p = k.map((node:any)=>Object.values(node)[0])
+  //   var q = p.map((item:any)=>Object.values(item)[0])
+
+  //   var r = Object.values(q)
+  //   var s = Object.values(r)
+  //   var u = s.map((item:any)=>Object.values(item)[2])
+  //   var v = u.map((item:any)=>Object.values(item)[0])
+  //   prices.push(v)
+  // };
 
   
   return (

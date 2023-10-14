@@ -3,6 +3,7 @@ import { atomWithStorage } from 'jotai/utils'
 import * as THREE from 'three';
 
 export const model = atom<any>([])
+export const shownProducts = atom<any>([])
 export const globalScroll = atomWithStorage<any>("currentScroll",0)
 export const currentSection = atom<any>("");
 export const globalLoaded = atomWithStorage("loaded", false)
