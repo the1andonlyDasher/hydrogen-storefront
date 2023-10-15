@@ -38,9 +38,9 @@ export default function ProductGrid({collection, url}:gridProps) {
   return (
 <>
       <div className="grid-flow-row grid gap-6 gap-y-6 w-full" style={{gridTemplateColumns:`repeat(auto-fit, minmax(min(250px, 100%), 1fr))`}}>  {/*  md:gap-4 lg:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 */}
-        {products.map((product:any, index: number) => (
+       {products.map((product:any, index: number) => (
           <ProductCard key={product.id + index} product={product} />
-        ))}
+        ))} 
       </div>
       {nextPage && (
         <div className="flex items-center justify-center mt-6">

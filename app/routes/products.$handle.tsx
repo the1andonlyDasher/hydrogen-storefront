@@ -25,7 +25,7 @@ export const handle = {
   seo,
 };
 
-export async function loader({ params, context, request }: LoaderArgs) {
+export async function loader({ params, request, context}: LoaderArgs) {
   const storeDomain = context.storefront.getShopifyDomain();
   const { handle } = params;
   const searchParams = new URL(request.url).searchParams;
@@ -41,6 +41,7 @@ export async function loader({ params, context, request }: LoaderArgs) {
     variables: {
       handle,
       selectedOptions,
+      cache: context.storefront.CacheLong(),
     },
   });
 
