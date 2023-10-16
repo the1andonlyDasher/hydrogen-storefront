@@ -7,6 +7,7 @@ import logo from "../images/logo.png"
 import Footer from "./Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { CookieConsent } from "./CookieConsent";
 
 
 interface LayoutProps {

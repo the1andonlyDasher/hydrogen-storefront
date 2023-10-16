@@ -16,6 +16,12 @@ interface serviceProps {
     props: serviceType;
 }
 
+const priceVariants:any = {
+    initial:{opacity:0, x:-10},
+    enter:{opacity:1, x:0, transition:{ staggerChidlren: 0.2, when:"beforeChildren"}},
+    exit:{opacity:0, x:10, transition:{ staggerChidlren: 0.2, when:"afterChildren"}},
+}
+
 const arrow_variants = {
     closed: { rotate: "0deg" },
     open: { rotate: "180deg" },
@@ -29,11 +35,11 @@ const desc_variants = {
 const ServiceBasic = ({ props }: serviceProps) => {
     const [click, setClicked] = useState(false);
     return (<>
-        <motion.div variants={props.variants} className="p-8 my-2 bg-[#0f0f0f] border-[#0e0e0e] w-full h-full grid grid-cols-1 md:grid-cols-2 justif-start grid-rows-1">
+        <motion.div variants={priceVariants} className="p-8 my-2 bg-[#0f0f0f] border-[#0e0e0e] w-full h-full grid grid-cols-1 md:grid-cols-2 justif-start grid-rows-1">
             <motion.dl className="flex flex-col mb-auto">
                 <motion.div
                     onClick={() => { setClicked(!click) }}
-                    className="flex gap-6 justify-start flex-row items-center">
+                    className="flex gap-6 cursor-pointer justify-start flex-row items-center">
                     <h3 className="m-0 w-auto">
                         {props.title}
                     </h3>
