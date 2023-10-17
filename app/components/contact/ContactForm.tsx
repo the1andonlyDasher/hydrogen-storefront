@@ -42,7 +42,7 @@ const ContactForm = ({ props }: contactProps) => {
       opacity: 1,
       transition: { ease: "easeIn", duration: 0.5, staggerChildren: 0.25 },
     },
-    exit: { opacity: 0, transition: { ease: "easeOut", duration: 0.5, staggerChildren: 0.25 } },
+    exit: { opacity: 0, transition: { ease: "easeOut", duration: 0.5, staggerChildren: 0.25, staggerDirection: -1 } },
   };
   const messageVariants = {
     initial: { opacity: 0 },
