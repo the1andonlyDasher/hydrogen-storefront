@@ -107,32 +107,49 @@ export function Layout({ title }: LayoutProps) {
   };
 
   const variants = {
-    initial: {  opacity: 0 },
-    enter: {  opacity: 1, transition: { type: "tween", ease: "easeIn", duration: 0.5, staggerChildren: 0.2 } },
-    exit: {  opacity: 0, transition: { type: "tween", ease: "easeOut", duration: 0.5 } },
+    initial: { opacity: 0 },
+    enter: { opacity: 1, transition: { type: "tween", ease: "easeIn", duration: 0.5, staggerChildren: 0.2, when: "beforeChildren" } },
+    exit: { opacity: 0, transition: { type: "tween", ease: "easeOut", duration: 0.5, staggerChildren: 0.1, staggerDirection: -1, when: "afterChildren" } },
+  }
+
+  const menuVariant = {
+    hidden: { left: "-100%", transition: { type: "tween", ease: "easeOut", duration: 0.25, staggerChildren: 0.1, staggerDirection: -1, when: "afterChildren" } },
+    enter: { left: 0, transition: { type: "tween", ease: "easeIn", duration: 0.25, staggerChildren: 0.1, when: "beforeChildren" } },
+
   }
 
   const toggle_variants = {
     hidden: {},
-    enter: { transition: { type: "tween", ease: "easeIn", duration: 0.5, staggerChildren: 0 } },
+    enter: { transition: { type: "tween", ease: "easeIn", duration: 0.5 } },
   }
 
   const list_variants = {
-    open:{scaleY:1, transition:{staggerChildren: 0.2, when:"beforeChildren"}},
-    closed:{scaleY:0, transition:{staggerChildren: 0.2, when:"afterChildren"}},
+    open: { scaleY: 1, transition: { staggerChildren: 0.2, when: "beforeChildren" } },
+    closed: { scaleY: 0, transition: { staggerChildren: 0.2, when: "afterChildren" } },
+  }
+
+  const listTwo_variants = {
+    hidden: { x: -10, opacity: 0, transition: { staggerChildren: 0.2, when: "afterChildren" } },
+    enter: { x: 0, opacity: 1, transition: { staggerChildren: 0.2, when: "beforeChildren" } },
+  }
+
+  const listItemTwo_variants = {
+    hidden: { opacity: 0, x: -10, transition: { ease: "easeOut" } },
+    enter: { opacity: 1, x: 0, transition: { ease: "easeIn" } },
+
   }
 
   const listItem_variants = {
-    open:{opacity: 1, x:0, transition:{ease:"easeIn"}},
-    closed:{opacity: 0, x:-10,transition:{ease:"easeOut"}},
+    open: { opacity: 1, x: 0, transition: { ease: "easeIn" } },
+    closed: { opacity: 0, x: -10, transition: { ease: "easeOut" } },
   }
 
   return (
     <div className="flex flex-col min-h-screen antialiased snap-y snap-mandatory">
       <motion.header
-              variants={toggle_variants}
-              initial="hidden"
-              animate={toggled ? "enter" : "hidden"}
+        variants={toggle_variants}
+        initial="hidden"
+        animate={toggled ? "enter" : "hidden"}
         role="banner"
         className={`mainnav flex items-center h-16 sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 antialiased transition shadow-sm `}
       >
@@ -159,29 +176,29 @@ export function Layout({ title }: LayoutProps) {
           </ul>
         </div>
         <motion.div
-  
+
           ref={toggle}
-          onClick={() => {setToggle(!toggled), setOpen(false)}}
+          onClick={() => { setToggle(!toggled), setOpen(false) }}
           id="menu-toggle"
           className="ml-auto mobile"
         >
-          <motion.div variants={{hidden:{rotate:0, top:"30%"}, enter:{rotate:45, top:"50%"}}} className="origin-center translate-y-[-50%]"></motion.div>
-          <motion.div variants={{hidden:{rotate:0, top:"70%"}, enter:{rotate:-45, top:"50%"}}} className="origin-center translate-y-[-50%]"></motion.div>
+          <motion.div variants={{ hidden: { rotate: 0, top: "30%" }, enter: { rotate: 45, top: "50%" } }} className="origin-center translate-y-[-50%]"></motion.div>
+          <motion.div variants={{ hidden: { rotate: 0, top: "70%" }, enter: { rotate: -45, top: "50%" } }} className="origin-center translate-y-[-50%]"></motion.div>
         </motion.div>
-        <motion.div variants={{hidden:{left:"-100%"}, enter:{left:0}}} className="mobile absolute top-16 left-[-100%] h-[100vh] w-full bg-[#111]">
-        <ul className="flex flex-col flex-nowrap justify-start items-center w-full h-full px-[10%] pt-[5%]">
-            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/">Home</Link></li>
-            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/about">Über uns</Link></li>
-            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/collections/kopfsache">Shop</Link></li>
-            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/prices">Preise</Link></li>
-            <li className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={()=>setToggle(!toggled)}><Link to="/contact">Kontakt</Link></li>
-            <motion.li className="flex flex-row justify-start gap-4 py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica'] text-gray-500" onClick={()=>setOpen(!open)}><div>Öffnungszeiten</div><motion.div className="w-10 h-10" animate={open ? {rotate: "180deg"} : {rotate:"0deg"}}><FontAwesomeIcon  icon={faChevronDown} className="text-thin text-md" /></motion.div></motion.li>
-          </ul>
-          <motion.ul variants={list_variants} animate={open? "open" : "closed"} className="py-8 w-full">
-              <motion.li variants={listItem_variants} className="flex flex-row space-between py-2"><h5>Di-Do</h5><h5 className="ml-auto">08:30 - 18:30</h5></motion.li>
-              <motion.li variants={listItem_variants} className="flex flex-row space-between py-2"><h5>Fr</h5><h5 className="ml-auto">10:00 - 20:00</h5></motion.li>
-              <motion.li variants={listItem_variants} className="flex flex-row space-between py-2"><h5>Sa</h5><h5 className="ml-auto">08:30 - 15:00</h5></motion.li>
-            </motion.ul>
+        <motion.div variants={menuVariant} className="mobile flex flex-col absolute top-16 left-[-100%] h-[100vh] w-full bg-[#111]">
+          <motion.ul variants={listTwo_variants} className="flex flex-col flex-nowrap justify-start items-center w-full px-6 pt-[5%]">
+            <motion.li variants={listItemTwo_variants} className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={() => setToggle(!toggled)}><Link to="/">Home</Link></motion.li>
+            <motion.li variants={listItemTwo_variants} className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={() => setToggle(!toggled)}><Link to="/about">Über uns</Link></motion.li>
+            <motion.li variants={listItemTwo_variants} className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={() => setToggle(!toggled)}><Link to="/collections/kopfsache">Shop</Link></motion.li>
+            <motion.li variants={listItemTwo_variants} className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={() => setToggle(!toggled)}><Link to="/prices">Preise</Link></motion.li>
+            <motion.li variants={listItemTwo_variants} className="py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica']" onClick={() => setToggle(!toggled)}><Link to="/contact">Kontakt</Link></motion.li>
+            <motion.li variants={listItemTwo_variants} className="flex flex-row justify-start gap-4 py-6 pl-4 border-l border-[#222] mx-auto w-full text-3xl md:text-4xl text-left font-['Economica'] text-gray-500" onClick={() => setOpen(!open)}><div>Öffnungszeiten</div><motion.div className="w-10 h-10" animate={open ? { rotate: "180deg" } : { rotate: "0deg" }}><FontAwesomeIcon icon={faChevronDown} className="text-thin text-md" /></motion.div></motion.li>
+          </motion.ul>
+          <motion.ul variants={list_variants} animate={open ? "open" : "closed"} className="p-6 w-full">
+            <motion.li variants={listItem_variants} className="flex flex-row space-between py-2"><h5>Di-Do</h5><h5 className="ml-auto">08:30 - 18:30</h5></motion.li>
+            <motion.li variants={listItem_variants} className="flex flex-row space-between py-2"><h5>Fr</h5><h5 className="ml-auto">10:00 - 20:00</h5></motion.li>
+            <motion.li variants={listItem_variants} className="flex flex-row space-between py-2"><h5>Sa</h5><h5 className="ml-auto">08:30 - 15:00</h5></motion.li>
+          </motion.ul>
         </motion.div>
         {/* <div className={location.pathname.includes("collections/kopfsache") ? "block" : "hidden"}> */}
         <CartHeader cart={cart} openDrawer={openDrawer} />
