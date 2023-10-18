@@ -27,56 +27,58 @@ export function CookieConsent() {
     const [consent, setConsent] = useState(false)
     useShopifyCookies({ hasUserConsent: consent });
 
-    useEffect(()=>handleCookieOpen, [])
+    useEffect(() => { handleCookieOpen }, [])
 
-    useEffect(()=>{
-      check &&  controls.start(closed ? "hidden" : "open")
+    useEffect(() => {
+        check && controls.start(closed ? "hidden" : "open")
         // const get = getShopifyCookies(document.cookie)
         // console.log(closed, get, document.cookie)
     }, [closed])
 
     const handleCookieClose = () => setClosed(true)
     const handleCookieOpen = () => {
-        if (typeof window !== 'undefined'){
+        if (typeof window !== 'undefined') {
 
-        let cookieName: any = getCookie("cookiePolicy")
-        // console.log(cookieName)
-        if (cookieName !== null) {
-            //if cookie = present, hide banner
-            console.log("present")
-            setClosed(true)
-        } else {
-            setClosed(false)
-            console.log("not present")
+            let cookieName: any = getCookie("cookiePolicy")
+            // console.log(cookieName)
+            if (cookieName !== null) {
+                //if cookie = present, hide banner
+                console.log("present")
+                setClosed(true)
+            } else {
+                setClosed(false)
+                console.log("not present")
+            }
+            setCheck(true)
         }
-        setCheck(true)
-    }
     }
 
-    function getCookie(name:any) {
-        var match = document.cookie.match(RegExp('(?:^|;\\s*)' + name + '=([^;]*)')); 
-        return match ? match[1] : null;
-    } 
+    function getCookie(name: any) {
+        if (typeof window !== 'undefined') {
+            var match = document.cookie.match(RegExp('(?:^|;\\s*)' + name + '=([^;]*)'));
+            return match ? match[1] : null;
+        }
+    }
 
     const handleCookieAccepted = () => {
-        if (typeof window !== 'undefined'){
+        if (typeof window !== 'undefined') {
             setConsent(true)
-        const expiry = new Date()
-        // save cookie for 1 month
-        expiry.setTime(expiry.getTime() + (30 * 24 * 60 * 60 * 1000))
-        let expires = " expires=" + expiry.toUTCString() + ";"
-        document.cookie = "cookiePolicy=accepted;" + expires + "; Secure; SameSite=None; path=/";
+            const expiry = new Date()
+            // save cookie for 1 month
+            expiry.setTime(expiry.getTime() + (30 * 24 * 60 * 60 * 1000))
+            let expires = " expires=" + expiry.toUTCString() + ";"
+            document.cookie = "cookiePolicy=accepted;" + expires + "; Secure; SameSite=None; path=/";
             setClosed(true)
         }
     }
     const handleCookieDeclined = () => {
-        if (typeof window !== 'undefined'){
+        if (typeof window !== 'undefined') {
             setConsent(false)
-        setClosed(true)
-        //let us save the cookie for the current session only
-        //use the default expiry : session
-        document.cookie = "cookiePolicy=declined" + "; Secure; SameSite=None; path=/";
-    }
+            setClosed(true)
+            //let us save the cookie for the current session only
+            //use the default expiry : session
+            document.cookie = "cookiePolicy=declined" + "; Secure; SameSite=None; path=/";
+        }
     }
     return (<>
         <motion.div initial="hidden" animate={controls} variants={cookieWrapper__variants} className='origin-bottom-left flex justify-center items-center fixed bottom-0 left-0 w-full h-full overflow-hidden backdrop-blur-lg z-30'>
@@ -98,10 +100,10 @@ export function CookieConsent() {
             </motion.div>
         </motion.div>
         <motion.div
-                onClick={() => setClosed(!closed)}
-                className='z-40 flex flex-row justify-center m-2 rounded bg-[#0f0f0f] items-center cursor-pointer w-auto h-12 fixed bottom-0 left-0'>
-                <FontAwesomeIcon className='w-12' icon={faCookie} />
-            </motion.div>
+            onClick={() => setClosed(!closed)}
+            className='z-40 flex flex-row justify-center m-2 rounded bg-[#0f0f0f] items-center cursor-pointer w-auto h-12 fixed bottom-0 left-0'>
+            <FontAwesomeIcon className='w-12' icon={faCookie} />
+        </motion.div>
     </>
     )
 }
