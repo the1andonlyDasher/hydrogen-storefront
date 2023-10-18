@@ -27,7 +27,7 @@ export function CookieConsent() {
     const [consent, setConsent] = useState(false)
     useShopifyCookies({ hasUserConsent: consent });
 
-    useEffect(() => { handleCookieOpen }, [])
+    useEffect(() => { handleCookieOpen() }, [])
 
     useEffect(() => {
         check && controls.start(closed ? "hidden" : "open")
