@@ -56,9 +56,9 @@ export default function Index() {
             <h1>Es ist alles nur Kopfsache</h1>
           </div>
           <div className="flex justify-center align-center flex-col h-full sec-pad_right gap-5 mx-4">
-            <video ref={video} preload='yes' autoPlay loop muted playsInline className='max-h-[600px] max-w-[300px] sm:max-w-none'>
-              <source src="/images/vid.webm" type='video/webm'></source>
+            <video ref={video} preload='none' autoPlay loop muted playsInline className='max-h-[600px] max-w-[300px] sm:max-w-none'>
               <source src="/images/vid.mov" type='video/mp4'></source>
+              <source src="/images/vid.webm" type='video/webm'></source>
               <track kind="captions" ></track>
             </video>
             {/* <img className="self-end my-0 mx-auto z-[2] w-[90%]" src={img} alt="Stephan und Simon" style={{ transformOrigin: "bottom right", maxWidth: "500px" }} /> */}
@@ -90,7 +90,7 @@ export default function Index() {
       children: (<>
         <div className='hidden grid-cols-1  relative  relative h-full w-full m-auto max-h-[70%] justify-center align-center z-10 md:grid'>
           <div className='flex justify-center align-center flex-col p-5'>
-            <Tiles bgPosition="bg-center" gridClass="feature-grid" array={icons}/>
+            <Tiles bgPosition="bg-center" gridClass="feature-grid" array={icons} />
           </div>
         </div>
         <div className='hidden justify-start align-center absolute top-0 left-[50%] w-full h-full z-[1] overflow-hidden md:flex'>
@@ -116,7 +116,7 @@ export default function Index() {
               <h3 className='my-2'>Bei uns sind Alle herzlich willkommen...</h3>
               <p>... wir freuen uns über deinen Besuch!</p>
             </div>
-            <Tiles bgPosition="bg-center" addClass="img__wrapper" gridClass="feature-grid" array={icons}/>
+            <Tiles bgPosition="bg-center" addClass="img__wrapper" gridClass="feature-grid" array={icons} />
             <div className='my-4 md:px-8'>
               <h4 className='my-2'>Ein umfangreiches Angebot...</h4>
               <p>...erwartet dich bei uns! Was auch immer Dir vorschwebt, zusammen werden wir deine Vorstellung Realität werden lassen.</p>
@@ -166,38 +166,38 @@ export default function Index() {
             <div className='flex flex-no
                 wrap flex-row w-full gap-5 my-12 img__wrapper'>
               <div className='flex flex-nowrap w-auto flex-[1_1_50%] h-full justify-start img__wrapper'>
-            {/* <Tiles gridClass="about-grid about-grid-left" array={stephanBilder} perspective={false}/> */}
+                {/* <Tiles gridClass="about-grid about-grid-left" array={stephanBilder} perspective={false}/> */}
                 <div className='rounded-br-lg w-full min-h-[200px]  h-[100%] flex-[1_1_100%] bg-cover bg-top' style={{ backgroundImage: `url(${stephan})` }}></div>
               </div>
               <div className='flex flex-nowrap w-auto flex-[1_1_50%] h-full justify-start img__wrapper'>
-            {/* <Tiles gridClass="about-grid about-grid-right" array={simonBilder} perspective={false}/> */}
+                {/* <Tiles gridClass="about-grid about-grid-right" array={simonBilder} perspective={false}/> */}
                 <div className='rounded-br-lg w-full min-h-[200px] h-[100%] flex-[1_1_100%] bg-cover bg-top' style={{ backgroundImage: `url(${simon})` }}></div>
               </div>
             </div>
             <div className='hidden flex-nowrap w-full h-full justify-start md:flex'>
-            <Tiles bgPosition="bg-top" gridClass="about-grid about-grid-right" array={simonBilder} perspective={false}/>          
+              <Tiles bgPosition="bg-top" gridClass="about-grid about-grid-right" array={simonBilder} perspective={false} />
               {/* <div className='rounded-tl-lg max-w-[100%] min-h-[200px] h-[100%] flex-[1_1_100%] bg-cover bg-top' style={{ backgroundImage: `url(${simon})` }}></div> */}
             </div>
             <div className='img__wrapper'>
               <h4>Erfahre mehr über uns <a href="/about" className='underline' aria-label='link'>hier!</a></h4>
               <p>Bleibe gerne mit uns in Verbindung:</p>
               <div className='socials flex justify-evenly my-5 w-full py-5'>
-              <Link title="Facebook von Kopfsache by Stephan" aria-label='Facebook von Kopfsache by Stephan' to="https://www.facebook.com/people/Kopfsache-by-Stephan/100070527370504/" className="max-h-4"><FontAwesomeIcon  icon={faFacebookF} /></Link>
-                <Link title="Instagram von Kopfsache by Stephan" aria-label='Instagram von Kopfsache by Stephan' to="https://www.instagram.com/kopfsache.by.stephan/" className="max-h-4"><FontAwesomeIcon  icon={faInstagram} /></Link>
-                <Link title="Email-Adresse von Kopfsache by Stephan" aria-label='Email-Adresse von Kopfsache by Stephan' to="mailto:stephan.muller4@aol.de" className="max-h-4"><FontAwesomeIcon  icon={faEnvelope} /></Link>
-                <Link title="Telefonnummer von Kopfsache by Stephan" aria-label='Telefonnummer von Kopfsache by Stephan' to="tel:+49152 23024555" className="max-h-4"><FontAwesomeIcon  icon={faPhoneSquare} /></Link>
-                </div>
+                <Link title="Facebook von Kopfsache by Stephan" aria-label='Facebook von Kopfsache by Stephan' to="https://www.facebook.com/people/Kopfsache-by-Stephan/100070527370504/" className="max-h-4"><FontAwesomeIcon icon={faFacebookF} /></Link>
+                <Link title="Instagram von Kopfsache by Stephan" aria-label='Instagram von Kopfsache by Stephan' to="https://www.instagram.com/kopfsache.by.stephan/" className="max-h-4"><FontAwesomeIcon icon={faInstagram} /></Link>
+                <Link title="Email-Adresse von Kopfsache by Stephan" aria-label='Email-Adresse von Kopfsache by Stephan' to="mailto:stephan.muller4@aol.de" className="max-h-4"><FontAwesomeIcon icon={faEnvelope} /></Link>
+                <Link title="Telefonnummer von Kopfsache by Stephan" aria-label='Telefonnummer von Kopfsache by Stephan' to="tel:+49152 23024555" className="max-h-4"><FontAwesomeIcon icon={faPhoneSquare} /></Link>
+              </div>
             </div>
           </div>
         </div>
       </>),
       deskChildren: (<>
-   <div className="flex justify-center align-center flex-col border-l border-[#222] py-20">
+        <div className="flex justify-center align-center flex-col border-l border-[#222] py-20">
           <div className='flex-auto flex'></div>
           <div className='flex relative h-full justify-center align-center flex-col'>
 
             <div className='flex-nowrap w-full h-full justify-start space-x-10 md:space-x-15 border-b border-[#222]'>
-              <Tiles bgPosition="bg-top"  gridClass="about-grid about-grid-left" array={stephanBilder} perspective={false}/>
+              <Tiles bgPosition="bg-top" gridClass="about-grid about-grid-left" array={stephanBilder} perspective={false} />
               {/* <div className='rounded-br-lg max-w-[100%] h-[100%] flex-[1_1_100%] bg-cover bg-top' style={{ backgroundImage: `url(${stephan})` }}></div> */}
             </div>
           </div>
@@ -236,7 +236,7 @@ export default function Index() {
                   </Link>
                 );
               })}
-            </div>    
+            </div>
           </div>
         </div>
       </>),
