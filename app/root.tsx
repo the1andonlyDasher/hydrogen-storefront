@@ -71,30 +71,30 @@ async function getCart({ storefront }: any, cartId: any) {
 }
 
 
-export async function loader({ context, params, request }: LoaderArgs) {
-  const cartId = await context.session.get('cartId');
-  const { handle } = params;
+// export async function loader({ context, params, request }: LoaderArgs) {
+//   const cartId = await context.session.get('cartId');
+//   const { handle } = params;
 
-  return defer({
-    cart: cartId ? getCart(context, cartId) : undefined,
-    layout: await context.storefront.query(LAYOUT_QUERY),
-    collection: await context.storefront.query(COLLECTIONS_QUERY, {
-      variables: {
-        handle
-      },
-    })
-  });
-}
+//   return defer({
+//     cart: cartId ? getCart(context, cartId) : undefined,
+//     layout: await context.storefront.query(LAYOUT_QUERY),
+//     collection: await context.storefront.query(COLLECTIONS_QUERY, {
+//       variables: {
+//         handle
+//       },
+//     })
+//   });
+// }
 
 
 
 
 export default function App() {
-  const data: any = useLoaderData<typeof loader>() || {};
-  const [stableData, setData] = useState<any>(data);
+  // const data: any = useLoaderData<typeof loader>() || {};
+  // const [stableData, setData] = useState<any>(data);
   const prices: any = []
   const [m, setM] = useAtom(model)
-  const { name } = data.layout.shop;
+  // const { name } = data.layout.shop;
   const location = useLocation();
   const lastLocationKey = useRef<string>('');
 
@@ -110,36 +110,36 @@ export default function App() {
 
 
 
-  useEffect(() => {
-    stableData && stableData.collection.collections.nodes.map((node: any) => {
-      node.products.edges.map((edge: any, index: number) =>
-        Object.values(edge).map((edgeItem: any) => {
-          edgeItem.media.nodes.map((med: any) => {
-            if (med.mediaContentType === 'MODEL_3D') {
-              if (!m.find((item: any) => item.name === edgeItem.handle)) {
-                m.push({ name: edgeItem.handle, url: `${med.sources[0].url}`, collection: node.handle, price: prices[index] })
-              }
-            }
-          })
-        })
-      )
-    })
-    data && setData(data)
-    stableData && stableData.collection.collections.nodes.map((node: any) => {
-      node.products.edges.map((edge: any) =>
-        Object.values(edge).map((edgeItem: any) =>
-          edgeItem.variants.nodes.map((node: any) =>
-            Object.values(node).map((item: any) => {
-              if (Object.prototype.toString.call(item) === "[object Object]") {
-                prices.push(item.amount)
+  // useEffect(() => {
+  //   stableData && stableData.collection.collections.nodes.map((node: any) => {
+  //     node.products.edges.map((edge: any, index: number) =>
+  //       Object.values(edge).map((edgeItem: any) => {
+  //         edgeItem.media.nodes.map((med: any) => {
+  //           if (med.mediaContentType === 'MODEL_3D') {
+  //             if (!m.find((item: any) => item.name === edgeItem.handle)) {
+  //               m.push({ name: edgeItem.handle, url: `${med.sources[0].url}`, collection: node.handle, price: prices[index] })
+  //             }
+  //           }
+  //         })
+  //       })
+  //     )
+  //   })
+  //   data && setData(data)
+  //   stableData && stableData.collection.collections.nodes.map((node: any) => {
+  //     node.products.edges.map((edge: any) =>
+  //       Object.values(edge).map((edgeItem: any) =>
+  //         edgeItem.variants.nodes.map((node: any) =>
+  //           Object.values(node).map((item: any) => {
+  //             if (Object.prototype.toString.call(item) === "[object Object]") {
+  //               prices.push(item.amount)
 
-              }
-            }))))
-    })
+  //             }
+  //           }))))
+  //   })
 
 
 
-  }, [stableData])
+  // }, [stableData])
 
 
   return (
@@ -153,8 +153,8 @@ export default function App() {
       </head>
 
       <body className="">
-      <CookieConsent/>
-        <Layout title={name} />
+        <CookieConsent />
+        {/* <Layout title={name} /> */}
         <Scripts />
         <GL />
         <ScrollRestoration />

@@ -1,15 +1,17 @@
 import React, { useRef, forwardRef, ReactNode, ReactComponentElement, ReactElement, useEffect, MutableRefObject, RefObject } from "react";
 import { inView, motion, useAnimation, useAnimationControls, useInView } from "framer-motion";
+import { useAtom } from "jotai";
+import { loc } from "./atoms";
 
 const section_variants = {
     initial: {
         transition: { staggerChildren: 0.2 },
     },
     enter: {
-        transition: { staggerChildren: 0.2, delayChildren: 0.35, when:"beforeChildren" },
+        transition: { staggerChildren: 0.2, delayChildren: 0.35, when: "beforeChildren" },
     },
     exit: {
-        transition: { staggerChildren: 0.2, when:"afterChildren" },
+        transition: { staggerChildren: 0.2, when: "afterChildren" },
     },
 };
 
@@ -40,7 +42,7 @@ interface sProps {
 
 
 function Section({ props }: sProps) {
-
+    const [app, setApp] = useAtom(loc)
     const controls = useAnimationControls();
 
     const left_variants = {
@@ -70,11 +72,21 @@ function Section({ props }: sProps) {
             animate={controls}
             exit="exit"
             whileInView={"enter"}
-            viewport={{ margin: "0px", amount: "some", once:true }}
+            viewport={{ margin: "0px", amount: "some", once: true }}
             ref={props.ref}
             id={props.id}
             variants={section_variants}
             className={props.sectionClass + "" + "overflow-hidden snap-center"}
+        // onViewportEnter={(entry) => {
+        //     controls.start("enter")
+        //     entry?.isIntersecting
+        //         ? setApp(
+        //             `${entry.target?.getAttribute(
+        //                 "data-section-name"
+        //             )}`
+        //         )
+        //         : null;
+        // }}
         >
             {props.background}
             <motion.div variants={left_variants} className="lr__wrapper flex-col left-0 top-0 w-full h-full">

@@ -10,7 +10,7 @@
     "dev:css": "postcss app/styles/tailwind.css -o app/styles/tailwind-build.css -w",
     "preview": "npm run build && shopify hydrogen preview",
     "lint": "eslint --no-error-on-unmatched-pattern --ext .js,.ts,.jsx,.tsx .",
-    "prefix-sass":"postcss app/styles/unfixed/style.css -u autoprefixer -d app/styles",
+    "prefix-sass": "postcss app/styles/unfixed/style.css -u autoprefixer -d app/styles",
     "sass-watch": "sass --watch --no-source-map  app/styles/scss:app/styles/unfixed",
     "watch": "npm-run-all --parallel sass-watch build:css prefix-sass",
     "typecheck": "tsc --noEmit",

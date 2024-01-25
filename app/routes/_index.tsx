@@ -16,7 +16,6 @@ import Footer from '@components/Footer';
 import Tiles from '@components/hero/Tiles';
 import { icons } from '@components/hero/icons';
 import { simonBilder, stephanBilder } from '@components/images/images';
-
 import { COLLECTIONS_QUERY } from '@queries/models';
 
 
@@ -41,14 +40,19 @@ export default function Index() {
     collections && setData(collections)
   }, [collections])
 
-  function solid(arg0: string): import("@fortawesome/fontawesome-svg-core").IconProp {
-    throw new Error('Function not implemented.');
-  }
-
   return (<>
+    <section>
+      <div className='flex flex-row justify-center w-full h-full flex-1'>
+        <div className='flex flex-col flex-1'>
+
+        </div>
+        <div className='flex flex-col flex-1'></div>
+      </div>
+    </section>
     <DoubleSec props={{
       left: true,
       sectionClass: "relative border-[#222] border-l ",
+      sectionName: "first",
       children: (<>
         <div className='flex flex-col relative h-full w-full m-auto justify-center align-center md:max-h-[375px] '>
           <div className='mb-auto mx-4 img__wrapper py-2'>
@@ -87,6 +91,7 @@ export default function Index() {
     <DoubleSec props={{
       left: true,
       sectionClass: "relative ",
+      sectionName: "second",
       children: (<>
         <div className='hidden grid-cols-1  relative  relative h-full w-full m-auto max-h-[70%] justify-center align-center z-10 md:grid'>
           <div className='flex justify-center align-center flex-col p-5'>
@@ -113,14 +118,14 @@ export default function Index() {
           <div className='flex gap-5 flex-col'>
             <div className='my-4 md:px-8'>
               <h5 className='text-[var(--clr-contrast-400)]'>Unsere Philosophie:</h5>
-              <h3 className='my-2'>Bei uns sind Alle herzlich willkommen...</h3>
+              <h1 className=''>Bei uns sind Alle herzlich willkommen...</h1>
               <p>... wir freuen uns über deinen Besuch!</p>
             </div>
             <Tiles bgPosition="bg-center" addClass="img__wrapper" gridClass="feature-grid" array={icons} />
             <div className='my-4 md:px-8'>
               <h4 className='my-2'>Ein umfangreiches Angebot...</h4>
               <p>...erwartet dich bei uns! Was auch immer Dir vorschwebt, zusammen werden wir deine Vorstellung Realität werden lassen.</p>
-              {/* <button className='btn__outline' role='button' type="button">Unsere Leistungen</button> */}
+              <button className='btn__outline' role='button' type="button"><a href='https://www.instagram.com/kopfsache.by.stephan/'>Mehr von uns</a></button>
             </div>
           </div>
           <div className='img__wrapper flex justify-center align-center absolute top-0 left-0 w-full h-full z-[-1] overflow-hidden'>
@@ -144,6 +149,7 @@ export default function Index() {
     <DoubleSec props={{
       left: false,
       sectionClass: "relative ",
+      sectionName: "third",
       ref: ref,
       children: (<>
         <div className='grid grid-cols-1  relative h-full w-full m-auto  justify-center align-center py-20'>
@@ -215,6 +221,7 @@ export default function Index() {
     <DoubleSec props={{
       left: false,
       sectionClass: "relative ",
+      sectionName: "fourth",
       header: "Hol dir deine Haarpflege direkt bei uns!",
       // background:(<>
       //     <div className='absolute top-0 left-0 w-full h-full bg-center' style={{backgroundImage:`url('${products}')`}}></div>

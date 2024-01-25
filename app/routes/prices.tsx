@@ -10,8 +10,8 @@ const variants: any = {
 
 const Prices = () => {
     return (<>
-        <motion.section variants={variants}>
-            <motion.div variants={variants} className="my-12 flex flex-wrap flex-col w-full h-full gap-6">
+        <motion.section className="flex-wrap" variants={variants}>
+            <motion.div variants={variants} className="flex flex-wrap flex-col h-full gap-6">
                 <motion.h2 variants={variants}>Unsere Preise</motion.h2>
                 <motion.h3 variants={variants}>Herren</motion.h3>
                 <Service props={{
@@ -94,7 +94,7 @@ const Prices = () => {
 
                 }} />
             </motion.div>
-            <motion.div variants={variants} className="flex flex-wrap flex-col w-full h-full gap-6">
+            <motion.div variants={variants} className="flex flex-wrap flex-col h-full gap-6">
                 <motion.h3>Damen</motion.h3>
                 <Service props={{
                     title: "Damenhaarschnitt (kurz)",
